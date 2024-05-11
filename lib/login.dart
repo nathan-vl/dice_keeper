@@ -13,6 +13,16 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+        child: Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
+        colors: [
+          Colors.white,
+          Colors.white,
+        ],
+      )),
       child: Column(
         children: [
           Column(
@@ -159,6 +169,6 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-    );
+    ));
   }
 }
