@@ -17,9 +17,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(),
-        body: const Center(
+      home: const Scaffold(
+        resizeToAvoidBottomInset: true,
+        /*
+          TODO: tem que ver uma forma de colocar essa AppBar
+          apenas em algumas páginas e não em todas
+          appBar: AppBar(),
+        */
+        body: Center(
           child: Login(),
         ),
       ),
