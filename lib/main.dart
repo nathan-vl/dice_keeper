@@ -1,6 +1,5 @@
-import 'package:dice_keeper/login.dart';
+import 'package:dice_keeper/dice_roller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +13,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
       home: Scaffold(
-        appBar: AppBar(),
-        body: const Center(
-          child: Login(),
+        resizeToAvoidBottomInset: false,
+        body: const DiceRoller(),
+        bottomNavigationBar: NavigationBar(
+          destinations: const [
+            Icon(Icons.new_label),
+            Icon(Icons.abc_rounded),
+          ],
         ),
       ),
     );
