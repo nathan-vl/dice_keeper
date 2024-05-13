@@ -1,5 +1,6 @@
 import 'package:dice_keeper/join_campaign.dart';
 import 'package:dice_keeper/login.dart';
+import 'package:dice_keeper/first_access.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 

@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/
     - assets/vectors/
+    - assets/vectors/icons/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
