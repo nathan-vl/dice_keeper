@@ -1,3 +1,4 @@
+import 'package:dice_keeper/create_campaign.dart';
 import 'package:dice_keeper/join_campaign.dart';
 import 'package:dice_keeper/login.dart';
 import 'package:dice_keeper/first_access.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
             // child: Login(),
             // child: FirstAccess(),
             // child: JoinCampaign(),
-            child: QRCodeCampaign(),
+            child: CreateCampaign(),
+            // child: QRCodeCampaign(),
           ),
         ),
       ),
