@@ -16,7 +16,7 @@ class DiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return FilledButton.tonal(
       onPressed: onPressed,
       child: SvgPicture.asset(
         path,
@@ -44,7 +44,8 @@ class _DiceRollerState extends State<DiceRoller> {
 
   @override
   Widget build(BuildContext context) {
-    const fontStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0);
+    const fontStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
       child: Center(
@@ -83,11 +84,11 @@ class _DiceRollerState extends State<DiceRoller> {
                     path: "./assets/dice/d$i.svg",
                   ),
                 ),
-                TextButton(
+                FilledButton.tonal(
                   onPressed: addD100,
                   child: const Text("d%", style: fontStyle),
                 ),
-                TextButton(
+                FilledButton.tonal(
                   onPressed: addFateDice,
                   child: const Text("dF", style: fontStyle),
                 ),
@@ -95,7 +96,7 @@ class _DiceRollerState extends State<DiceRoller> {
                   fontStyle: fontStyle,
                   onModalButtonPressed: addCommonDice,
                 ),
-                TextButton(
+                FilledButton.tonal(
                   onPressed: addParenthesis,
                   child: const Text("( )", style: fontStyle),
                 ),
@@ -106,17 +107,12 @@ class _DiceRollerState extends State<DiceRoller> {
                     child: const Icon(Icons.percent),
                   ),
                 ),
-                TextButton(
-                  onPressed: () => addDigit(7),
-                  child: const Text("7", style: fontStyle),
-                ),
-                TextButton(
-                  onPressed: () => addDigit(8),
-                  child: const Text("8", style: fontStyle),
-                ),
-                TextButton(
-                  onPressed: () => addDigit(9),
-                  child: const Text("9", style: fontStyle),
+                ...List.generate(
+                  3,
+                  (index) => FilledButton.tonal(
+                    onPressed: () => addDigit(index + 7),
+                    child: Text((index + 7).toString(), style: fontStyle),
+                  ),
                 ),
                 FilledButton(
                   onPressed: () => addToken(Asterisk()),
@@ -125,43 +121,33 @@ class _DiceRollerState extends State<DiceRoller> {
                     child: const Icon(Icons.add),
                   ),
                 ),
-                TextButton(
-                  onPressed: () => addDigit(4),
-                  child: const Text("4", style: fontStyle),
-                ),
-                TextButton(
-                  onPressed: () => addDigit(5),
-                  child: const Text("5", style: fontStyle),
-                ),
-                TextButton(
-                  onPressed: () => addDigit(6),
-                  child: const Text("6", style: fontStyle),
+                ...List.generate(
+                  3,
+                  (index) => FilledButton.tonal(
+                    onPressed: () => addDigit(index + 4),
+                    child: Text((index + 4).toString(), style: fontStyle),
+                  ),
                 ),
                 FilledButton(
                   onPressed: () => addToken(Minus()),
                   child: const Icon(Icons.remove),
                 ),
-                TextButton(
-                  onPressed: () => addDigit(1),
-                  child: const Text("1", style: fontStyle),
-                ),
-                TextButton(
-                  onPressed: () => addDigit(2),
-                  child: const Text("2", style: fontStyle),
-                ),
-                TextButton(
-                  onPressed: () => addDigit(3),
-                  child: const Text("3", style: fontStyle),
+                ...List.generate(
+                  3,
+                  (index) => FilledButton.tonal(
+                    onPressed: () => addDigit(index + 1),
+                    child: Text((index + 1).toString(), style: fontStyle),
+                  ),
                 ),
                 FilledButton(
                   onPressed: () => addToken(Plus()),
                   child: const Icon(Icons.add),
                 ),
-                TextButton(
+                FilledButton.tonal(
                   onPressed: () => addDigit(0),
                   child: const Text("0", style: fontStyle),
                 ),
-                TextButton(
+                FilledButton(
                   onPressed: () => setState(() {
                     tokens.clear();
                     diceRolled = null;
@@ -352,7 +338,7 @@ class _UnknownDiceInputState extends State<UnknownDiceInput> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return FilledButton.tonal(
       onPressed: () => {
         showModalBottomSheet(
           isScrollControlled: true,
