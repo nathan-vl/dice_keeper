@@ -33,7 +33,7 @@ class GameMasterMain extends StatelessWidget {
         body: const TabBarView(
           children: [
             Placeholder(), // Jogadores
-            Placeholder(), // Dados
+            DiceRoller(),
             Placeholder(), // NPCs
             Locations(), // Locais
           ],
