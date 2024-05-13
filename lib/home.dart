@@ -49,28 +49,48 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: Card(
-                    child: Expanded(
-                      child: ListTile(
-                        leading: Image.asset("assets/splash_1152.png"),
-                        title: const Text('Nome da Sala'),
-                        subtitle: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Tema do Jogo'),
-                            Text('Nome do Sistema')
-                          ],
-                        ),
-                        trailing: Stack(
-                          children: <Widget>[
-                            Positioned(
-                                child: Image.asset(
-                              "assets/splash_1152.png",
-                              height: 10,
-                            )),
-                            Positioned(
-                                child: Image.asset("assets/splash_1152.png")),
-                          ],
-                        ),
+                    child: ListTile(
+                      leading: Image.asset("assets/splash_1152.png"),
+                      title: const Text('Nome da Sala'),
+                      subtitle: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Tema do Jogo'),
+                          Text('Nome do Sistema')
+                        ],
+                      ),
+                      trailing: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SizedBox(
+                            width: constraints.maxWidth * 0.25,
+                            child: Stack(
+                              alignment: Alignment.centerLeft,
+                              children: <Widget>[
+                                Image.asset(
+                                  "assets/splash_1152.png",
+                                  height: constraints.maxHeight,
+                                ),
+                                Positioned(
+                                  left: 20,
+                                  child: Image.asset(
+                                    "assets/splash_1152.png",
+                                    height: constraints.maxHeight,
+                                  ),
+                                ),
+                                const Positioned(
+                                  right: 0,
+                                  child: Text(
+                                    "+4",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
