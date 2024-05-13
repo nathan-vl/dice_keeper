@@ -18,7 +18,7 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
             child: Text(
-              'Entrar na Campanha',
+              'Criação da Campanha',
               style: GoogleFonts.getFont(
                 'Roboto',
                 fontWeight: FontWeight.w400,
