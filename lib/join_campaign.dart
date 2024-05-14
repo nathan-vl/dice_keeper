@@ -15,20 +15,17 @@ class _JoinCampaignState extends State<JoinCampaign> {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 151),
-            child: const Text(
+            child: Text(
               'Entrar na Campanha',
-              style: TextStyle(fontSize: 32),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-            child: const Text(
+            child: Text(
               'Para entrar na sala de uma campanha, você pode digitar o código no campo abaixo',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           Container(
@@ -43,13 +40,10 @@ class _JoinCampaignState extends State<JoinCampaign> {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-            child: const Text(
+            child: Text(
               'Ou',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           Container(
@@ -57,22 +51,13 @@ class _JoinCampaignState extends State<JoinCampaign> {
             width: double.infinity,
             height: 56,
             child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
-                ),
-                onPressed: () => {},
-                child: const Text('Escanear QRCode')),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: const Text(
-              'Voltar',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Color.fromRGBO(74, 84, 140, 1),
-              ),
+              onPressed: () => {},
+              child: const Text('Escanear QRCode'),
             ),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text('Voltar'),
           ),
         ],
       ),

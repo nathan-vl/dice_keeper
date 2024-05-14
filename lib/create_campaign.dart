@@ -15,11 +15,9 @@ class _CreateCampaignState extends State<CreateCampaign> {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
-            child: const Text(
+            child: Text(
               'Criação da Campanha',
-              style: TextStyle(
-                fontSize: 32,
-              ),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           Container(
@@ -91,22 +89,13 @@ class _CreateCampaignState extends State<CreateCampaign> {
             width: double.infinity,
             height: 56,
             child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
-                ),
-                onPressed: () => {},
-                child: const Text('FINALIZAR CRIAÇÃO DA CAMPANHA')),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: const Text(
-              'Voltar',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Color.fromRGBO(74, 84, 140, 1),
-              ),
+              onPressed: () => {},
+              child: const Text('FINALIZAR CRIAÇÃO DA CAMPANHA'),
             ),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text('Voltar'),
           ),
         ],
       ),

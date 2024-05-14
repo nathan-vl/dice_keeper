@@ -16,19 +16,16 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
-            child: const Text(
+            child: Text(
               'Criação da Campanha',
-              style: TextStyle(fontSize: 32),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 32),
-            child: const Text(
+            child: Text(
               '2b0af0p',
-              style: TextStyle(
-                fontSize: 57,
-                color: Color.fromRGBO(42, 21, 89, 1),
-              ),
+              style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
           Container(
@@ -50,14 +47,11 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
           Container(
             width: 230,
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
-            child: const Text(
-              'Copiar código para a área de transferência',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                decoration: TextDecoration.underline,
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: Color.fromRGBO(74, 84, 140, 1),
+            child: TextButton(
+              onPressed: () {},
+              child: const Text(
+                'Copiar código para a área de transferência',
+                textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -66,11 +60,9 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
             width: double.infinity,
             height: 56,
             child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
-                ),
-                onPressed: () => {},
-                child: const Text('VISUALIZAR CAMPANHAS')),
+              onPressed: () => {},
+              child: const Text('VISUALIZAR CAMPANHAS'),
+            ),
           ),
         ],
       ),

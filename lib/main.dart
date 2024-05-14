@@ -1,4 +1,5 @@
 import 'package:dice_keeper/create_campaign.dart';
+import 'package:dice_keeper/game_master_main.dart';
 import 'package:dice_keeper/join_campaign.dart';
 import 'package:dice_keeper/login.dart';
 import 'package:dice_keeper/room_selection.dart';
@@ -18,8 +19,98 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+        colorScheme: ColorScheme(
+          brightness: Brightness.light,
+          primary: const Color.fromRGBO(74, 84, 140, 1),
+          onPrimary: Colors.white,
+          secondary: const Color.fromARGB(255, 220, 221, 230),
+          onSecondary: Colors.black87,
+          error: Colors.pink,
+          onError: Colors.pink,
+          background: Colors.white,
+          onBackground: Colors.black87,
+          surface: Colors.blue.shade50,
+          onSurface: Colors.black,
+        ),
+        iconButtonTheme: const IconButtonThemeData(
+          style: ButtonStyle(
+            iconColor: MaterialStatePropertyAll(
+              Color.fromRGBO(74, 84, 140, 1),
+            ),
+          ),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          elevation: 0.5,
+          highlightElevation: 1,
+          focusElevation: 0,
+        ),
+        cardTheme: CardTheme(
+          elevation: 0,
+          color: MaterialColor(
+            const Color.fromARGB(255, 220, 221, 230).value,
+            const <int, Color>{},
+          ),
+          shadowColor: Colors.transparent,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white,
+          labelStyle: TextStyle(fontSize: 16),
+        ),
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            fontSize: 32.0,
+            fontWeight: FontWeight.w700,
+            color: Color.fromRGBO(74, 84, 140, 1),
+          ),
+          labelMedium: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400,
+          ),
+          bodyLarge: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),
+          bodyMedium: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+            height: 1.4,
+          ),
+          displayLarge: TextStyle(
+            fontSize: 57,
+            fontWeight: FontWeight.w600,
+            color: Color.fromRGBO(74, 84, 140, 1),
+          ),
+          displaySmall: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 32,
+          ),
+        ),
+        textButtonTheme: const TextButtonThemeData(
+          style: ButtonStyle(
+            textStyle: MaterialStatePropertyAll(
+              TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        listTileTheme: const ListTileThemeData(
+          titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+          subtitleTextStyle: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
+          ),
+        ),
+        primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -41,12 +132,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
           child: const Center(
-            // child: Login(),
+            child: Login(),
             // child: FirstAccess(),
             // child: JoinCampaign(),
             // child: CreateCampaign(),
             // child: QRCodeCampaign(),
-            child: RoomSelection()
+            // child: RoomSelection(),
+            // child: GameMasterMain(roomName: "[Nome da sala]"),
           ),
         ),
       ),

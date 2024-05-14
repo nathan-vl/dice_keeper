@@ -18,8 +18,7 @@ class DiceButton extends StatelessWidget {
       child: SvgPicture.asset(
         path,
         colorFilter: ColorFilter.mode(
-          Theme.of(context).buttonTheme.colorScheme?.onBackground ??
-              Colors.black,
+          Theme.of(context).colorScheme.onSecondary,
           BlendMode.srcIn,
         ),
         height: 42,

@@ -38,9 +38,9 @@ class _LocationsState extends State<Locations> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Locais",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16.0),
             Expanded(
@@ -102,8 +102,6 @@ class LocationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10.0,
-      shadowColor: Colors.transparent,
       child: ListTile(
         onTap: () => showDialog(
           context: context,
