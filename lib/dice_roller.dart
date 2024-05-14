@@ -23,139 +23,157 @@ class _DiceRollerState extends State<DiceRoller> {
     const fontStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    tokens.map((e) => e.toString()).toList().join(' '),
-                    textAlign: TextAlign.end,
-                    style: const TextStyle(
-                        fontSize: 40, fontWeight: FontWeight.bold),
-                  ),
-                  (diceRolled != null)
-                      ? Text(
-                          "${diceRolled?.ast()} = ${diceRolled?.eval() ?? 0}",
-                          style: const TextStyle(fontSize: 24))
-                      : const Text(""),
-                ],
-              ),
-            ),
-            GridView.count(
-              primary: false,
-              shrinkWrap: true,
-              crossAxisCount: 4,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ...[2, 4, 6, 8, 10, 12, 20].map(
-                  (i) => DiceButton(
-                    onPressed: () => addCommonDice(i),
-                    path: "./assets/dice/d$i.svg",
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      tokens.map((e) => e.toString()).toList().join(' '),
+                      textAlign: TextAlign.end,
+                      style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-                FilledButton.tonal(
-                  onPressed: addD100,
-                  child: const Text("d%", style: fontStyle),
-                ),
-                FilledButton.tonal(
-                  onPressed: addFateDice,
-                  child: const Text("dF", style: fontStyle),
-                ),
-                UnknownDiceInput(
-                  fontStyle: fontStyle,
-                  onModalButtonPressed: addCommonDice,
-                ),
-                FilledButton.tonal(
-                  onPressed: addParenthesis,
-                  child: const Text("( )", style: fontStyle),
-                ),
-                FilledButton(
-                  onPressed: () => addToken(Slash()),
-                  child: Transform.rotate(
-                    angle: 45 * pi / 180,
-                    child: const Icon(Icons.percent),
-                  ),
-                ),
-                ...List.generate(
-                  3,
-                  (index) => FilledButton.tonal(
-                    onPressed: () => addDigit(index + 7),
-                    child: Text((index + 7).toString(), style: fontStyle),
-                  ),
-                ),
-                FilledButton(
-                  onPressed: () => addToken(Asterisk()),
-                  child: Transform.rotate(
-                    angle: 45 * pi / 180,
-                    child: const Icon(Icons.add),
-                  ),
-                ),
-                ...List.generate(
-                  3,
-                  (index) => FilledButton.tonal(
-                    onPressed: () => addDigit(index + 4),
-                    child: Text((index + 4).toString(), style: fontStyle),
-                  ),
-                ),
-                FilledButton(
-                  onPressed: () => addToken(Minus()),
-                  child: const Icon(Icons.remove),
-                ),
-                ...List.generate(
-                  3,
-                  (index) => FilledButton.tonal(
-                    onPressed: () => addDigit(index + 1),
-                    child: Text((index + 1).toString(), style: fontStyle),
-                  ),
-                ),
-                FilledButton(
-                  onPressed: () => addToken(Plus()),
-                  child: const Icon(Icons.add),
-                ),
-                FilledButton.tonal(
-                  onPressed: () => addDigit(0),
-                  child: const Text("0", style: fontStyle),
-                ),
-                FilledButton(
-                  onPressed: () => setState(() {
-                    tokens.clear();
-                    diceRolled = null;
-                  }),
-                  child: const Text("AC", style: fontStyle),
-                ),
-                FilledButton(
-                  onPressed: remove,
-                  child: const Icon(Icons.backspace),
-                ),
-                FilledButton(
-                  onPressed: () {
-                    if (tokens.isNotEmpty) {
-                      setState(() {
-                        var parser = Parser(tokens);
-                        try {
-                          var ast = parser.buildAst();
-                          diceRolled = ast?.rollDice();
-                        } catch (e) {
-                          diceRolled = null;
-                        }
-                      });
-                    }
-                  },
-                  child: SvgPicture.asset(
-                    "./assets/math/equal.svg",
-                    colorFilter: ColorFilter.mode(
-                        Theme.of(context).canvasColor, BlendMode.srcIn),
-                    height: 24.0,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      (diceRolled == null)
+                          ? ""
+                          : "${diceRolled?.ast()} = ${diceRolled?.eval() ?? 0}",
+                      style: const TextStyle(fontSize: 24),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 28),
+              child: GridView.count(
+                primary: false,
+                shrinkWrap: true,
+                crossAxisCount: 4,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 1.0,
+                children: [
+                  ...[2, 4, 6, 8, 10, 12, 20].map(
+                    (i) => DiceButton(
+                      onPressed: () => addCommonDice(i),
+                      path: "./assets/dice/d$i.svg",
+                    ),
+                  ),
+                  FilledButton.tonal(
+                    onPressed: addD100,
+                    child: const Text("d%", style: fontStyle),
+                  ),
+                  FilledButton.tonal(
+                    onPressed: addFateDice,
+                    child: const Text("dF", style: fontStyle),
+                  ),
+                  UnknownDiceInput(
+                    fontStyle: fontStyle,
+                    onModalButtonPressed: addCommonDice,
+                  ),
+                  FilledButton.tonal(
+                    onPressed: addParenthesis,
+                    child: const Text("( )", style: fontStyle),
+                  ),
+                  FilledButton(
+                    onPressed: () => addToken(Slash()),
+                    child: Transform.rotate(
+                      angle: 45 * pi / 180,
+                      child: const Icon(Icons.percent),
+                    ),
+                  ),
+                  ...List.generate(
+                    3,
+                    (index) => FilledButton.tonal(
+                      onPressed: () => addDigit(index + 7),
+                      child: Text((index + 7).toString(), style: fontStyle),
+                    ),
+                  ),
+                  FilledButton(
+                    onPressed: () => addToken(Asterisk()),
+                    child: Transform.rotate(
+                      angle: 45 * pi / 180,
+                      child: const Icon(Icons.add),
+                    ),
+                  ),
+                  ...List.generate(
+                    3,
+                    (index) => FilledButton.tonal(
+                      onPressed: () => addDigit(index + 4),
+                      child: Text((index + 4).toString(), style: fontStyle),
+                    ),
+                  ),
+                  FilledButton(
+                    onPressed: () => addToken(Minus()),
+                    child: const Icon(Icons.remove),
+                  ),
+                  ...List.generate(
+                    3,
+                    (index) => FilledButton.tonal(
+                      onPressed: () => addDigit(index + 1),
+                      child: Text((index + 1).toString(), style: fontStyle),
+                    ),
+                  ),
+                  FilledButton(
+                    onPressed: () => addToken(Plus()),
+                    child: const Icon(Icons.add),
+                  ),
+                  FilledButton.tonal(
+                    onPressed: () => addDigit(0),
+                    child: const Text("0", style: fontStyle),
+                  ),
+                  FilledButton(
+                    onPressed: () => setState(() {
+                      tokens.clear();
+                      diceRolled = null;
+                    }),
+                    child: const Text("AC", style: fontStyle),
+                  ),
+                  FilledButton(
+                    onPressed: remove,
+                    child: const Icon(Icons.backspace),
+                  ),
+                  FilledButton(
+                    onPressed: () {
+                      if (tokens.isNotEmpty) {
+                        setState(() {
+                          var parser = Parser(tokens);
+                          try {
+                            var ast = parser.buildAst();
+                            diceRolled = ast?.rollDice();
+                          } catch (e) {
+                            diceRolled = null;
+                          }
+                        });
+                      }
+                    },
+                    child: SvgPicture.asset(
+                      "./assets/math/equal.svg",
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).canvasColor, BlendMode.srcIn),
+                      height: 24.0,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -172,6 +190,10 @@ class _DiceRollerState extends State<DiceRoller> {
         case Literal():
           diceQty = lastToken.value;
           tokens.removeLast();
+        case Dice():
+          tokens.add(Plus());
+        case FateDice():
+          tokens.add(Plus());
         default:
           break;
       }
@@ -193,6 +215,10 @@ class _DiceRollerState extends State<DiceRoller> {
         case Literal():
           diceQty = lastToken.value;
           tokens.removeLast();
+        case Dice():
+          tokens.add(Plus());
+        case FateDice():
+          tokens.add(Plus());
         default:
           break;
       }
@@ -214,6 +240,10 @@ class _DiceRollerState extends State<DiceRoller> {
         case Literal():
           diceQty = lastToken.value;
           tokens.removeLast();
+        case Dice():
+          tokens.add(Plus());
+        case FateDice():
+          tokens.add(Plus());
         default:
           break;
       }
