@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class JoinCampaign extends StatefulWidget {
   const JoinCampaign({super.key});
@@ -16,29 +15,19 @@ class _JoinCampaignState extends State<JoinCampaign> {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 151),
-            child: Text(
+            child: const Text(
               'Entrar na Campanha',
-              style: GoogleFonts.getFont(
-                'Roboto',
-                fontWeight: FontWeight.w400,
-                fontSize: 32,
-                height: 1.3,
-                color: const Color.fromRGBO(0, 0, 0, 1),
-              ),
+              style: TextStyle(fontSize: 32),
             ),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-            child: Text(
+            child: const Text(
               'Para entrar na sala de uma campanha, você pode digitar o código no campo abaixo',
               textAlign: TextAlign.center,
-              style: GoogleFonts.getFont(
-                'Roboto',
+              style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                height: 1.5,
-                letterSpacing: 0.2,
-                color: const Color.fromRGBO(0, 0, 0, 1),
               ),
             ),
           ),
@@ -54,16 +43,12 @@ class _JoinCampaignState extends State<JoinCampaign> {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-            child: Text(
+            child: const Text(
               'Ou',
               textAlign: TextAlign.center,
-              style: GoogleFonts.getFont(
-                'Roboto',
+              style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                height: 1.5,
-                letterSpacing: 0.2,
-                color: const Color.fromRGBO(0, 0, 0, 1),
               ),
             ),
           ),
@@ -80,15 +65,12 @@ class _JoinCampaignState extends State<JoinCampaign> {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Text(
+            child: const Text(
               'Voltar',
-              style: GoogleFonts.getFont(
-                'Roboto',
+              style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                height: 1.5,
-                letterSpacing: 0.2,
-                color: const Color.fromRGBO(74, 84, 140, 1),
+                color: Color.fromRGBO(74, 84, 140, 1),
               ),
             ),
           ),

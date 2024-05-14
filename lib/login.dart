@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -69,18 +68,11 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 30),
-                child: Align(
+                child: const Align(
                   alignment: Alignment.topCenter,
                   child: Text(
                     'Ou',
-                    style: GoogleFonts.getFont(
-                      'Roboto',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      height: 1.4,
-                      letterSpacing: 0.1,
-                      color: const Color(0xFF000000),
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
@@ -114,51 +106,38 @@ class _LoginState extends State<Login> {
                 margin: const EdgeInsets.fromLTRB(41.9, 0, 42.9, 30),
                 child: RichText(
                   textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: 'Ao entrar no sistema você está de acordo com nossa',
-                    style: GoogleFonts.getFont(
-                      'Roboto',
+                  text: const TextSpan(
+                    text: 'Ao entrar no sistema você está de acordo com nossa ',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontSize: 14,
                       height: 1.4,
-                      letterSpacing: 0.1,
-                      color: const Color(0xFF000000),
+                      color: Color(0xFF000000),
                     ),
                     children: [
                       TextSpan(
                         text: 'Política de Privacidade',
-                        style: GoogleFonts.getFont(
-                          'Roboto',
+                        style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          height: 1.3,
-                          letterSpacing: 0.1,
-                          color: const Color(0xFF4A548C),
+                          height: 1.4,
+                          color: Color(0xFF4A548C),
                         ),
                       ),
-                      const TextSpan(
+                      TextSpan(
                         text: ' e ',
                       ),
                       TextSpan(
                         text: 'Termos de Uso',
-                        style: GoogleFonts.getFont(
-                          'Roboto',
+                        style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          height: 1.3,
-                          letterSpacing: 0.1,
-                          color: const Color(0xFF4A548C),
+                          height: 1.4,
+                          color: Color(0xFF4A548C),
                         ),
                       ),
                       TextSpan(
                         text: '.',
-                        style: GoogleFonts.getFont(
-                          'Roboto',
+                        style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
                           height: 1.4,
-                          letterSpacing: 0.1,
-                          color: const Color(0xFF000000),
                         ),
                       ),
                     ],

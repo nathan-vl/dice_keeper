@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeCampaign extends StatefulWidget {
@@ -17,27 +16,18 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
-            child: Text(
+            child: const Text(
               'Criação da Campanha',
-              style: GoogleFonts.getFont(
-                'Roboto',
-                fontWeight: FontWeight.w400,
-                fontSize: 32,
-                height: 1.3,
-                color: const Color.fromRGBO(0, 0, 0, 1),
-              ),
+              style: TextStyle(fontSize: 32),
             ),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 32),
-            child: Text(
+            child: const Text(
               '2b0af0p',
-              style: GoogleFonts.getFont(
-                'Roboto',
-                fontWeight: FontWeight.w400,
+              style: TextStyle(
                 fontSize: 57,
-                height: 1.3,
-                color: const Color.fromRGBO(42, 21, 89, 1),
+                color: Color.fromRGBO(42, 21, 89, 1),
               ),
             ),
           ),
@@ -60,17 +50,14 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
           Container(
             width: 230,
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
-            child: Text(
+            child: const Text(
               'Copiar código para a área de transferência',
               textAlign: TextAlign.center,
-              style: GoogleFonts.getFont(
-                'Roboto',
+              style: TextStyle(
                 decoration: TextDecoration.underline,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                height: 1.5,
-                letterSpacing: 0.2,
-                color: const Color.fromRGBO(74, 84, 140, 1),
+                color: Color.fromRGBO(74, 84, 140, 1),
               ),
             ),
           ),

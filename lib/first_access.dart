@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FirstAccess extends StatefulWidget {
   const FirstAccess({super.key});
@@ -37,30 +36,22 @@ class _FirstAccessState extends State<FirstAccess> {
                   Container(
                     width: 300,
                     margin: const EdgeInsets.fromLTRB(0, 0, 1, 32),
-                    child: Text(
+                    child: const Text(
                       'Agora, para continuar precisamos saber qual o seu papel no grupo.',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.getFont(
-                        'Roboto',
+                      style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         height: 1.5,
                         letterSpacing: 0.2,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 32),
-                    child: Text(
+                    child: const Text(
                       'Eu sou...',
-                      style: GoogleFonts.getFont(
-                        'Roboto',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 22,
-                        height: 1.3,
-                        color: const Color.fromRGBO(0, 0, 0, 1),
-                      ),
+                      style: TextStyle(fontSize: 22),
                     ),
                   ),
                   Container(
@@ -113,15 +104,14 @@ class _FirstAccessState extends State<FirstAccess> {
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                    child: Text(
+                    child: const Text(
                       'Voltar',
-                      style: GoogleFonts.getFont(
-                        'Roboto',
+                      style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         height: 1.5,
                         letterSpacing: 0.2,
-                        color: const Color.fromRGBO(74, 84, 140, 1),
+                        color: Color.fromRGBO(74, 84, 140, 1),
                       ),
                     ),
                   ),

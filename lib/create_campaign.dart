@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class CreateCampaign extends StatefulWidget {
   const CreateCampaign({super.key});
@@ -17,14 +15,10 @@ class _CreateCampaignState extends State<CreateCampaign> {
         children: [
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
-            child: Text(
+            child: const Text(
               'Criação da Campanha',
-              style: GoogleFonts.getFont(
-                'Roboto',
-                fontWeight: FontWeight.w400,
+              style: TextStyle(
                 fontSize: 32,
-                height: 1.3,
-                color: const Color.fromRGBO(0, 0, 0, 1),
               ),
             ),
           ),
@@ -57,7 +51,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                 labelText: 'Tipo de Sistema de RPG',
               ),
             ),
-          ),  
+          ),
           Container(
             margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
             alignment: AlignmentDirectional.topStart,
@@ -105,15 +99,12 @@ class _CreateCampaignState extends State<CreateCampaign> {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Text(
+            child: const Text(
               'Voltar',
-              style: GoogleFonts.getFont(
-                'Roboto',
+              style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                height: 1.5,
-                letterSpacing: 0.2,
-                color: const Color.fromRGBO(74, 84, 140, 1),
+                color: Color.fromRGBO(74, 84, 140, 1),
               ),
             ),
           ),
