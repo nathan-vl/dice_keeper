@@ -1,5 +1,5 @@
 import 'package:dice_keeper/dice_roller.dart';
-import 'package:dice_keeper/locations.dart';
+import 'package:dice_keeper/game_master/locations.dart';
 import 'package:flutter/material.dart';
 
 class GameMasterMain extends StatelessWidget {

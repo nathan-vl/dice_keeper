@@ -1,5 +1,5 @@
 import 'package:dice_keeper/create_campaign.dart';
-import 'package:dice_keeper/game_master_main.dart';
+import 'package:dice_keeper/game_master/game_master_main.dart';
 import 'package:dice_keeper/join_campaign.dart';
 import 'package:dice_keeper/login.dart';
 import 'package:dice_keeper/room_selection.dart';
@@ -132,13 +132,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
           // child: const Center(
-            child: const Login(),
-            // child: FirstAccess(),
-            // child: JoinCampaign(),
-            // child: CreateCampaign(),
-            // child: QRCodeCampaign(),
-            // child: RoomSelection(),
-            // child: GameMasterMain(roomName: "[Nome da sala]"),
+          child: const Login(),
+          // child: FirstAccess(),
+          // child: JoinCampaign(),
+          // child: CreateCampaign(),
+          // child: QRCodeCampaign(),
+          // child: RoomSelection(),
+          // child: GameMasterMain(roomName: "[Nome da sala]"),
           // ),
         ),
       ),
