@@ -35,7 +35,7 @@ class GameMasterMain extends StatelessWidget {
             Placeholder(), // Jogadores
             DiceRoller(),
             Placeholder(), // NPCs
-            Locations(), // Locais
+            Locations(),
           ],
         ),
       ),
