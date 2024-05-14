@@ -131,15 +131,15 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          child: const Center(
-            child: Login(),
+          // child: const Center(
+            child: const Login(),
             // child: FirstAccess(),
             // child: JoinCampaign(),
             // child: CreateCampaign(),
             // child: QRCodeCampaign(),
             // child: RoomSelection(),
             // child: GameMasterMain(roomName: "[Nome da sala]"),
-          ),
+          // ),
         ),
       ),
     );
