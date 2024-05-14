@@ -1,24 +1,20 @@
 name: dice_keeper
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
+  sdk: ">=3.3.1 <4.0.0"
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
   flutter_native_splash: ^2.0.4
   flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -29,11 +25,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/dice/d2.svg
-    - assets/dice/d4.svg
-    - assets/dice/d6.svg
-    - assets/dice/d8.svg
-    - assets/dice/d10.svg
-    - assets/dice/d12.svg
-    - assets/dice/d20.svg
+    - assets/
+    - assets/dice/
     - assets/math/equal.svg
+    - assets/vectors/
+    - assets/vectors/icons/
