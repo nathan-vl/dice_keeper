@@ -1,3 +1,4 @@
+import 'package:dice_keeper/game_master/game_master_main.dart';
 import 'package:flutter/material.dart';
 
 class ListMaster extends StatelessWidget {
@@ -25,7 +26,15 @@ class _CardRoom extends StatelessWidget {
     return Card(
       clipBehavior: Clip.hardEdge,
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  const GameMasterMain(roomName: "[Nome da Sala]"),
+            ),
+          );
+        },
         leading: Image.asset("assets/splash_1152.png"),
         title: const Text('Nome da Sala'),
         subtitle: const Column(

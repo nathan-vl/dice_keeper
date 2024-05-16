@@ -1,3 +1,5 @@
+import 'package:dice_keeper/first_access.dart';
+import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -59,7 +61,14 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
-                onPressed: () => {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FirstAccess(),
+                    ),
+                  );
+                },
                 child: const Text('INICIAR AVENTURA'),
               ),
             ),
@@ -75,7 +84,14 @@ class _LoginState extends State<Login> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(3)),
                 ),
-                onPressed: () => {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RoomSelection(),
+                    ),
+                  );
+                },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
