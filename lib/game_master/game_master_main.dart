@@ -26,7 +26,9 @@ class GameMasterMain extends StatelessWidget {
         ),
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(Icons.arrow_back),
           ),
           title: Text(roomName),
