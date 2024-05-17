@@ -22,6 +22,7 @@ class CardRoom extends StatelessWidget {
 }
 
 class _CardRoom extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.hardEdge,
@@ -95,9 +96,9 @@ class _ListMasterState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: <Widget>[
+      children: const <Widget>[
         Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: CardRoom()),
       ],
     );

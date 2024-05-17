@@ -13,6 +13,7 @@ class RoomSelection extends StatelessWidget {
 }
 
 class _RoomSelection extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

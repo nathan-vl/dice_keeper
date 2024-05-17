@@ -15,22 +15,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
-        colorScheme: ColorScheme(
+        colorScheme: const ColorScheme(
           brightness: Brightness.light,
-          primary: const Color.fromRGBO(74, 84, 140, 1),
+          primary: Color.fromRGBO(74, 84, 140, 1),
           onPrimary: Colors.white,
-          secondary: const Color.fromARGB(255, 220, 221, 230),
+          secondary: Color.fromARGB(255, 220, 221, 230),
           onSecondary: Colors.black87,
           error: Colors.pink,
           onError: Colors.pink,
-          background: Colors.white,
-          onBackground: Colors.black87,
-          surface: Colors.blue.shade50,
-          onSurface: Colors.black,
+          surface: Colors.white,
+          onSurface: Colors.black87,
         ),
         iconButtonTheme: const IconButtonThemeData(
           style: ButtonStyle(
-            iconColor: MaterialStatePropertyAll(
+            iconColor: WidgetStatePropertyAll(
               Color.fromRGBO(74, 84, 140, 1),
             ),
           ),
@@ -84,7 +82,7 @@ class MyApp extends StatelessWidget {
         ),
         textButtonTheme: const TextButtonThemeData(
           style: ButtonStyle(
-            textStyle: MaterialStatePropertyAll(
+            textStyle: WidgetStatePropertyAll(
               TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,

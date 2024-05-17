@@ -14,9 +14,9 @@ class _ListPlayerState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: <Widget>[
+      children: const <Widget>[
         Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: CardCharacter())
       ],
     );
@@ -34,6 +34,7 @@ class CardCharacter extends StatelessWidget {
 }
 
 class _CardCharacter extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
