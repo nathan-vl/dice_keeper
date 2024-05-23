@@ -6,7 +6,6 @@ class ListMaster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _ListMasterState();
   }
 }
@@ -16,7 +15,6 @@ class CardRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _CardRoom();
   }
 }
@@ -36,7 +34,15 @@ class _CardRoom extends StatelessWidget {
             ),
           );
         },
-        leading: Image.asset("assets/splash_1152.png"),
+        leading: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              height: constraints.maxHeight,
+              child: CircleAvatar(
+                  backgroundImage: Image.asset("assets/splash_1152.png").image),
+            );
+          },
+        ),
         title: const Text('Nome da Sala'),
         subtitle: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,15 +58,19 @@ class _CardRoom extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.centerLeft,
                 children: <Widget>[
-                  Image.asset(
-                    "assets/splash_1152.png",
+                  Container(
                     height: constraints.maxHeight,
+                    child: CircleAvatar(
+                        backgroundImage:
+                            Image.asset("assets/splash_1152.png").image),
                   ),
                   Positioned(
                     left: 21,
-                    child: Image.asset(
-                      "assets/splash_1152.png",
+                    child: Container(
                       height: constraints.maxHeight,
+                      child: CircleAvatar(
+                          backgroundImage:
+                              Image.asset("assets/splash_1152.png").image),
                     ),
                   ),
                   Positioned(
@@ -71,7 +81,7 @@ class _CardRoom extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: const Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Text(
                           "+4",
                           style: TextStyle(
@@ -97,9 +107,7 @@ class _ListMasterState extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: const <Widget>[
-        Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: CardRoom()),
+        Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 0), child: CardRoom()),
       ],
     );
   }
