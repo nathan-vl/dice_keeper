@@ -1,6 +1,7 @@
 import 'package:dice_keeper/dice_roller.dart';
 import 'package:dice_keeper/game_master/locations.dart';
 import 'package:dice_keeper/game_master/npcs.dart';
+import 'package:dice_keeper/game_master/players_list.dart';
 import 'package:flutter/material.dart';
 
 class GameMasterMain extends StatelessWidget {
@@ -35,7 +36,7 @@ class GameMasterMain extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Placeholder(), // Jogadores
+            PlayersList(), // Jogadores
             DiceRoller(),
             NPCs(),
             Locations(),

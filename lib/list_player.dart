@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class ListPlayer extends StatelessWidget {
   const ListPlayer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _ListPlayerState();
   }
 }
@@ -16,8 +16,7 @@ class _ListPlayerState extends StatelessWidget {
     return ListView(
       children: const <Widget>[
         Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: CardCharacter())
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0), child: CardCharacter())
       ],
     );
   }
@@ -28,7 +27,6 @@ class CardCharacter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _CardCharacter();
   }
 }
@@ -47,7 +45,13 @@ class _CardCharacter extends StatelessWidget {
             Text('Lv 10'),
           ],
         ),
-        trailing: Image.asset("assets/splash_1152.png"),
+        trailing: LayoutBuilder(builder: (context, constraints) {
+          return Container(
+            height: constraints.maxHeight,
+            child: CircleAvatar(
+                backgroundImage: Image.asset("assets/splash_1152.png").image),
+          );
+        }),
       ),
     );
   }
