@@ -14,6 +14,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('./assets/background.png'),
@@ -27,9 +28,10 @@ class _CreateCampaignState extends State<CreateCampaign> {
         ),
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            mainAxisSize: MainAxisSize.max,
+             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
+                margin: const EdgeInsets.fromLTRB(0, 50, 0, 30),
                 child: Text(
                   'Criação da Campanha',
                   style: Theme.of(context).textTheme.titleMedium,

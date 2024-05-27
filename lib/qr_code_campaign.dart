@@ -20,6 +20,7 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
           appBar: AppBar(),
         */
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('./assets/background.png'),
@@ -35,7 +36,7 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 80),
+                margin: const EdgeInsets.fromLTRB(0, 50, 0, 30),
                 child: Text(
                   'Criação da Campanha',
                   style: Theme.of(context).textTheme.titleMedium,
