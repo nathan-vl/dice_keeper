@@ -12,6 +12,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('./assets/background.png'),
@@ -27,7 +28,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 151),
+                margin: const EdgeInsets.fromLTRB(0, 50, 0, 100),
                 child: Text(
                   'Entrar na Campanha',
                   style: Theme.of(context).textTheme.titleMedium,
