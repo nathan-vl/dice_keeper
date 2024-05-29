@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Dice Keeper',
       theme: ThemeData(
         useMaterial3: true,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
@@ -104,22 +104,9 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
+      home: const Scaffold(
         resizeToAvoidBottomInset: true,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: const AssetImage('./assets/background.png'),
-              fit: BoxFit.scaleDown,
-              repeat: ImageRepeat.repeat,
-              colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.05),
-                BlendMode.dstATop,
-              ),
-            ),
-          ),
-          child: const Login(),
-        ),
+        body: Login(),
       ),
     );
   }

@@ -27,147 +27,132 @@ class _LoginState extends State<Login> {
         ),
         child: Column(
           children: [
-            SvgPicture.asset(
-              'assets/vectors/login_background.svg',
-              alignment: Alignment.topCenter,
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-              child: const TextField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'E-mail',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-              child: const TextField(
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Senha',
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-              width: double.infinity,
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3),
+            Image.asset('assets/login_background.png'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  const TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'E-mail',
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FirstAccess(),
+                  const SizedBox(height: 16),
+                  const TextField(
+                    keyboardType: TextInputType.visiblePassword,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Senha',
                     ),
-                  );
-                },
-                child: const Text('INICIAR AVENTURA'),
-              ),
-            ),
-            Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                child: const Text('Ou')),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-              width: double.infinity,
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(179, 38, 30, 1),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3)),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RoomSelection(),
-                    ),
-                  );
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset('./assets/vectors/icons/google.svg'),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child: Text('Entrar com Google'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-              width: double.infinity,
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(79, 55, 139, 1),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3)),
-                ),
-                onPressed: () => {},
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset('./assets/vectors/icons/facebook.svg'),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(2, 0, 0, 0),
-                      child: Text('Entrar com Facebook'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: const TextSpan(
-                  text: 'Ao entrar no sistema você está de acordo com nossa ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    height: 1.4,
-                    color: Color(0xFF000000),
                   ),
-                  children: [
-                    TextSpan(
-                      text: 'Política de Privacidade',
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FirstAccess(),
+                          ),
+                        );
+                      },
+                      child: const Text('INICIAR AVENTURA'),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text('Ou'),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RoomSelection(),
+                          ),
+                        );
+                      },
+                      icon: SvgPicture.asset(
+                        './assets/vectors/icons/google.svg',
+                      ),
+                      label: const Text("Entrar com Google"),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(179, 38, 30, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(
+                        './assets/vectors/icons/facebook.svg',
+                      ),
+                      label: const Text("Entrar com Facebook"),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(79, 55, 139, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      text:
+                          'Ao entrar no sistema você está de acordo com nossa ',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         height: 1.4,
-                        color: Color(0xFF4A548C),
+                        color: Color(0xFF000000),
                       ),
+                      children: [
+                        TextSpan(
+                          text: 'Política de Privacidade',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
+                            color: Color(0xFF4A548C),
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' e ',
+                        ),
+                        TextSpan(
+                          text: 'Termos de Uso',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
+                            color: Color(0xFF4A548C),
+                          ),
+                        ),
+                        TextSpan(
+                          text: '.',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
                     ),
-                    TextSpan(
-                      text: ' e ',
-                    ),
-                    TextSpan(
-                      text: 'Termos de Uso',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        height: 1.4,
-                        color: Color(0xFF4A548C),
-                      ),
-                    ),
-                    TextSpan(
-                      text: '.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        height: 1.4,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
