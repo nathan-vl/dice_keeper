@@ -1,5 +1,5 @@
+import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ListPlayer extends StatelessWidget {
   const ListPlayer({super.key});
@@ -36,7 +36,15 @@ class _CardCharacter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  const PlayerMain(roomName: "[Nome da Sala]"),
+            ),
+          );
+        },
         title: const Text('Nome do Personagem'),
         subtitle: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
