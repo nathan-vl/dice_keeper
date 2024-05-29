@@ -13,15 +13,20 @@ class DiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton.tonal(
-      onPressed: onPressed,
-      child: SvgPicture.asset(
-        path,
-        colorFilter: ColorFilter.mode(
-          Theme.of(context).colorScheme.onSecondary,
-          BlendMode.srcIn,
+    return Expanded(
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: FilledButton.tonal(
+          onPressed: onPressed,
+          child: SvgPicture.asset(
+            path,
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.onSecondary,
+              BlendMode.srcIn,
+            ),
+            height: 42,
+          ),
         ),
-        height: 42,
       ),
     );
   }

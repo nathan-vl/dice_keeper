@@ -44,29 +44,24 @@ class _LocationsState extends State<Locations> {
             ),
             const SizedBox(height: 16.0),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: items.length,
-                    itemBuilder: (context, index) => LocationCard(
-                      location: items[index],
-                      onSave: (location) {
-                        setState(() {
-                          items[index] = location;
-                        });
-                        Navigator.pop(context);
-                      },
-                      onConfirmRemove: () {
-                        setState(() {
-                          items.removeAt(index);
-                        });
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ],
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: items.length,
+                itemBuilder: (context, index) => LocationCard(
+                  location: items[index],
+                  onSave: (location) {
+                    setState(() {
+                      items[index] = location;
+                    });
+                    Navigator.pop(context);
+                  },
+                  onConfirmRemove: () {
+                    setState(() {
+                      items.removeAt(index);
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
           ],
