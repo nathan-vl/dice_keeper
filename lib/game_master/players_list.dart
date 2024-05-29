@@ -58,7 +58,7 @@ class _CardPlayer extends StatelessWidget {
           ],
         ),
         trailing: LayoutBuilder(builder: (context, constraints) {
-          return Container(
+          return SizedBox(
             height: constraints.maxHeight,
             child: CircleAvatar(
                 backgroundImage: Image.asset("assets/splash_1152.png").image),

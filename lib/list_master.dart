@@ -36,7 +36,7 @@ class _CardRoom extends StatelessWidget {
         },
         leading: LayoutBuilder(
           builder: (context, constraints) {
-            return Container(
+            return SizedBox(
               height: constraints.maxHeight,
               child: CircleAvatar(
                   backgroundImage: Image.asset("assets/splash_1152.png").image),
@@ -58,7 +58,7 @@ class _CardRoom extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.centerLeft,
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                     height: constraints.maxHeight,
                     child: CircleAvatar(
                         backgroundImage:
@@ -66,7 +66,7 @@ class _CardRoom extends StatelessWidget {
                   ),
                   Positioned(
                     left: 21,
-                    child: Container(
+                    child: SizedBox(
                       height: constraints.maxHeight,
                       child: CircleAvatar(
                           backgroundImage:

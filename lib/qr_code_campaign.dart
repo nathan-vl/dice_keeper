@@ -14,11 +14,6 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      /*
-          TODO: tem que ver uma forma de colocar essa AppBar
-          apenas em algumas páginas e não em todas
-          appBar: AppBar(),
-        */
       body: Container(
         height: double.infinity,
         decoration: BoxDecoration(
@@ -55,8 +50,6 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
                 child: QrImageView(
                   data: "2B0AF0P",
                   size: 250,
-                  // You can include embeddedImageStyle Property if you
-                  //wanna embed an image from your Asset folder
                   embeddedImageStyle: const QrEmbeddedImageStyle(
                     size: Size(
                       100,

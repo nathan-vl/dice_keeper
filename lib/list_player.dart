@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ListPlayer extends StatelessWidget {
   const ListPlayer({super.key});
@@ -46,7 +45,7 @@ class _CardCharacter extends StatelessWidget {
           ],
         ),
         trailing: LayoutBuilder(builder: (context, constraints) {
-          return Container(
+          return SizedBox(
             height: constraints.maxHeight,
             child: CircleAvatar(
                 backgroundImage: Image.asset("assets/splash_1152.png").image),
