@@ -108,7 +108,7 @@ class _Sheet extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 75, 20, 0),
+                  margin: const EdgeInsets.fromLTRB(20, 100, 20, 0),
                   width: double.infinity,
                   height: 56,
                   child: FilledButton(
