@@ -112,13 +112,33 @@ class _SkillsState extends State<Skills> {
                     width: double.infinity,
                     height: 56,
                     child: FilledButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Inventory(),
-                          ),
-                        );
+                      onPressed: () => {
+                        if (selectedItems.isEmpty)
+                          {
+                            showDialog(
+                                context: context,
+                                builder: (context) => ConfirmProgressDialog(
+                                      message: "Deseja continuar?",
+                                      onConfirm: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Inventory(),
+                                          ),
+                                        );
+                                      },
+                                    )),
+                          }
+                        else
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Inventory(),
+                              ),
+                            )
+                          }
                       },
                       child: const Text('Prosseguir'),
                     ),
@@ -299,6 +319,43 @@ class ConfirmDeleteDialog extends StatelessWidget {
                 OutlinedButton(
                   onPressed: onConfirm,
                   child: const Text("Remover"),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ConfirmProgressDialog extends StatelessWidget {
+  final String message;
+  final void Function() onConfirm;
+
+  const ConfirmProgressDialog(
+      {super.key, required this.message, required this.onConfirm});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(message),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("Cancelar"),
+                ),
+                FilledButton(
+                  onPressed: onConfirm,
+                  child: const Text("Continuar"),
                 ),
               ],
             ),

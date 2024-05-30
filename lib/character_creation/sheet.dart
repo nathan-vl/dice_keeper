@@ -1,6 +1,5 @@
 import 'package:dice_keeper/character_creation/history.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Sheet extends StatelessWidget {
   const Sheet({super.key});
@@ -17,7 +16,7 @@ class _Sheet extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -108,7 +107,7 @@ class _Sheet extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 100, 20, 0),
+                  margin: const EdgeInsets.fromLTRB(20, 80, 20, 0),
                   width: double.infinity,
                   height: 56,
                   child: FilledButton(
@@ -149,6 +148,7 @@ class AttributeField extends StatefulWidget {
 }
 
 class _AttributeField extends State<AttributeField> {
+  final controller = TextEditingController();
   late String title = '';
 
   @override
@@ -165,6 +165,7 @@ class _AttributeField extends State<AttributeField> {
         Expanded(
           flex: 3,
           child: TextField(
+            controller: controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
@@ -184,7 +185,13 @@ class _AttributeField extends State<AttributeField> {
                         RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ))),
-                onPressed: () {},
+                onPressed: () {
+                  if (controller.text == "") {
+                    controller.text = '0';
+                  }
+                  int value = int.parse(controller.text);
+                  controller.text = (value += 1).toString();
+                },
                 child: const Icon(Icons.add)),
           ),
         ),
@@ -201,7 +208,15 @@ class _AttributeField extends State<AttributeField> {
                             RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ))),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (controller.text == "") {
+                        controller.text = '0';
+                      }
+                      int value = int.parse(controller.text);
+                      if (value > 0) {
+                        controller.text = (value -= 1).toString();
+                      }
+                    },
                     child: const Icon(Icons.remove)),
               ),
             )),
