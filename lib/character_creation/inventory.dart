@@ -35,47 +35,60 @@ class _InventoryState extends State<Inventory> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SearchAnchor(builder:
-                      (BuildContext context, SearchController controller) {
-                    return SearchBar(
-                      controller: controller,
-                      padding: const WidgetStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.symmetric(horizontal: 16.0)),
-                      onTap: () {
-                        controller.openView();
-                      },
-                      onChanged: (_) {
-                        controller.openView();
-                      },
-                      leading: const Icon(Icons.search),
-                    );
-                  }, suggestionsBuilder:
-                      (BuildContext context, SearchController controller) {
-                    return List<ListTile>.generate(items.length, (int index) {
-                      Item item = items[index];
-                      return ListTile(
-                        title: Text(item.name),
+                  SearchAnchor(
+                    builder:
+                        (BuildContext context, SearchController controller) {
+                      return SearchBar(
+                        controller: controller,
+                        padding: const WidgetStatePropertyAll<EdgeInsets>(
+                            EdgeInsets.symmetric(horizontal: 16.0)),
                         onTap: () {
-                          setState(() {
-                            controller.closeView("");
-                            showDialog(
-                              context: context,
-                              builder: (context) => InventoryModal(
-                                onSave: (skill) {
-                                  setState(() {
-                                    selectedItems.add(skill);
-                                  });
-                                  Navigator.pop(context);
-                                },
-                                item: item,
-                                isShowing: false,
-                              ),
-                            );
-                          });
+                          controller.openView();
                         },
+                        onChanged: (_) {
+                          controller.openView();
+                        },
+                        leading: const Icon(Icons.search),
                       );
-                    });
-                  }),
+                    },
+                    suggestionsBuilder: (
+                      BuildContext context,
+                      SearchController controller,
+                    ) =>
+                        items
+                            .where((i) =>
+                                controller.text.isEmpty ||
+                                i.name
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()))
+                            .map(
+                              (item) => ListTile(
+                                title: Text(item.name),
+                                onTap: () {
+                                  setState(
+                                    () {
+                                      controller.closeView("");
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => InventoryModal(
+                                          onSave: (skill) {
+                                            setState(
+                                              () {
+                                                selectedItems.add(skill);
+                                              },
+                                            );
+                                            Navigator.pop(context);
+                                          },
+                                          item: item,
+                                          isShowing: false,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                  ),
                   Expanded(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
