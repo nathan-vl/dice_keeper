@@ -1,3 +1,4 @@
+import 'package:dice_keeper/join_campaign.dart';
 import 'package:flutter/material.dart';
 
 class ListPlayer extends StatelessWidget {
@@ -12,11 +13,24 @@ class ListPlayer extends StatelessWidget {
 class _ListPlayerState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const <Widget>[
-        Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 0), child: CardCharacter())
-      ],
+    return Scaffold(
+      body: ListView(
+        children: const <Widget>[
+          Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: CardCharacter())
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const JoinCampaign(),
+              ),
+            );
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }

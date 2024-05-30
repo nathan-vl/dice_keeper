@@ -1,3 +1,4 @@
+import 'package:dice_keeper/create_campaign.dart';
 import 'package:dice_keeper/game_master/game_master_main.dart';
 import 'package:flutter/material.dart';
 
@@ -6,20 +7,33 @@ class ListMaster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ListMasterState();
+    return Scaffold(
+      body: ListView(
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: CardRoom(),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CreateCampaign(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
 
 class CardRoom extends StatelessWidget {
   const CardRoom({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return _CardRoom();
-  }
-}
-
-class _CardRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,8 +43,9 @@ class _CardRoom extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  const GameMasterMain(roomName: "[Nome da Sala]"),
+              builder: (context) => const GameMasterMain(
+                roomName: "[Nome da Sala]",
+              ),
             ),
           );
         },
@@ -39,7 +54,8 @@ class _CardRoom extends StatelessWidget {
             return SizedBox(
               height: constraints.maxHeight,
               child: CircleAvatar(
-                  backgroundImage: Image.asset("assets/splash_1152.png").image),
+                backgroundImage: Image.asset("assets/splash_1152.png").image,
+              ),
             );
           },
         ),
@@ -61,16 +77,18 @@ class _CardRoom extends StatelessWidget {
                   SizedBox(
                     height: constraints.maxHeight,
                     child: CircleAvatar(
-                        backgroundImage:
-                            Image.asset("assets/splash_1152.png").image),
+                      backgroundImage:
+                          Image.asset("assets/splash_1152.png").image,
+                    ),
                   ),
                   Positioned(
                     left: 21,
                     child: SizedBox(
                       height: constraints.maxHeight,
                       child: CircleAvatar(
-                          backgroundImage:
-                              Image.asset("assets/splash_1152.png").image),
+                        backgroundImage:
+                            Image.asset("assets/splash_1152.png").image,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -98,17 +116,6 @@ class _CardRoom extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-class _ListMasterState extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: const <Widget>[
-        Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 0), child: CardRoom()),
-      ],
     );
   }
 }

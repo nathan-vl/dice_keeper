@@ -43,8 +43,6 @@ class _RoomSelection extends StatelessWidget {
             body: const TabBarView(
               children: [ListPlayer(), ListMaster()],
             ),
-            floatingActionButton: FloatingActionButton(
-                onPressed: () {}, child: const Icon(Icons.add)),
           ),
         ),
         // child: QRCodeCampaign(),

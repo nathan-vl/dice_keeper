@@ -1,3 +1,4 @@
+import 'package:dice_keeper/character_creation/sheet.dart';
 import 'package:flutter/material.dart';
 
 class JoinCampaign extends StatefulWidget {
@@ -65,7 +66,14 @@ class _JoinCampaignState extends State<JoinCampaign> {
                 width: double.infinity,
                 height: 56,
                 child: FilledButton(
-                  onPressed: () => {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Sheet(),
+                      ),
+                    );
+                  },
                   child: const Text('Escanear QRCode'),
                 ),
               ),
