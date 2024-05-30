@@ -38,47 +38,61 @@ class _SkillsState extends State<Skills> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SearchAnchor(builder:
-                      (BuildContext context, SearchController controller) {
-                    return SearchBar(
-                      controller: controller,
-                      padding: const WidgetStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.symmetric(horizontal: 16.0)),
-                      onTap: () {
-                        controller.openView();
-                      },
-                      onChanged: (_) {
-                        controller.openView();
-                      },
-                      leading: const Icon(Icons.search),
-                    );
-                  }, suggestionsBuilder:
-                      (BuildContext context, SearchController controller) {
-                    return List<ListTile>.generate(items.length, (int index) {
-                      Skill skill = items[index];
-                      return ListTile(
-                        title: Text(skill.name),
+                  SearchAnchor(
+                    builder:
+                        (BuildContext context, SearchController controller) {
+                      return SearchBar(
+                        controller: controller,
+                        padding: const WidgetStatePropertyAll<EdgeInsets>(
+                          EdgeInsets.symmetric(horizontal: 16.0),
+                        ),
                         onTap: () {
-                          setState(() {
-                            controller.closeView("");
-                            showDialog(
-                              context: context,
-                              builder: (context) => SkillModal(
-                                onSave: (skill) {
-                                  setState(() {
-                                    selectedItems.add(skill);
-                                  });
-                                  Navigator.pop(context);
-                                },
-                                skill: skill,
-                                isShowing: false,
-                              ),
-                            );
-                          });
+                          controller.openView();
                         },
+                        onChanged: (text) {
+                          controller.openView();
+                        },
+                        leading: const Icon(Icons.search),
                       );
-                    });
-                  }),
+                    },
+                    suggestionsBuilder: (
+                      BuildContext context,
+                      SearchController controller,
+                    ) =>
+                        items
+                            .where((i) =>
+                                controller.text.isEmpty ||
+                                i.name
+                                    .toLowerCase()
+                                    .contains(controller.text.toLowerCase()))
+                            .map(
+                              (skill) => ListTile(
+                                title: Text(skill.name),
+                                onTap: () {
+                                  setState(
+                                    () {
+                                      controller.closeView("");
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => SkillModal(
+                                          onSave: (skill) {
+                                            setState(
+                                              () {
+                                                selectedItems.add(skill);
+                                              },
+                                            );
+                                            Navigator.pop(context);
+                                          },
+                                          skill: skill,
+                                          isShowing: false,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                  ),
                   Expanded(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
