@@ -1,4 +1,5 @@
 import 'package:dice_keeper/character_creation/inventory.dart';
+import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class Skills extends StatefulWidget {
@@ -16,6 +17,7 @@ class _SkillsState extends State<Skills> {
         name: "Bola elétrica",
         description: "uma bola de raios feitos pelo deus grego Nathanzinho."),
   ];
+
   final selectedItems = <Skill>[];
   List<Skill> filteredItems = <Skill>[];
 
@@ -131,8 +133,9 @@ class _SkillsState extends State<Skills> {
                           {
                             showDialog(
                                 context: context,
-                                builder: (context) => ConfirmProgressDialog(
+                                builder: (context) => ConfirmDialog(
                                       message: "Deseja continuar?",
+                                      confirmText: "Continuar",
                                       onConfirm: () {
                                         Navigator.push(
                                           context,
@@ -218,8 +221,9 @@ class SkillCard extends StatelessWidget {
             IconButton(
               onPressed: () => showDialog(
                 context: context,
-                builder: (context) => ConfirmDeleteDialog(
+                builder: (context) => ConfirmDialog(
                   message: "Tem certeza que deseja remover essa habilidade?",
+                  confirmText: "Remover",
                   onConfirm: onConfirmRemove,
                 ),
               ),
@@ -298,80 +302,6 @@ class _SkillModalState extends State<SkillModal> {
                         child: const Text("Adicionar"),
                       ),
                     ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ConfirmDeleteDialog extends StatelessWidget {
-  final String message;
-  final void Function() onConfirm;
-
-  const ConfirmDeleteDialog(
-      {super.key, required this.message, required this.onConfirm});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(message),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancelar"),
-                ),
-                OutlinedButton(
-                  onPressed: onConfirm,
-                  child: const Text("Remover"),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ConfirmProgressDialog extends StatelessWidget {
-  final String message;
-  final void Function() onConfirm;
-
-  const ConfirmProgressDialog(
-      {super.key, required this.message, required this.onConfirm});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(message),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancelar"),
-                ),
-                FilledButton(
-                  onPressed: onConfirm,
-                  child: const Text("Continuar"),
-                ),
-              ],
             ),
           ],
         ),

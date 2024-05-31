@@ -1,3 +1,5 @@
+import 'package:dice_keeper/character_creation/conclude.dart';
+import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class Inventory extends StatefulWidget {
@@ -127,14 +129,15 @@ class _InventoryState extends State<Inventory> {
                           {
                             showDialog(
                                 context: context,
-                                builder: (context) => ConfirmProgressDialog(
+                                builder: (context) => ConfirmDialog(
                                       message: "Deseja continuar?",
+                                      confirmText: "Continuar",
                                       onConfirm: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const Inventory(),
+                                                const Conclude(),
                                           ),
                                         );
                                       },
@@ -145,7 +148,7 @@ class _InventoryState extends State<Inventory> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Inventory(),
+                                builder: (context) => const Conclude(),
                               ),
                             )
                           }
@@ -214,8 +217,9 @@ class InventoryCard extends StatelessWidget {
             IconButton(
               onPressed: () => showDialog(
                 context: context,
-                builder: (context) => ConfirmDeleteDialog(
-                  message: "Tem certeza que deseja remover essa habilidade?",
+                builder: (context) => ConfirmDialog(
+                  message: "Tem certeza que deseja remover esse item?",
+                  confirmText: "Remover",
                   onConfirm: onConfirmRemove,
                 ),
               ),
@@ -294,80 +298,6 @@ class _InventoryModalState extends State<InventoryModal> {
                         child: const Text("Adicionar"),
                       ),
                     ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ConfirmDeleteDialog extends StatelessWidget {
-  final String message;
-  final void Function() onConfirm;
-
-  const ConfirmDeleteDialog(
-      {super.key, required this.message, required this.onConfirm});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(message),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancelar"),
-                ),
-                OutlinedButton(
-                  onPressed: onConfirm,
-                  child: const Text("Remover"),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ConfirmProgressDialog extends StatelessWidget {
-  final String message;
-  final void Function() onConfirm;
-
-  const ConfirmProgressDialog(
-      {super.key, required this.message, required this.onConfirm});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 22),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(message),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancelar"),
-                ),
-                FilledButton(
-                  onPressed: onConfirm,
-                  child: const Text("Continuar"),
-                ),
-              ],
             ),
           ],
         ),

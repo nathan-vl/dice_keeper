@@ -6,13 +6,6 @@ class History extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _History();
-  }
-}
-
-class _History extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
