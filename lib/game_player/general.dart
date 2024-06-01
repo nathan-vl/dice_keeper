@@ -133,7 +133,6 @@ class _GeneralState extends State<General> {
           ),
         ),
       ),
-      // ),
     );
   }
 }
