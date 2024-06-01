@@ -1,15 +1,9 @@
+import 'package:dice_keeper/widgets/card_character.dart';
 import 'package:flutter/material.dart';
 
 class PlayersList extends StatelessWidget {
   const PlayersList({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return _PlayersListState();
-  }
-}
-
-class _PlayersListState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,45 +19,23 @@ class _PlayersListState extends StatelessWidget {
           const Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [CardPlayer(), CardPlayer()],
+              children: [
+                CardCharacter(
+                  title: 'Nome do Jogador',
+                  sub1: 'Nome do personagem',
+                  sub2: 'Lv 10',
+                  image: "assets/splash_1152.png",
+                ),
+                CardCharacter(
+                  title: 'Nome do Jogador',
+                  sub1: 'Nome do personagem',
+                  sub2: 'Lv 10',
+                  image: "assets/splash_1152.png",
+                ),
+              ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CardPlayer extends StatelessWidget {
-  const CardPlayer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return _CardPlayer();
-  }
-}
-
-class _CardPlayer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        onTap: () {},
-        title: const Text('Nome do Jogador'),
-        subtitle: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Nome do personagem'),
-            Text('Lv 10'),
-          ],
-        ),
-        trailing: LayoutBuilder(builder: (context, constraints) {
-          return Container(
-            height: constraints.maxHeight,
-            child: CircleAvatar(
-                backgroundImage: Image.asset("assets/splash_1152.png").image),
-          );
-        }),
       ),
     );
   }

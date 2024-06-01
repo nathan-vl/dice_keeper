@@ -61,14 +61,13 @@ class _DiceRollerState extends State<DiceRoller> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28),
+            Expanded(
               child: GridView.count(
                 primary: false,
-                shrinkWrap: true,
+                shrinkWrap: false,
                 crossAxisCount: 4,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
                 childAspectRatio: 1.0,
                 children: [
                   ...[2, 4, 6, 8, 10, 12, 20].map(
@@ -168,7 +167,9 @@ class _DiceRollerState extends State<DiceRoller> {
                     child: SvgPicture.asset(
                       "./assets/math/equal.svg",
                       colorFilter: ColorFilter.mode(
-                          Theme.of(context).canvasColor, BlendMode.srcIn),
+                        Theme.of(context).canvasColor,
+                        BlendMode.srcIn,
+                      ),
                       height: 24.0,
                     ),
                   ),

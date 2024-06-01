@@ -7,7 +7,6 @@ class RoomSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _RoomSelection();
   }
 }
@@ -44,8 +43,6 @@ class _RoomSelection extends StatelessWidget {
             body: const TabBarView(
               children: [ListPlayer(), ListMaster()],
             ),
-            floatingActionButton: FloatingActionButton(
-                onPressed: () {}, child: const Icon(Icons.add)),
           ),
         ),
         // child: QRCodeCampaign(),
