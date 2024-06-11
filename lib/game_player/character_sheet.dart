@@ -2,7 +2,6 @@ import 'package:dice_keeper/game_player/general.dart';
 import 'package:dice_keeper/game_player/inventory.dart';
 import 'package:dice_keeper/game_player/skills.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CharacterSheet extends StatefulWidget {
   const CharacterSheet({super.key});

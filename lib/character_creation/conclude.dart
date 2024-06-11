@@ -1,4 +1,4 @@
-import 'package:dice_keeper/room_selection.dart';
+import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:flutter/material.dart';
 
 class Conclude extends StatelessWidget {
@@ -31,7 +31,9 @@ class Conclude extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RoomSelection(),
+                    builder: (context) => const PlayerMain(
+                      roomName: "[Nome da Sala]",
+                    ),
                   ),
                 );
               },

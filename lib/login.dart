@@ -42,6 +42,9 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 16),
                   const TextField(
                     keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Senha',
