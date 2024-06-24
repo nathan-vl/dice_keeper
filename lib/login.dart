@@ -2,6 +2,7 @@ import 'package:dice_keeper/first_access.dart';
 import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,8 +12,44 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth  _auth = FirebaseAuth.instance;
+  void _login() async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      print(userCredential.toString());
+      // Login bem-sucedido
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const FirstAccess()),
+      );
+      
+    } on FirebaseAuthException catch (e) {
+      // Tratar erro de login
+     
+    }
+  }
+
+  registrar() async {
+    try {
+      await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('A senha é muito fraca!');
+      } else if (e.code == 'email-already-in-use') {
+        print('Este email já está cadastrado');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    
+
     return SingleChildScrollView(
       child: Container(
         decoration: const BoxDecoration(
@@ -32,20 +69,22 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  const TextField(
+                  TextField(
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'E-mail',
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const TextField(
+                  TextField(
                     keyboardType: TextInputType.visiblePassword,
+                    controller: _passwordController,
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Senha',
                     ),
@@ -61,12 +100,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FirstAccess(),
-                          ),
-                        );
+                        _login();
                       },
                       child: const Text('INICIAR AVENTURA'),
                     ),

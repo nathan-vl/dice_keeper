@@ -1,5 +1,7 @@
 import 'package:dice_keeper/create_campaign.dart';
 import 'package:dice_keeper/join_campaign.dart';
+import 'package:dice_keeper/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -11,6 +13,16 @@ class FirstAccess extends StatefulWidget {
 }
 
 class _FirstAccessState extends State<FirstAccess> {
+  final FirebaseAuth  _auth = FirebaseAuth.instance;
+
+  logout() async {
+    await _auth.signOut();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,7 +128,7 @@ class _FirstAccessState extends State<FirstAccess> {
               const Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 30)),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  logout();
                 },
                 child: const Text('Voltar'),
               ),
