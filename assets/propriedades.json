@@ -1,5 +1,5 @@
 {
-  "vantagens": [
+  "Vantagens": [
     {
       "nome": "Aceleração",
       "custo": "1 ponto",
@@ -681,7 +681,7 @@
     {
       "nome": "Animais",
       "descricao": "Você sabe cuidar de animais e tratar de seus ferimentos, evitar animais perigosos, e até domar animais selvagens mas se deseja ter um animal treinado, vai precisar também da vantagem Aliado). Em mundos de fantasia, esta perícia também permite falar a língua dos animais. A critério do mestre, a perícia também pode se aplicar a monstros e outras criaturas fantásticas.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Doma",
           "descricao": "Você sabe domar animais selvagens."
@@ -707,7 +707,7 @@
     {
       "nome": "Arte",
       "descricao": "Você tem sensibilidade e talento para artes. Sabe cantar, dançar, desenhar, pintar, fazer esculturas, tocar instrumentos musicais...",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Atuação",
           "descricao": "você é um ator. Pode simular emoções que não está sentindo."
@@ -741,7 +741,7 @@
     {
       "nome": "Ciência",
       "descricao": "Você tem grandes conhecimentos sobre ciências em geral, incluindo os mais obscuros.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Astronomia",
           "descricao": "Você sabe reconhecer estrelas e constelações, ler mapas estelares e saber se existem planetas à volta de uma estrela."
@@ -779,7 +779,7 @@
     {
       "nome": "Crime",
       "descricao": "Você é um ladrão, espião, falsário, arrombador ou outro tipo de criminoso. Consulte o mestre para saber se esta perícia está disponível para personagens jogadores.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Armadilhas",
           "descricao": "Você sabe construir, armas e desarmar armadilhas, explosivos e aparelhos de detecção."
@@ -821,7 +821,7 @@
     {
       "nome": "Esporte",
       "descricao": "Você sabe praticar vários tipos de esportes, e conhece suas regras. Esta perícia não afeta seu desempenho em combate, mesmo quando se trata de esportes como artes marciais, boxe, arquearia...",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Acrobacia",
           "descricao": "Você pode equilibrar-se em pequenas superfícies, andar sobre cordas, fazer malabarismo, etc."
@@ -863,7 +863,7 @@
     {
       "nome": "Idiomas",
       "descricao": "Você é poliglota. Conhece as principais línguas do mundo, e aprende outras com facilidade, mesmo as mais obscuras. Se você não possui esta perícia, saberá falar apenas o idioma mais comum no local da campanha e, caso pertença a alguma raça não humana, seu idioma nativo. Cada língua conta como uma especialização. Personagens com esta perícia não precisam de testes para aprender novas magias.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Código Morse",
           "descricao": "Você sabe transmitir e receber mensagens compostas de pontos e traços."
@@ -889,7 +889,7 @@
     {
       "nome": "Investigação",
       "descricao": "Você é um policial, detetive ou agente secreto, e conhece técnicas de investigação. Sabe seguir pegadas, procurar impressões digitais, usar disfarces, instalar explosivos, decifrar códigos secretos, destrancar fechaduras e desarmar armadilhas.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Armadilhas",
           "descricao": "Você sabe construir, armar e desarmar armadilhas, explosivos e aparelhos de detecção."
@@ -935,7 +935,7 @@
     {
       "nome": "Máquinas",
       "descricao": "Você é bom com máquinas, veículos e computadores. Sabe operar, pilotar, dirigir, construir e consertar qualquer coisa, se tiver as peças e ferramentas certas.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Armadilhas",
           "descricao": "Você sabe construir, armar e desarmar armadilhas, explosivos e aparelhos de detecção."
@@ -969,7 +969,7 @@
     {
       "nome": "Manipulação",
       "descricao": "Você sabe obter favores de outras pessoas por meios diversos, através de truques, engodos ou ameaças.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Hipnose",
           "descricao": "Você pode afetar a mente de uma pessoa e torná-la mais fácil de manipular."
@@ -995,7 +995,7 @@
     {
       "nome": "Medicina",
       "descricao": "Você sabe dizer que tipo de doença um paciente tem, como curá-la, e também pode fazer cirurgias. Quando alguém precisa de cuidados médicos, você pode providenciar.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Cirurgia",
           "descricao": "Você sabe tratar de doenças e ferimentos internos. Restaurar 1 PV é uma tarefa Média, mas é permitido apenas um teste por dia para cada paciente."
@@ -1021,7 +1021,7 @@
     {
       "nome": "Sobrevivência",
       "descricao": "Você consegue sobreviver em lugares selvagens. Sabe caçar, pescar, seguir pistas e encontrar comida e abrigo para você e seus amigos. Cada tipo de região conta como uma especialização.",
-      "especializacoes": [
+      "subopcoes": [
         {
           "nome": "Alpinismo",
           "descricao": "Você sabe escalar em montanhas, subir em muros altos, árvores e até edifícios."
@@ -1057,6 +1057,176 @@
         {
           "nome": "Outras Especializações",
           "descricao": "Mesmas da vantagem Arena."
+        }
+      ]
+    }
+  ],
+  "Vantagens_Unicas": [
+    {
+      "nome": "Humano"
+    },
+    {
+      "nome": "Semi-Humano",
+      "subopcoes": [
+        {
+          "nome": "Anão",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Elfo",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Elfo Negro",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Gnomo",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Halfling",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Meio-Elfo",
+          "custo": "0 ponto"
+        },
+        {
+          "nome": "Meio-Orc",
+          "custo": "0 pontos"
+        }
+      ]
+    },
+    {
+      "nome": "Humanoides",
+      "subopcoes": [
+        {
+          "nome": "Alien",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Anfíbio",
+          "custo": "0 pontos"
+        },
+        {
+          "nome": "Centauro",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Goblin",
+          "custo": "–1 ponto"
+        },
+        {
+          "nome": "Kemono",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Meio-Dragão",
+          "custo": "4 pontos"
+        },
+        {
+          "nome": "Minotauro",
+          "custo": "0 pontos"
+        },
+        {
+          "nome": "Ogre",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Troglodita",
+          "custo": "2 pontos"
+        }
+      ]
+    },
+    {
+      "nome": "Youkai",
+      "subopcoes": [
+        {
+          "nome": "Anjo",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Demônio",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Fada",
+          "custo": "3 pontos"
+        },
+        {
+          "nome": "Licantropo",
+          "custo": "0 pontos"
+        },
+        {
+          "nome": "Meio-Abissal",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Meio-Celestial",
+          "custo": "2 pontos"
+        },
+        {
+          "nome": "Meio-Gênio",
+          "custo": "4 pontos"
+        }
+      ]
+    },
+    {
+      "nome": "Construtos",
+      "subopcoes": [
+        {
+          "nome": "Androide",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Ciborgue",
+          "custo": "0 pontos"
+        },
+        {
+          "nome": "Golem",
+          "custo": "3 pontos"
+        },
+        {
+          "nome": "Mecha",
+          "custo": "0 pontos"
+        },
+        {
+          "nome": "Meio-Golem",
+          "custo": "1 ponto"
+        },
+        {
+          "nome": "Nanomorfo",
+          "custo": "3 pontos"
+        },
+        {
+          "nome": "Robô Positrônico",
+          "custo": "-2 pontos"
+        }
+      ]
+    },
+    {
+      "nome": "Mortos-Vivos",
+      "subopcoes": [
+        {
+          "nome": "Esqueleto",
+          "custo": "0 pontos"
+        },
+        {
+          "nome": "Fantasma",
+          "custo": "3 pontos"
+        },
+        {
+          "nome": "Múmia",
+          "custo": "3 pontos"
+        },
+        {
+          "nome": "Vampiro",
+          "custo": "-1 ponto"
+        },
+        {
+          "nome": "Zumbi",
+          "custo": "-2 pontos"
         }
       ]
     }
