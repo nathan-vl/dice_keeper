@@ -1230,5 +1230,138 @@
         }
       ]
     }
+  ],
+
+  "magias": [
+    {
+      "nome": "Acordar",
+      "descricao": "Esta magia serve para acordar criaturas adormecidas, incluindo aquelas que não possam ser despertadas por meios normais, como vítimas da magia Sono. Esta utilização consome 1 Ponto de Magia por criatura. Despertar uma vítima da magia Coma consome 5 PMs."
+    },
+    {
+      "nome": "Ao Alcance da Mão",
+      "descricao": "Esta magia reproduz exatamente o efeito de Membros Elásticos. Com ela o mago pode projetar mãos mágicas feitas de água, pedra ou sombra, que aumentam sua distância de combate corpo-a-corpo. Além da óbvia utilidade para ataques à distância, esta magia também é excelente para lançar outras magias que funcionam apenas ao toque."
+    },
+    {
+      "nome": "O Amor Incontestável de Raviollius",
+      "descricao": "Qualquer criatura atingida por ela deve fazer um teste de Resistência; se falhar, vai se apaixonar perdidamente pela primeira criatura em que colocar os olhos. Uma vítima nesse estado não pode fazer qualquer ataque contra a pessoa amada, e nem permitir que seja atacada. Contudo, se receber qualquer ataque, a magia será cancelada."
+    },
+    {
+      "nome": "Sanidade",
+      "descricao": "Esta mágica pode anular o efeito da desvantagem Insano durante uma hora, ou cancelar a Loucura de Atavus."
+    },
+    {
+      "nome": "Sentidos Especiais",
+      "descricao": "Esta magia permite simular temporariamente uma das habilidades sensoriais de Sentidos Especiais. Enquanto está ativa, o mago possui aquele Sentido exatamente como descrito na vantagem — mas só pode manter um de cada vez."
+    },
+    {
+      "nome": "A Seta Infalível de Talude",
+      "descricao": "A mágica cria ao lado do mago uma pequena seta luminosa que dispara de imediato. Ela sempre acerta com FA 1, e contra ela qualquer alvo é considerado indefeso. Gastando PMs, um mago pode criar setas adicionais, até um máximo de 5 setas por 4 PMs."
+    },
+    {
+      "nome": "Silêncio",
+      "descricao": "Esta magia pode ser lançada contra um local ou uma criatura, mas não em objetos. Em um local, vai afetar um volume esférico com até 3m de raio para cada 2 PMs gastos. Dentro desta área será impossível ouvir ou produzir qualquer som. Lançada contra uma criatura, a magia vai impedir que ela consiga ouvir ou dizer qualquer coisa, assim como produzir qualquer som."
+    },
+    {
+      "nome": "O Soco de Arsenal",
+      "descricao": "Desferir um soco mágico com força equivalente ao número de PMs gastos."
+    },
+    {
+      "nome": "Cegueira",
+      "descricao": "Causa cegueira temporária em uma criatura. Uma criatura cega sofre penalidades em ataques e esquivas."
+    },
+    {
+      "nome": "Chuva Congelante",
+      "descricao": "Cria acima do mago uma esfera flutuante de gelo que faz chover pequenas farpas de gelo na área abaixo. Todos na área afetada sofrem um ataque por turno com FA=3d."
+    },
+    {
+      "nome": "Chuva Quente",
+      "descricao": "Cria uma pequena e confortável chuva de água quente, ótima para tomar banho e curar resfriados. A Chuva Quente pode ser invocada apenas em aposentos fechados e mantida enquanto o mago continua entoando as palavras mágicas de ativação."
+    },
+    {
+      "nome": "Coma",
+      "descricao": "Induz uma criatura ao estado de coma. Uma criatura nesse estado não pode ser despertada por meios normais."
+    }
+  ],
+  "itens": [
+    {
+      "nome": "Cura Menor",
+      "efeito": "restaura 5 PVs"
+    },
+    {
+      "nome": "Cura Maior",
+      "efeito": "restaura 10 PVs"
+    },
+    {
+      "nome": "Cura Total",
+      "efeito": "restaura todos os PVs"
+    },
+    {
+      "nome": "Magia Menor",
+      "efeito": "restaura 5 PMs"
+    },
+    {
+      "nome": "Magia Maior",
+      "efeito": "restaura 10 PMs"
+    },
+    {
+      "nome": "Magia Total",
+      "efeito": "restaura todos os PMs"
+    },
+    {
+      "nome": "Cura & Magia Menores",
+      "efeito": "restaura 5 PVs e 5 PMs"
+    },
+    {
+      "nome": "Cura & Magia Maiores",
+      "efeito": "restaura 10 PVs e 10 PMs"
+    },
+    {
+      "nome": "Cura & Magia Totais",
+      "efeito": "restaura todos os PVs e PMs"
+    },
+    {
+      "nome": "Antídoto Menor",
+      "efeito": "cura venenos, doenças, cegueira, paralisia e outros males que possam ser curados com a magia Cura Mágica"
+    },
+    {
+      "nome": "Antídoto Maior",
+      "efeito": "cura males só curados com a magia Cura Total"
+    },
+    {
+      "nome": "Antídoto Total",
+      "efeito": "cura males só curados com a magia Cura de Maldição"
+    },
+    {
+      "nome": "Medalhão de Thyatis",
+      "efeito": "ressuscita o portador com Pontos de Vida totais"
+    },
+    {
+      "nome": "Medalhão de Wynna",
+      "efeito": "permite gastar metade dos PMs necessários para usar qualquer magia ou poder especial"
+    },
+    {
+      "nome": "Brincos de Marah",
+      "efeito": "protegem o usuário contra violência"
+    },
+    {
+      "nome": "Brincos de Wynna",
+      "efeito": "cada brinco armazena 1 Ponto de Magia"
+    },
+    {
+      "nome": "Colar do Mar",
+      "efeito": "permite ao usuário se mover e respirar normalmente embaixo d'água"
+    },
+    {
+      "nome": "Coroa da Resistência Espiritual",
+      "efeito": "+3 em testes de Resistência contra magias da escola Elemental (espírito)"
+    },
+    {
+      "nome": "Escudo da Lua",
+      "efeito": "reflete qualquer ataque baseado em Poder de Fogo e magias ofensivas que ignoram a Armadura do alvo"
+    },
+    {
+      "nome": "Medalhão de Lena",
+      "efeito": "restaura todos os PVs da vítima quando atinge 0 Pontos de Vida"
+    }
   ]
 }
