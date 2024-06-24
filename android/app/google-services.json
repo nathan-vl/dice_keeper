@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "700886395770",
+    "project_id": "dice-keeper",
+    "storage_bucket": "dice-keeper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700886395770:android:0ba3f7c087867277a104c3",
+        "android_client_info": {
+          "package_name": "com.example.dice_keeper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM_r2ExovZUJSk3lERCFwhTZBbrPEwJDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
