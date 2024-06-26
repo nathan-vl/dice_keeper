@@ -111,10 +111,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: Login(),
-      ),
+      home: Login(),
     );
   }
 }

@@ -13,14 +13,14 @@ class FirstAccess extends StatefulWidget {
 }
 
 class _FirstAccessState extends State<FirstAccess> {
-  final FirebaseAuth  _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   logout() async {
     await _auth.signOut();
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Login()),
-      );
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) {
+      return Login();
+    }));
   }
 
   @override
