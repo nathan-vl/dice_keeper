@@ -1,38 +1,48 @@
+import 'package:dice_keeper/models/npc.dart';
+import 'package:dice_keeper/services.dart';
 import 'package:flutter/material.dart';
 
 class NPCs extends StatefulWidget {
-  const NPCs({super.key});
+  final String npcsDoc;
+
+  const NPCs({super.key, required this.npcsDoc});
 
   @override
   State<NPCs> createState() => _NPCsState();
 }
 
 class _NPCsState extends State<NPCs> {
-  final items = <NPC>[
-    NPC(title: "Conselheiro do Rei", description: ""),
-    NPC(title: "Guarda da Cidade 02", description: ""),
-    NPC(title: "Médico Yueh", description: ""),
-  ];
+  List<NPC> items = List.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    getNpcs(widget.npcsDoc).then((res) {
+      setState(() {
+        items = res;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showDialog(
-          context: context,
-          builder: (context) => NPCModal(
-            isEditing: false,
-            onSave: (npc) {
-              setState(() {
-                items.add(npc);
-              });
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        elevation: 0,
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => showDialog(
+      //     context: context,
+      //     builder: (context) => NPCModal(
+      //       isEditing: false,
+      //       onSave: (npc) {
+      //         setState(() {
+      //           items.add(npc);
+      //         });
+      //         Navigator.pop(context);
+      //       },
+      //     ),
+      //   ),
+      //   elevation: 0,
+      //   child: const Icon(Icons.add),
+      // ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 24.0),
         child: Column(
@@ -68,17 +78,6 @@ class _NPCsState extends State<NPCs> {
         ),
       ),
     );
-  }
-}
-
-class NPC {
-  final String title;
-  final String description;
-
-  NPC({required this.title, required this.description});
-
-  NPC clone() {
-    return NPC(title: title, description: description);
   }
 }
 

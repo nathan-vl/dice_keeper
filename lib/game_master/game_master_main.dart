@@ -38,7 +38,7 @@ class GameMasterMain extends StatelessWidget {
           children: [
             PlayersList(), // Jogadores
             DiceRoller(),
-            NPCs(),
+            NPCs(npcsDoc: "OL5umur3TxOdBt65xdHf"),
             Locations(),
           ],
         ),
