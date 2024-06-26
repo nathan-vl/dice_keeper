@@ -1,5 +1,5 @@
 import 'package:dice_keeper/models/npc.dart';
-import 'package:dice_keeper/services.dart';
+import 'package:dice_keeper/npc_service.dart';
 import 'package:flutter/material.dart';
 
 class NPCs extends StatefulWidget {
@@ -17,7 +17,7 @@ class _NPCsState extends State<NPCs> {
   @override
   void initState() {
     super.initState();
-    getNpcs(widget.npcsDoc).then((res) {
+    NPCService.get(widget.npcsDoc).then((res) {
       setState(() {
         items = res;
       });
@@ -27,22 +27,23 @@ class _NPCsState extends State<NPCs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => showDialog(
-      //     context: context,
-      //     builder: (context) => NPCModal(
-      //       isEditing: false,
-      //       onSave: (npc) {
-      //         setState(() {
-      //           items.add(npc);
-      //         });
-      //         Navigator.pop(context);
-      //       },
-      //     ),
-      //   ),
-      //   elevation: 0,
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) => NPCModal(
+            isEditing: false,
+            onSave: (npc) {
+              items.add(npc);
+              NPCService.update(widget.npcsDoc, items);
+
+              setState(() {});
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        elevation: 0,
+        child: const Icon(Icons.add),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 24.0),
         child: Column(
@@ -60,15 +61,17 @@ class _NPCsState extends State<NPCs> {
                 itemBuilder: (context, index) => NPCCard(
                   npc: items[index],
                   onSave: (npc) {
-                    setState(() {
-                      items[index] = npc;
-                    });
+                    items[index] = npc;
+                    NPCService.update(widget.npcsDoc, items);
+
+                    setState(() {});
                     Navigator.pop(context);
                   },
                   onConfirmRemove: () {
-                    setState(() {
-                      items.removeAt(index);
-                    });
+                    items.removeAt(index);
+                    NPCService.update(widget.npcsDoc, items);
+
+                    setState(() {});
                     Navigator.pop(context);
                   },
                 ),

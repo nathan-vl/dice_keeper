@@ -12,4 +12,9 @@ class NPC {
     title = npcMap['title'];
     description = npcMap['description'];
   }
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+      };
 }
