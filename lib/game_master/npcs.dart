@@ -1,5 +1,5 @@
 import 'package:dice_keeper/models/npc.dart';
-import 'package:dice_keeper/npc_service.dart';
+import 'package:dice_keeper/service/npc_service.dart';
 import 'package:flutter/material.dart';
 
 class NPCs extends StatefulWidget {
@@ -231,8 +231,11 @@ class ConfirmDeleteDialog extends StatelessWidget {
   final String message;
   final void Function() onConfirm;
 
-  const ConfirmDeleteDialog(
-      {super.key, required this.message, required this.onConfirm});
+  const ConfirmDeleteDialog({
+    super.key,
+    required this.message,
+    required this.onConfirm,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,18 +1,28 @@
+import 'package:dice_keeper/models/location.dart';
+import 'package:dice_keeper/service/location_service.dart';
 import 'package:flutter/material.dart';
 
 class Locations extends StatefulWidget {
-  const Locations({super.key});
+  final String locationsDoc;
+
+  const Locations({super.key, required this.locationsDoc});
 
   @override
   State<Locations> createState() => _LocationsState();
 }
 
 class _LocationsState extends State<Locations> {
-  final items = <Location>[
-    Location(title: "Vila Foosha", description: ""),
-    Location(title: "Anor Londo", description: ""),
-    Location(title: "Castelo do Rei", description: ""),
-  ];
+  List<Location> items = List.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    LocationService.get(widget.locationsDoc).then((res) {
+      setState(() {
+        items = res;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +33,10 @@ class _LocationsState extends State<Locations> {
           builder: (context) => LocationModal(
             isEditing: false,
             onSave: (location) {
-              setState(() {
-                items.add(location);
-              });
+              items.add(location);
+              LocationService.update(widget.locationsDoc, items);
+
+              setState(() {});
               Navigator.pop(context);
             },
           ),
@@ -50,15 +61,17 @@ class _LocationsState extends State<Locations> {
                 itemBuilder: (context, index) => LocationCard(
                   location: items[index],
                   onSave: (location) {
-                    setState(() {
-                      items[index] = location;
-                    });
+                    items[index] = location;
+                    LocationService.update(widget.locationsDoc, items);
+
+                    setState(() {});
                     Navigator.pop(context);
                   },
                   onConfirmRemove: () {
-                    setState(() {
-                      items.removeAt(index);
-                    });
+                    items.removeAt(index);
+                    LocationService.update(widget.locationsDoc, items);
+
+                    setState(() {});
                     Navigator.pop(context);
                   },
                 ),
@@ -68,17 +81,6 @@ class _LocationsState extends State<Locations> {
         ),
       ),
     );
-  }
-}
-
-class Location {
-  final String title;
-  final String description;
-
-  Location({required this.title, required this.description});
-
-  Location clone() {
-    return Location(title: title, description: description);
   }
 }
 
@@ -230,8 +232,11 @@ class ConfirmDeleteDialog extends StatelessWidget {
   final String message;
   final void Function() onConfirm;
 
-  const ConfirmDeleteDialog(
-      {super.key, required this.message, required this.onConfirm});
+  const ConfirmDeleteDialog({
+    super.key,
+    required this.message,
+    required this.onConfirm,
+  });
 
   @override
   Widget build(BuildContext context) {
