@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/first_access.dart';
 import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuth  _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   void _login() async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -28,29 +32,105 @@ class _LoginState extends State<Login> {
         context,
         MaterialPageRoute(builder: (context) => const FirstAccess()),
       );
-      
-    } on FirebaseAuthException catch (e) {
-      // Tratar erro de loginflutter clean
-     
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro durante o login: $e")),
+      );
     }
   }
 
-  loginWithGoogle() async {
-
+  Future<void> _signInWithGoogle() async {
     try {
-      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
-      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      if (googleUser == null) {
+        return;
+      }
 
-      AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
 
-      print(userCredential.user?.displayName);
+      DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(userCredential.user?.uid)
+          .get();
 
+      if (!userDoc.exists) {
+        await _firestore.collection('users').doc(userCredential.user?.uid).set({
+          'email': userCredential.user?.email,
+          'displayName': userCredential.user?.displayName,
+          'photoURL': userCredential.user?.photoURL,
+          'lastSignIn': Timestamp.now(),
+        });
+      } else {
+        await _firestore
+            .collection('users')
+            .doc(userCredential.user?.uid)
+            .update({
+          'lastSignIn': Timestamp.now(),
+        });
+      }
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => FirstAccess()),
+      );
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro durante o login: $e")),
+      );
+    }
+  }
+
+  /*_loginWithGoogle() async {
+    try {
+      GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(userCredential.user?.uid)
+          .get();
+
+      if (!userDoc.exists) {
+        // If the user is not registered, add them to Firestore
+        await _firestore.collection('users').doc(userCredential.user?.uid).set({
+          'email': userCredential.user?.email,
+          'displayName': userCredential.user?.displayName,
+          'photoURL': userCredential.user?.photoURL,
+          'lastSignIn': Timestamp.now(),
+        });
+      } else {
+        // Update the last sign-in time if the user already exists
+        await _firestore
+            .collection('users')
+            .doc(userCredential.user?.uid)
+            .update({
+          'lastSignIn': Timestamp.now(),
+        });
+      }
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const FirstAccess()),
+      );
       if (userCredential.user != null) {
         print("deu certo");
         // Navigator.push(
@@ -63,12 +143,12 @@ class _LoginState extends State<Login> {
     } catch (e) {
       // Tratar erro
     }
-
-  }
+  }*/
 
   registrar() async {
     try {
-      await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+      await _auth.createUserWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('A senha é muito fraca!');
@@ -80,8 +160,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return SingleChildScrollView(
       child: Container(
         decoration: const BoxDecoration(
@@ -144,7 +222,7 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: FilledButton.icon(
                       onPressed: () {
-                        loginWithGoogle();
+                        _signInWithGoogle();
                       },
                       icon: SvgPicture.asset(
                         './assets/vectors/icons/google.svg',
@@ -152,23 +230,6 @@ class _LoginState extends State<Login> {
                       label: const Text("Entrar com Google"),
                       style: FilledButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(179, 38, 30, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.icon(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        './assets/vectors/icons/facebook.svg',
-                      ),
-                      label: const Text("Entrar com Facebook"),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(79, 55, 139, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(3),
                         ),
