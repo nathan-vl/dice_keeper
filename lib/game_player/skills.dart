@@ -1,3 +1,5 @@
+import 'package:dice_keeper/models/skill.dart';
+import 'package:dice_keeper/service/skill_service.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -9,16 +11,19 @@ class Skills extends StatefulWidget {
 }
 
 class _SkillsState extends State<Skills> {
-  final items = <Skill>[
-    Skill(name: "Bola de fogo", description: "uma bola de fogo."),
-    Skill(name: "Bola de gelo", description: "uma bola de neve giganstruosa."),
-    Skill(
-        name: "Bola elétrica",
-        description: "uma bola de raios feitos pelo deus grego Nathanzinho."),
-  ];
-
+  var items = List.empty();
   final selectedItems = <Skill>[];
   List<Skill> filteredItems = <Skill>[];
+
+  @override
+  void initState() {
+    super.initState();
+    SkillService.get().then((res) {
+      setState(() {
+        items = res;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,16 +123,6 @@ class _SkillsState extends State<Skills> {
         ),
       ),
     );
-  }
-}
-
-class Skill {
-  final String name;
-  final String description;
-
-  Skill({required this.name, required this.description});
-  Skill clone() {
-    return Skill(name: name, description: description);
   }
 }
 

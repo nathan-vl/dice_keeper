@@ -1,5 +1,5 @@
 {
-  "Vantagens": [
+  "vantagens": [
     {
       "nome": "Aceleração",
       "custo": "1 ponto",
@@ -318,7 +318,7 @@
       "descricao": "Você tem uma forte ligação com o mundo dos espíritos. Pode interagir com fantasmas e outras criaturas incorpóreas, podendo atacá-las (e ser atacado) livremente. Você também pode Ver o Invisível como se tivesse esse Sentido Especial."
     }
   ],
-  "Desvantagens": [
+  "desvantagens": [
     {
       "nome": "Ambiente Especial",
       "custo": -1,
@@ -677,7 +677,7 @@
       "descricao": "Você é mais vulnerável a um certo tipo de dano. Quando recebe um ataque ao qual é vulnerável, sua Armadura é reduzida a zero para calcular sua Força de Defesa: o ataque ignora quase toda a sua proteção e frita seus Pontos de Vida! Exemplo: você tem Habilidade 2, Armadura 5 e Vulnera bilidade a Sônico. Se for atingido por um raio sônico, sua Força de Defesa será 2+1d. Esta desvantagem não oferece pontos, e não pode ser escolhida durante a criação de personagem. No entanto, ela pode aparecer mais adiante como parte de uma vantagem única (por exemplo, um Anjo tem Vulnerabilidade: Fogo), ou causada por alguma Maldição. Os tipos de Vulnerabilidade são os mesmos existentes para Armadura Extra. Vulnerabilidade não vale apenas contra ataques de criaturas: se você é vulnerável a fogo, então qualquer calor ou fogo terá maior chance de feri-lo: incêndios, vapor escaldante, água fervente, lava... veja mais detalhes em “Combate”."
     }
   ],
-  "Pericias": [
+  "pericias": [
     {
       "nome": "Animais",
       "descricao": "Você sabe cuidar de animais e tratar de seus ferimentos, evitar animais perigosos, e até domar animais selvagens mas se deseja ter um animal treinado, vai precisar também da vantagem Aliado). Em mundos de fantasia, esta perícia também permite falar a língua dos animais. A critério do mestre, a perícia também pode se aplicar a monstros e outras criaturas fantásticas.",
@@ -1061,7 +1061,7 @@
       ]
     }
   ],
-  "Vantagens_Unicas": [
+  "vantagens_unicas": [
     {
       "nome": "Humano"
     },

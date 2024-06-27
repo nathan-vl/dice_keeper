@@ -1,4 +1,5 @@
 import 'package:dice_keeper/character_creation/inventory.dart';
+import 'package:dice_keeper/models/skill.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -173,16 +174,6 @@ class _SkillsState extends State<Skills> {
         ),
       ),
     );
-  }
-}
-
-class Skill {
-  final String name;
-  final String description;
-
-  Skill({required this.name, required this.description});
-  Skill clone() {
-    return Skill(name: name, description: description);
   }
 }
 
