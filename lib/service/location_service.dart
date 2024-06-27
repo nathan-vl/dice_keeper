@@ -8,12 +8,15 @@ class LocationService {
     final document = await _db.collection("locations").doc(locationsDoc).get();
     final data = document.data()!;
     final items = data["items"];
-    final locations = items.map((location) => Location.fromDynamic(location));
+    final locations = items.map((location) => Location.fromMap(location));
     return List<Location>.from(locations.toList() as List);
   }
 
   static void update(String locationsDoc, List<Location> locations) async {
-    final items = locations.map((location) => location.toJson());
-    await _db.collection("npcs").doc(locationsDoc).update({"items": items});
+    final items = locations.map((location) => location.toMap());
+    await _db
+        .collection("locations")
+        .doc(locationsDoc)
+        .update({"items": items});
   }
 }

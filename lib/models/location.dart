@@ -1,6 +1,6 @@
 class Location {
-  String title = "";
-  String description = "";
+  String title;
+  String description;
 
   Location({required this.title, required this.description});
 
@@ -8,12 +8,12 @@ class Location {
     return Location(title: title, description: description);
   }
 
-  Location.fromDynamic(dynamic npcMap) {
-    title = npcMap['title'];
-    description = npcMap['description'];
-  }
+  factory Location.fromMap(Map<String, dynamic> map) => Location(
+        title: map['title'],
+        description: map['description'],
+      );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         'title': title,
         'description': description,
       };

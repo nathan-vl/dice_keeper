@@ -1,6 +1,6 @@
 class NPC {
-  String title = "";
-  String description = "";
+  String title;
+  String description;
 
   NPC({required this.title, required this.description});
 
@@ -8,12 +8,12 @@ class NPC {
     return NPC(title: title, description: description);
   }
 
-  NPC.fromDynamic(dynamic npcMap) {
-    title = npcMap['title'];
-    description = npcMap['description'];
-  }
+  factory NPC.fromMap(Map<String, dynamic> map) => NPC(
+        title: map['title'],
+        description: map['description'],
+      );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         'title': title,
         'description': description,
       };

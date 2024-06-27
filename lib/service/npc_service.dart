@@ -8,12 +8,12 @@ class NPCService {
     final document = await _db.collection("npcs").doc(npcsDoc).get();
     final data = document.data()!;
     final items = data["items"];
-    final npcs = items.map((npc) => NPC.fromDynamic(npc));
+    final npcs = items.map((npc) => NPC.fromMap(npc));
     return List<NPC>.from(npcs.toList() as List);
   }
 
   static void update(String npcsDoc, List<NPC> npcs) async {
-    final items = npcs.map((npc) => npc.toJson());
+    final items = npcs.map((npc) => npc.toMap());
     await _db.collection("npcs").doc(npcsDoc).update({"items": items});
   }
 }
