@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/first_access.dart';
+import 'package:dice_keeper/register.dart';
 import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -90,19 +91,6 @@ class _LoginState extends State<Login> {
     }
   }
 
-  registrar() async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: _emailController.text, password: _passwordController.text);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('A senha é muito fraca!');
-      } else if (e.code == 'email-already-in-use') {
-        print('Este email já está cadastrado');
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,6 +148,19 @@ class _LoginState extends State<Login> {
                           _login();
                         },
                         child: const Text('INICIAR AVENTURA'),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton.icon(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Register()),
+                          );
+                        },
+                        label: const Text("Criar conta"),
                       ),
                     ),
                     const SizedBox(height: 12),

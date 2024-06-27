@@ -1,3 +1,4 @@
+import 'package:dice_keeper/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:dice_keeper/login.dart';
