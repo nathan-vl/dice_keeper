@@ -2,51 +2,69 @@ import 'package:dice_keeper/dice_roller.dart';
 import 'package:dice_keeper/screens/game_master_locations.dart';
 import 'package:dice_keeper/screens/game_master_npcs.dart';
 import 'package:dice_keeper/screens/game_master_players_list.dart';
+import 'package:dice_keeper/service/room_service.dart';
 import 'package:flutter/material.dart';
 
-class GameMasterMain extends StatelessWidget {
-  final String roomName;
+class GameMasterMain extends StatefulWidget {
+  final String roomDoc;
 
   const GameMasterMain({
     super.key,
-    required this.roomName,
+    required this.roomDoc,
   });
 
   @override
+  State<GameMasterMain> createState() => _GameMasterMainState();
+}
+
+class _GameMasterMainState extends State<GameMasterMain> {
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        bottomNavigationBar: const TabBar(
-          tabs: [
-            Tab(icon: Icon(Icons.view_list), text: 'Jogadores'),
-            Tab(icon: Icon(Icons.casino), text: 'Dados'),
-            Tab(icon: Icon(Icons.person), text: 'NPCs'),
-            Tab(icon: Icon(Icons.pin_drop), text: 'Locais'),
-          ],
-        ),
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-          title: Text(roomName),
-        ),
-        body: const TabBarView(
-          children: [
-            GameMasterPlayersList(), // Jogadores
-            DiceRoller(),
-            GameMasterNPCs(
-              npcsDoc: "aqWVN0TpUOmuK7M38onC",
-            ),
-            GameMasterLocations(
-              locationsDoc: "jU1gki9ds95lNPWgAwYT",
-            ),
-          ],
-        ),
-      ),
+    return FutureBuilder(
+      future: RoomService.get(widget.roomDoc),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+          case ConnectionState.active:
+            return Placeholder();
+          case ConnectionState.done:
+            return DefaultTabController(
+              length: 4,
+              child: Scaffold(
+                bottomNavigationBar: const TabBar(
+                  tabs: [
+                    Tab(icon: Icon(Icons.view_list), text: 'Jogadores'),
+                    Tab(icon: Icon(Icons.casino), text: 'Dados'),
+                    Tab(icon: Icon(Icons.person), text: 'NPCs'),
+                    Tab(icon: Icon(Icons.pin_drop), text: 'Locais'),
+                  ],
+                ),
+                appBar: AppBar(
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back),
+                  ),
+                  title: Text(snapshot.requireData.title),
+                ),
+                body: TabBarView(
+                  children: [
+                    const GameMasterPlayersList(), // Jogadores
+                    const DiceRoller(),
+                    GameMasterNPCs(
+                      npcsDoc: snapshot.requireData.npcsRef.id,
+                    ),
+                    GameMasterLocations(
+                      locationsDoc: snapshot.requireData.locationsRef.id,
+                    ),
+                  ],
+                ),
+              ),
+            );
+        }
+      },
     );
   }
 }

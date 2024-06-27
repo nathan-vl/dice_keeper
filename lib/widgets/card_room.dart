@@ -14,7 +14,7 @@ class CardRoom extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const GameMasterMain(
-                roomName: "[Nome da Sala]",
+                roomDoc: "MhvD9haf1LtBh5th8G2n",
               ),
             ),
           );

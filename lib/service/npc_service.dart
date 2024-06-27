@@ -14,6 +14,6 @@ class NPCService {
 
   static void update(String npcsDoc, List<NPC> npcs) async {
     final items = npcs.map((npc) => npc.toJson());
-    await _db.collection("roomNpcs").doc(npcsDoc).update({"items": items});
+    await _db.collection("npcs").doc(npcsDoc).update({"items": items});
   }
 }
