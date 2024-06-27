@@ -2,16 +2,16 @@ import 'package:dice_keeper/models/npc.dart';
 import 'package:dice_keeper/service/npc_service.dart';
 import 'package:flutter/material.dart';
 
-class NPCs extends StatefulWidget {
+class GameMasterNPCs extends StatefulWidget {
   final String npcsDoc;
 
-  const NPCs({super.key, required this.npcsDoc});
+  const GameMasterNPCs({super.key, required this.npcsDoc});
 
   @override
-  State<NPCs> createState() => _NPCsState();
+  State<GameMasterNPCs> createState() => _GameMasterNPCsState();
 }
 
-class _NPCsState extends State<NPCs> {
+class _GameMasterNPCsState extends State<GameMasterNPCs> {
   List<NPC> items = List.empty();
 
   @override

@@ -2,16 +2,16 @@ import 'package:dice_keeper/models/location.dart';
 import 'package:dice_keeper/service/location_service.dart';
 import 'package:flutter/material.dart';
 
-class Locations extends StatefulWidget {
+class GameMasterLocations extends StatefulWidget {
   final String locationsDoc;
 
-  const Locations({super.key, required this.locationsDoc});
+  const GameMasterLocations({super.key, required this.locationsDoc});
 
   @override
-  State<Locations> createState() => _LocationsState();
+  State<GameMasterLocations> createState() => _GameMasterLocationsState();
 }
 
-class _LocationsState extends State<Locations> {
+class _GameMasterLocationsState extends State<GameMasterLocations> {
   List<Location> items = List.empty();
 
   @override

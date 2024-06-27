@@ -1,4 +1,4 @@
-import 'package:dice_keeper/game_master/game_master_main.dart';
+import 'package:dice_keeper/screens/game_master_main.dart';
 import 'package:flutter/material.dart';
 
 class CardRoom extends StatelessWidget {

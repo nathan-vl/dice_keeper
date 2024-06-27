@@ -2,8 +2,8 @@ import 'package:dice_keeper/widgets/card_character.dart';
 import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:flutter/material.dart';
 
-class PlayersList extends StatelessWidget {
-  const PlayersList({super.key});
+class GameMasterPlayersList extends StatelessWidget {
+  const GameMasterPlayersList({super.key});
 
   @override
   Widget build(BuildContext context) {
