@@ -9,8 +9,7 @@ class LocationService {
     final data = document.data()!;
     final items = data["items"];
     final locations = items.map((location) => Location.fromDynamic(location));
-    final l = List<Location>.from(locations.toList() as List);
-    return l;
+    return List<Location>.from(locations.toList() as List);
   }
 
   static void update(String locationsDoc, List<Location> locations) async {

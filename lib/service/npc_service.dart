@@ -5,12 +5,11 @@ final _db = FirebaseFirestore.instance;
 
 class NPCService {
   static Future<List<NPC>> get(String npcsDoc) async {
-    final document = await _db.collection("roomNpcs").doc(npcsDoc).get();
+    final document = await _db.collection("npcs").doc(npcsDoc).get();
     final data = document.data()!;
     final items = data["items"];
     final npcs = items.map((npc) => NPC.fromDynamic(npc));
-    final l = List<NPC>.from(npcs.toList() as List);
-    return l;
+    return List<NPC>.from(npcs.toList() as List);
   }
 
   static void update(String npcsDoc, List<NPC> npcs) async {
