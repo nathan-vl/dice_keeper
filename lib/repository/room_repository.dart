@@ -3,7 +3,7 @@ import 'package:dice_keeper/models/room.dart';
 
 final _db = FirebaseFirestore.instance;
 
-class RoomService {
+class RoomRepository {
   static Future<Room> get(String npcsDoc) async {
     final document = await _db.collection("rooms").doc(npcsDoc).get();
     final data = document.data()!;

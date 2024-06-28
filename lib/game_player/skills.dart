@@ -1,5 +1,5 @@
 import 'package:dice_keeper/models/skill.dart';
-import 'package:dice_keeper/service/skill_service.dart';
+import 'package:dice_keeper/repository/skill_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _SkillsState extends State<Skills> {
   @override
   void initState() {
     super.initState();
-    SkillService.get().then((res) {
+    SkillRepository.get().then((res) {
       setState(() {
         items = res;
       });

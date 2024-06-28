@@ -1,5 +1,5 @@
 import 'package:dice_keeper/models/location.dart';
-import 'package:dice_keeper/service/location_service.dart';
+import 'package:dice_keeper/repository/location_repository.dart';
 import 'package:dice_keeper/widgets/confirm_delete_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _GameMasterLocationsState extends State<GameMasterLocations> {
   @override
   void initState() {
     super.initState();
-    LocationService.get(widget.locationsDoc).then((res) {
+    LocationRepository.get(widget.locationsDoc).then((res) {
       setState(() {
         items = res;
       });
@@ -35,7 +35,7 @@ class _GameMasterLocationsState extends State<GameMasterLocations> {
             isEditing: false,
             onSave: (location) {
               items.add(location);
-              LocationService.update(widget.locationsDoc, items);
+              LocationRepository.update(widget.locationsDoc, items);
 
               setState(() {});
               Navigator.pop(context);
@@ -63,14 +63,14 @@ class _GameMasterLocationsState extends State<GameMasterLocations> {
                   location: items[index],
                   onSave: (location) {
                     items[index] = location;
-                    LocationService.update(widget.locationsDoc, items);
+                    LocationRepository.update(widget.locationsDoc, items);
 
                     setState(() {});
                     Navigator.pop(context);
                   },
                   onConfirmRemove: () {
                     items.removeAt(index);
-                    LocationService.update(widget.locationsDoc, items);
+                    LocationRepository.update(widget.locationsDoc, items);
 
                     setState(() {});
                     Navigator.pop(context);

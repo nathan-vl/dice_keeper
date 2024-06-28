@@ -3,7 +3,7 @@ import 'package:dice_keeper/models/skill.dart';
 
 final _db = FirebaseFirestore.instance;
 
-class SkillService {
+class SkillRepository {
   static Future<List<Skill>> get() async {
     final document =
         await _db.collection("rpg_properties").doc("properties").get();

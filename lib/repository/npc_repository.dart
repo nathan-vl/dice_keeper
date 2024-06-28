@@ -3,7 +3,7 @@ import 'package:dice_keeper/models/npc.dart';
 
 final _db = FirebaseFirestore.instance;
 
-class NPCService {
+class NPCRepository {
   static Future<List<NPC>> get(String npcsDoc) async {
     final document = await _db.collection("npcs").doc(npcsDoc).get();
     final data = document.data()!;

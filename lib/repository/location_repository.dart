@@ -3,7 +3,7 @@ import 'package:dice_keeper/models/location.dart';
 
 final _db = FirebaseFirestore.instance;
 
-class LocationService {
+class LocationRepository {
   static Future<List<Location>> get(String locationsDoc) async {
     final document = await _db.collection("locations").doc(locationsDoc).get();
     final data = document.data()!;

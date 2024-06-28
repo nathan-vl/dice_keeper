@@ -1,5 +1,5 @@
 import 'package:dice_keeper/models/npc.dart';
-import 'package:dice_keeper/service/npc_service.dart';
+import 'package:dice_keeper/repository/npc_repository.dart';
 import 'package:dice_keeper/widgets/confirm_delete_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class _GameMasterNPCsState extends State<GameMasterNPCs> {
   @override
   void initState() {
     super.initState();
-    NPCService.get(widget.npcsDoc).then((res) {
+    NPCRepository.get(widget.npcsDoc).then((res) {
       setState(() {
         items = res;
       });
@@ -35,7 +35,7 @@ class _GameMasterNPCsState extends State<GameMasterNPCs> {
             isEditing: false,
             onSave: (npc) {
               items.add(npc);
-              NPCService.update(widget.npcsDoc, items);
+              NPCRepository.update(widget.npcsDoc, items);
 
               setState(() {});
               Navigator.pop(context);
@@ -63,14 +63,14 @@ class _GameMasterNPCsState extends State<GameMasterNPCs> {
                   npc: items[index],
                   onSave: (npc) {
                     items[index] = npc;
-                    NPCService.update(widget.npcsDoc, items);
+                    NPCRepository.update(widget.npcsDoc, items);
 
                     setState(() {});
                     Navigator.pop(context);
                   },
                   onConfirmRemove: () {
                     items.removeAt(index);
-                    NPCService.update(widget.npcsDoc, items);
+                    NPCRepository.update(widget.npcsDoc, items);
 
                     setState(() {});
                     Navigator.pop(context);

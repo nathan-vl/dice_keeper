@@ -2,7 +2,7 @@ import 'package:dice_keeper/dice_roller.dart';
 import 'package:dice_keeper/screens/game_master_locations.dart';
 import 'package:dice_keeper/screens/game_master_npcs.dart';
 import 'package:dice_keeper/screens/game_master_players_list.dart';
-import 'package:dice_keeper/service/room_service.dart';
+import 'package:dice_keeper/repository/room_repository.dart';
 import 'package:flutter/material.dart';
 
 class GameMasterMain extends StatefulWidget {
@@ -21,7 +21,7 @@ class _GameMasterMainState extends State<GameMasterMain> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: RoomService.get(widget.roomDoc),
+      future: RoomRepository.get(widget.roomDoc),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
