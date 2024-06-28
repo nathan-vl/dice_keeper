@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/first_access.dart';
 import 'package:dice_keeper/register.dart';
-import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -59,10 +58,10 @@ class _LoginState extends State<Login> {
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-      DocumentSnapshot userDoc = await _firestore
-          .collection('users')
-          .doc(userCredential.user?.uid)
-          .get();
+        DocumentSnapshot userDoc = await _firestore
+            .collection('users')
+            .doc(userCredential.user?.uid)
+            .get();
 
       if (!userDoc.exists) {
         await _firestore.collection('users').doc(userCredential.user?.uid).set({

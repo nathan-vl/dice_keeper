@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/character_creation/sheet.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,39 @@ class JoinCampaign extends StatefulWidget {
 }
 
 class _JoinCampaignState extends State<JoinCampaign> {
+  final TextEditingController _tokenRoomController = TextEditingController();
+  CollectionReference tokens = FirebaseFirestore.instance.collection('tokens');
+
+  Future<void> _signInRoom() async {
+    String tokenRoom = _tokenRoomController.text;
+
+    print("toke room: "+tokenRoom);
+
+    if (tokenRoom.length == 7) {
+      tokens
+        .where('token', isEqualTo: tokenRoom)
+        .get()
+        .then((value) {
+          if (value.docs.isNotEmpty) {
+            // Token encontrado dentro do período de tempo
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Sheet()),
+            );
+          } else {
+            // Nenhum token encontrado ou fora do período de tempo
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Token inválido ou expirado')),
+            );
+          }
+        }).catchError((error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Erro ao buscar token: $error')),
+          );
+        });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +79,11 @@ class _JoinCampaignState extends State<JoinCampaign> {
               ),
               Container(
                 margin: const EdgeInsets.fromLTRB(20, 0, 20, 30),
-                child: const TextField(
+                child: TextField(
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
+                  controller: _tokenRoomController,
+                  onChanged: (value) => _signInRoom(),
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Código da Sala',
                   ),
