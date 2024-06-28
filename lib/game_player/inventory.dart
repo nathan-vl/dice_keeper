@@ -1,3 +1,5 @@
+import 'package:dice_keeper/models/item.dart';
+import 'package:dice_keeper/repository/item_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +11,19 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
-  final items = <Item>[
-    Item(name: "Faca", description: "Uma faca tramontina."),
-    Item(name: "Espada", description: "Uma espada de aço."),
-    Item(name: "Arco", description: "Um arco de madeira reforçado."),
-  ];
-  final filteredItems = <Item>[];
+  var items = List.empty();
   final selectedItems = <Item>[];
+  List<Item> filteredItems = <Item>[];
+
+  @override
+  void initState() {
+    super.initState();
+    ItemRepository.get().then((res) {
+      setState(() {
+        items = res;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,16 +125,6 @@ class _InventoryState extends State<Inventory> {
   }
 }
 
-class Item {
-  final String name;
-  final String description;
-
-  Item({required this.name, required this.description});
-  Item clone() {
-    return Item(name: name, description: description);
-  }
-}
-
 class InventoryCard extends StatelessWidget {
   final Item item;
   final void Function(Item) onSave;
@@ -153,7 +151,7 @@ class InventoryCard extends StatelessWidget {
         ),
         title: Text(item.name),
         subtitle: Text(
-          item.description,
+          item.effect,
           overflow: TextOverflow.ellipsis,
         ),
         trailing: Row(
@@ -194,7 +192,7 @@ class InventoryModal extends StatefulWidget {
 }
 
 class _InventoryModalState extends State<InventoryModal> {
-  Item item = Item(name: '', description: '');
+  Item item = Item(name: '', effect: '');
 
   @override
   void initState() {
@@ -215,7 +213,7 @@ class _InventoryModalState extends State<InventoryModal> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(item.description),
+            Text(item.effect),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing
@@ -237,7 +235,7 @@ class _InventoryModalState extends State<InventoryModal> {
                         onPressed: () => widget.onSave(
                           Item(
                             name: item.name,
-                            description: item.description,
+                            effect: item.effect,
                           ),
                         ),
                         child: const Text("Adicionar"),
