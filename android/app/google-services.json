@@ -12,7 +12,12 @@
           "package_name": "com.example.dice_keeper"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "700886395770-86juisaubm5qp37u6uuug25ungfv35vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCM_r2ExovZUJSk3lERCFwhTZBbrPEwJDk"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700886395770-86juisaubm5qp37u6uuug25ungfv35vg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
