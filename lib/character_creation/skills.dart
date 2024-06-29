@@ -5,7 +5,9 @@ import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class Skills extends StatefulWidget {
-  const Skills({super.key});
+  final Map<String, dynamic> currentCharacter;
+
+  const Skills({super.key, required this.currentCharacter});
 
   @override
   State<Skills> createState() => _SkillsState();
@@ -137,27 +139,47 @@ class _SkillsState extends State<Skills> {
                         if (selectedItems.isEmpty)
                           {
                             showDialog(
-                                context: context,
-                                builder: (context) => ConfirmDialog(
-                                      message: "Deseja continuar?",
-                                      confirmText: "Continuar",
-                                      onConfirm: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Advantages(),
-                                          ),
+                              context: context,
+                              builder: (context) => ConfirmDialog(
+                                message: "Deseja continuar?",
+                                confirmText: "Continuar",
+                                onConfirm: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        var character = widget.currentCharacter;
+                                        character['skills'] = selectedItems
+                                            .map(
+                                              (item) => item.toMap(),
+                                            )
+                                            .toList();
+                                        return Advantages(
+                                          currentCharacter: character,
                                         );
                                       },
-                                    )),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           }
                         else
                           {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Advantages(),
+                                builder: (context) {
+                                  var character = widget.currentCharacter;
+                                  character['skills'] = selectedItems
+                                      .map(
+                                        (item) => item.toMap(),
+                                      )
+                                      .toList();
+                                  return Advantages(
+                                    currentCharacter: character,
+                                  );
+                                },
                               ),
                             )
                           }

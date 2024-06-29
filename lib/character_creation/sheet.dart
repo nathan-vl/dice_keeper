@@ -11,7 +11,7 @@ class Sheet extends StatefulWidget {
 
 class _SheetState extends State<Sheet> {
   final name = TextEditingController();
-  final level = TextEditingController();
+  final level = TextEditingController(text: "0");
 
   final stregth = TextEditingController();
   final ability = TextEditingController();
@@ -19,8 +19,8 @@ class _SheetState extends State<Sheet> {
   final armor = TextEditingController();
   final firePower = TextEditingController();
 
-  final healthPoints = TextEditingController();
-  final manaPoints = TextEditingController();
+  final healthPoints = TextEditingController(text: "0");
+  final manaPoints = TextEditingController(text: "0");
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +39,20 @@ class _SheetState extends State<Sheet> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   children: [
                     Expanded(
                       flex: 8,
                       child: TextField(
+                        controller: name,
                         keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Nome do Personagem',
                         ),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 2,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -143,7 +144,22 @@ class _SheetState extends State<Sheet> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const History(),
+                          builder: (context) {
+                            final currentCharacter = {
+                              "name": name.text,
+                              "level": int.parse(level.text),
+                              "str": int.parse(stregth.text),
+                              "abi": int.parse(ability.text),
+                              "res": int.parse(endurance.text),
+                              "arm": int.parse(armor.text),
+                              "pof": int.parse(firePower.text),
+                              "hp": int.parse(healthPoints.text),
+                              "mp": int.parse(manaPoints.text),
+                            };
+                            return History(
+                              currentCharacter: currentCharacter,
+                            );
+                          },
                         ),
                       );
                     },

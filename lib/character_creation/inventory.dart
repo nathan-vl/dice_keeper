@@ -5,7 +5,9 @@ import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class Inventory extends StatefulWidget {
-  const Inventory({super.key});
+  final Map<String, dynamic> currentCharacter;
+
+  const Inventory({super.key, required this.currentCharacter});
 
   @override
   State<Inventory> createState() => _InventoryState();
@@ -25,7 +27,6 @@ class _InventoryState extends State<Inventory> {
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,8 @@ class _InventoryState extends State<Inventory> {
                       return SearchBar(
                         controller: controller,
                         padding: const WidgetStatePropertyAll<EdgeInsets>(
-                            EdgeInsets.symmetric(horizontal: 16.0)),
+                          EdgeInsets.symmetric(horizontal: 16.0),
+                        ),
                         onTap: () {
                           controller.openView();
                         },
@@ -137,27 +139,47 @@ class _InventoryState extends State<Inventory> {
                         if (selectedItems.isEmpty)
                           {
                             showDialog(
-                                context: context,
-                                builder: (context) => ConfirmDialog(
-                                      message: "Deseja continuar?",
-                                      confirmText: "Continuar",
-                                      onConfirm: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Conclude(),
-                                          ),
+                              context: context,
+                              builder: (context) => ConfirmDialog(
+                                message: "Deseja continuar?",
+                                confirmText: "Continuar",
+                                onConfirm: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        var character = widget.currentCharacter;
+                                        character['inventory'] = selectedItems
+                                            .map(
+                                              (item) => item.toMap(),
+                                            )
+                                            .toList();
+                                        return Conclude(
+                                          currentCharacter: character,
                                         );
                                       },
-                                    )),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           }
                         else
                           {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Conclude(),
+                                builder: (context) {
+                                  var character = widget.currentCharacter;
+                                  character['inventory'] = selectedItems
+                                      .map(
+                                        (item) => item.toMap(),
+                                      )
+                                      .toList();
+                                  return Conclude(
+                                    currentCharacter: character,
+                                  );
+                                },
                               ),
                             )
                           }

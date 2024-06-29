@@ -14,6 +14,6 @@ class Item {
 
   Map<String, dynamic> toMap() => {
         "nome": name,
-        "descricao": effect,
+        "efeito": effect,
       };
 }

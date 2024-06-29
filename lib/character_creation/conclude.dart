@@ -1,11 +1,18 @@
 import 'package:dice_keeper/game_player/player_main.dart';
+import 'package:dice_keeper/models/character.dart';
 import 'package:flutter/material.dart';
 
 class Conclude extends StatelessWidget {
-  const Conclude({super.key});
+  final Map<String, dynamic> currentCharacter;
+
+  const Conclude({super.key, required this.currentCharacter});
 
   @override
   Widget build(BuildContext context) {
+    Character character = Character.fromMap(currentCharacter);
+    print('TODO: Insert character database');
+    print(character.toMap());
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
       resizeToAvoidBottomInset: false,

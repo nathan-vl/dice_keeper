@@ -5,7 +5,9 @@ import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class Advantages extends StatefulWidget {
-  const Advantages({super.key});
+  final Map<String, dynamic> currentCharacter;
+
+  const Advantages({super.key, required this.currentCharacter});
 
   @override
   State<Advantages> createState() => _AdvantagesState();
@@ -137,27 +139,47 @@ class _AdvantagesState extends State<Advantages> {
                         if (selectedItems.isEmpty)
                           {
                             showDialog(
-                                context: context,
-                                builder: (context) => ConfirmDialog(
-                                      message: "Deseja continuar?",
-                                      confirmText: "Continuar",
-                                      onConfirm: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Disadvantages(),
-                                          ),
+                              context: context,
+                              builder: (context) => ConfirmDialog(
+                                message: "Deseja continuar?",
+                                confirmText: "Continuar",
+                                onConfirm: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        var character = widget.currentCharacter;
+                                        character['advantages'] = selectedItems
+                                            .map(
+                                              (item) => item.toMap(),
+                                            )
+                                            .toList();
+                                        return Disadvantages(
+                                          currentCharacter: character,
                                         );
                                       },
-                                    )),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           }
                         else
                           {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Disadvantages(),
+                                builder: (context) {
+                                  var character = widget.currentCharacter;
+                                  character['advantages'] = selectedItems
+                                      .map(
+                                        (item) => item.toMap(),
+                                      )
+                                      .toList();
+                                  return Disadvantages(
+                                    currentCharacter: character,
+                                  );
+                                },
                               ),
                             )
                           }

@@ -1,8 +1,17 @@
 import 'package:dice_keeper/character_creation/skills.dart';
 import 'package:flutter/material.dart';
 
-class History extends StatelessWidget {
-  const History({super.key});
+class History extends StatefulWidget {
+  final Map<String, dynamic> currentCharacter;
+
+  const History({super.key, required this.currentCharacter});
+
+  @override
+  State<History> createState() => _HistoryState();
+}
+
+class _HistoryState extends State<History> {
+  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +31,11 @@ class History extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const TextField(
+                  TextField(
+                    controller: controller,
                     maxLines: 15,
                     keyboardType: TextInputType.multiline,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       alignLabelWithHint: true,
                       border: OutlineInputBorder(),
                       labelText: 'História do Personagem',
@@ -42,7 +52,11 @@ class History extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Skills(),
+                            builder: (context) {
+                              var character = widget.currentCharacter;
+                              character['history'] = controller.text;
+                              return Skills(currentCharacter: character);
+                            },
                           ),
                         );
                       },

@@ -39,11 +39,15 @@ class Character {
         pof: map["pof"],
         res: map["res"],
         arm: map["arm"],
-        advantages: map["advantages"].map(Advantage.fromMap),
-        disadvantages: map["disadvantages"].map(Disadvantage.fromMap),
-        inventory: map["inventory"].map(Item.fromMap),
-        skills: map["skills"].map(Skill.fromMap),
-        roomId: map["roomId"],
+        advantages: List<Advantage>.from(
+            map["advantages"].map(Advantage.fromMap).toList() as List),
+        disadvantages: List<Disadvantage>.from(
+            map["disadvantages"].map(Disadvantage.fromMap).toList() as List),
+        inventory: List<Item>.from(
+            map["inventory"].map(Item.fromMap).toList() as List),
+        skills:
+            List<Skill>.from(map["skills"].map(Skill.fromMap).toList() as List),
+        roomId: map["roomId"] ?? "teste",
       );
 
   Map<String, dynamic> toMap() => {
