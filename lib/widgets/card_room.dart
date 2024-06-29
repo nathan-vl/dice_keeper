@@ -1,8 +1,10 @@
+import 'package:dice_keeper/models/room.dart';
 import 'package:dice_keeper/screens/game_master_main.dart';
 import 'package:flutter/material.dart';
 
 class CardRoom extends StatelessWidget {
-  const CardRoom({super.key});
+  final Room room;
+  const CardRoom({super.key, required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class CardRoom extends StatelessWidget {
             );
           },
         ),
-        title: const Text('Nome da Sala'),
+        title: Text(room.title),
         subtitle: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

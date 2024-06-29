@@ -24,4 +24,11 @@ class RoomRepository {
     final room = Room.fromMap(rooms.docs.first.data());
     return room;
   }
+
+  static Future<List<Room>> getByMaster(String masterDoc) async {
+    final document = _db.collection("characters");
+    final items = await document.where('gameMaster', isEqualTo: masterDoc).get();
+    final rooms = items.docs.map((room) => Room.fromMap(room.data()));
+    return List<Room>.from(rooms.toList() as List);
+  }
 }

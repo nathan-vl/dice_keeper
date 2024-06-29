@@ -1,7 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 
 class Room {
-  String title;
+  final String title;
 
   DocumentReference gameMasterRef;
   DocumentReference npcsRef;

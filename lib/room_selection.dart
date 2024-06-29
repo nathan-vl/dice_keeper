@@ -45,7 +45,6 @@ class _RoomSelection extends StatelessWidget {
             ),
           ),
         ),
-        // child: QRCodeCampaign(),
       ),
     );
   }
