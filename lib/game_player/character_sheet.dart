@@ -3,25 +3,20 @@ import 'package:dice_keeper/game_player/inventory.dart';
 import 'package:dice_keeper/game_player/skills.dart';
 import 'package:flutter/material.dart';
 
-class CharacterSheet extends StatefulWidget {
+class CharacterSheet extends StatelessWidget {
   final String characterId;
   const CharacterSheet({super.key, required this.characterId});
 
   @override
-  State<CharacterSheet> createState() => _CharacterSheetState();
-}
-
-class _CharacterSheetState extends State<CharacterSheet> {
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: true,
       body: DefaultTabController(
         length: 3,
         child: Scaffold(
           body: Column(
             children: [
-              TabBar(
+              const TabBar(
                 tabs: [
                   Tab(text: "Geral"),
                   Tab(text: "Habilidades"),
@@ -30,16 +25,17 @@ class _CharacterSheetState extends State<CharacterSheet> {
               ),
               Expanded(
                 child: TabBarView(
-                  children: [General(), Skills(), Inventory()],
+                  children: [
+                    General(characterId: characterId),
+                    const Skills(),
+                    const Inventory(),
+                  ],
                 ),
               )
             ],
           ),
-          // floatingActionButton: FloatingActionButton(
-          //     onPressed: () {}, child: const Icon(Icons.add)),
         ),
       ),
-      // child: QRCodeCampaign(),
     );
   }
 }

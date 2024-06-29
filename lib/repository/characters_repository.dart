@@ -15,6 +15,10 @@ class CharactersRepository {
     }
   }
 
+  static void update(String id, Character character) {
+    collection.doc(id).update(character.toMap());
+  }
+
   static Future<List<Character>> getByPlayer(String player) async {
     final items = await collection.where('playerId', isEqualTo: player).get();
     final characters =
