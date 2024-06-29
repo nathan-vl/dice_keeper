@@ -1,6 +1,9 @@
 import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:dice_keeper/models/character.dart';
+import 'package:dice_keeper/providers/UserProvider.dart';
+import 'package:dice_keeper/repository/characters_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Conclude extends StatelessWidget {
   final Map<String, dynamic> currentCharacter;
@@ -9,9 +12,18 @@ class Conclude extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Character character = Character.fromMap(currentCharacter);
-    print('TODO: Insert character database');
-    print(character.toMap());
+    final String userId = Provider.of<UserProvider>(context).uid;
+    CharactersRepository.getByPlayerAndRoom(
+      userId,
+      currentCharacter['roomId'],
+    ).then(
+      (res) {
+        if (res == null) {
+          Character character = Character.fromMap(currentCharacter);
+          CharactersRepository.insertCharacter(character);
+        }
+      },
+    );
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(74, 84, 140, 1),

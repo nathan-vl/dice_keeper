@@ -1,9 +1,14 @@
 import 'package:dice_keeper/character_creation/history.dart';
+import 'package:dice_keeper/models/room.dart';
+import 'package:dice_keeper/providers/UserProvider.dart';
 import 'package:dice_keeper/widgets/attribute_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Sheet extends StatefulWidget {
-  const Sheet({super.key});
+  final Room room;
+
+  const Sheet({super.key, required this.room});
 
   @override
   State<Sheet> createState() => _SheetState();
@@ -155,6 +160,9 @@ class _SheetState extends State<Sheet> {
                               "pof": int.parse(firePower.text),
                               "hp": int.parse(healthPoints.text),
                               "mp": int.parse(manaPoints.text),
+                              "roomId": widget.room.id,
+                              "playerId":
+                                  Provider.of<UserProvider>(context).uid,
                             };
                             return History(
                               currentCharacter: currentCharacter,

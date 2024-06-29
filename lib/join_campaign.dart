@@ -20,7 +20,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const Sheet(),
+            builder: (context) => Sheet(room: room),
           ),
         );
       }
@@ -90,7 +90,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Sheet(),
+                        builder: (context) => const Placeholder(),
                       ),
                     );
                   },

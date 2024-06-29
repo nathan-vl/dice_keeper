@@ -1,20 +1,19 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 
 class Room {
-  final String title;
-
-  DocumentReference gameMasterRef;
-  DocumentReference npcsRef;
-  DocumentReference locationsRef;
+  final String id, title;
+  final DocumentReference gameMasterRef, npcsRef, locationsRef;
 
   Room({
+    required this.id,
     required this.title,
     required this.gameMasterRef,
     required this.locationsRef,
     required this.npcsRef,
   });
 
-  factory Room.fromMap(Map<String, dynamic> map) => Room(
+  factory Room.fromMap(Map<String, dynamic> map, String id) => Room(
+        id: id,
         title: map["title"],
         gameMasterRef: map["gameMaster"],
         locationsRef: map["locations"],

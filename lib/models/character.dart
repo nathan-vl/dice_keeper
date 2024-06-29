@@ -11,6 +11,7 @@ class Character {
   final List<Item> inventory;
   final List<Skill> skills;
   final String roomId;
+  final String playerId;
 
   Character({
     required this.name,
@@ -27,6 +28,7 @@ class Character {
     required this.inventory,
     required this.skills,
     required this.roomId,
+    required this.playerId,
   });
 
   factory Character.fromMap(Map<String, dynamic> map) => Character(
@@ -47,7 +49,8 @@ class Character {
             map["inventory"].map(Item.fromMap).toList() as List),
         skills:
             List<Skill>.from(map["skills"].map(Skill.fromMap).toList() as List),
-        roomId: map["roomId"] ?? "teste",
+        roomId: map["roomId"],
+        playerId: map["playerId"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -66,5 +69,6 @@ class Character {
         "inventory": inventory.map((item) => item.toMap()),
         "skills": skills.map((skill) => skill.toMap()),
         "roomId": roomId,
+        "playerId": playerId,
       };
 }
