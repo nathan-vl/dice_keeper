@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/character_creation/sheet.dart';
+import 'package:dice_keeper/repository/room_repository.dart';
 import 'package:flutter/material.dart';
 
 class JoinCampaign extends StatefulWidget {
@@ -11,35 +11,19 @@ class JoinCampaign extends StatefulWidget {
 
 class _JoinCampaignState extends State<JoinCampaign> {
   final TextEditingController _tokenRoomController = TextEditingController();
-  CollectionReference tokens = FirebaseFirestore.instance.collection('tokens');
-
   Future<void> _signInRoom() async {
-    String tokenRoom = _tokenRoomController.text;
+    String token = _tokenRoomController.text;
 
-    print("toke room: "+tokenRoom);
-
-    if (tokenRoom.length == 7) {
-      tokens
-        .where('token', isEqualTo: tokenRoom)
-        .get()
-        .then((value) {
-          if (value.docs.isNotEmpty) {
-            // Token encontrado dentro do período de tempo
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Sheet()),
-            );
-          } else {
-            // Nenhum token encontrado ou fora do período de tempo
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Token inválido ou expirado')),
-            );
-          }
-        }).catchError((error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Erro ao buscar token: $error')),
-          );
-        });
+    if (token.length == 7) {
+      final room = await RoomRepository.findByToken(token);
+      if (room != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Sheet(),
+          ),
+        );
+      }
     }
   }
 

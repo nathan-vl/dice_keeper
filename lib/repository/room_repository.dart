@@ -13,4 +13,15 @@ class RoomRepository {
   static void update(String roomDoc, Room room) async {
     await _db.collection("rooms").doc(roomDoc).update(room.toMap());
   }
+
+  static Future<Room?> findByToken(String token) async {
+    final document = _db.collection("rooms");
+    final rooms = await document.where('token', isEqualTo: token).get();
+    if (rooms.size == 0) {
+      return null;
+    }
+
+    final room = Room.fromMap(rooms.docs.first.data());
+    return room;
+  }
 }
