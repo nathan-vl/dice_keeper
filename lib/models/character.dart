@@ -32,23 +32,15 @@ class Character {
   });
 
   factory Character.fromMap(Map<String, dynamic> map) {
-    final advantages = map["advantages"].isEmpty
-        ? List<Advantage>.empty()
-        : List<Advantage>.from(
-            map["advantages"].map(Advantage.fromMap).toList() as List);
-
-    final disadvantages = map["disadvantages"].isEmpty
-        ? List<Disadvantage>.empty()
-        : List<Disadvantage>.from(
-            map["disadvantages"].map(Disadvantage.fromMap).toList() as List);
-
-    final inventory = map["inventory"].isEmpty
-        ? List<Item>.empty()
-        : List<Item>.from(map["inventory"].map(Item.fromMap).toList() as List);
-
-    final skills = map["skills"].isEmpty
-        ? List<Skill>.empty()
-        : List<Skill>.from(map["skills"].map(Skill.fromMap).toList() as List);
+    var advantages = List<Advantage>.from(
+        map["advantages"].map((a) => Advantage.fromMap(a)).toList() as List);
+    final disadvantages = List<Disadvantage>.from(map["disadvantages"]
+        .map((d) => Disadvantage.fromMap(d))
+        .toList() as List);
+    final inventory = List<Item>.from(
+        map["inventory"].map((i) => Item.fromMap(i)).toList() as List);
+    final skills = List<Skill>.from(
+        map["skills"].map((s) => Skill.fromMap(s)).toList() as List);
 
     return Character(
       name: map["name"],

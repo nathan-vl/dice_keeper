@@ -28,32 +28,26 @@ class _LoginState extends State<Login> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   void _login() async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
+    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    String uid = userCredential.user!.uid;
+
+    Provider.of<UserProvider>(context, listen: false).setUid(uid);
+
+    List<Room> rooms = await RoomRepository.getByMaster(uid);
+    List<Character> characters = await CharactersRepository.getByPlayer(uid);
+
+    if (rooms.isEmpty && characters.isEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const FirstAccess()),
       );
-      String uid = userCredential.user!.uid;
-
-      Provider.of<UserProvider>(context, listen: false).setUid(uid);
-
-      List<Room> rooms = await RoomRepository.getByMaster(uid);
-      List<Character> characters = await CharactersRepository.getByPlayer(uid);
-
-      if (rooms.isEmpty && characters.isEmpty) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const FirstAccess()),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const RoomSelection()),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Erro durante o login: $e")),
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const RoomSelection()),
       );
     }
   }
