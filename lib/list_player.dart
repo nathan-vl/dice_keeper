@@ -19,7 +19,8 @@ class _ListPlayerState extends State<ListPlayer> {
   @override
   void initState() {
     super.initState();
-    CharactersRepository.getByPlayer(FirebaseAuth.instance.currentUser!.uid).then((res) {
+    CharactersRepository.getByPlayer(FirebaseAuth.instance.currentUser!.uid)
+        .then((res) {
       setState(() {
         items = res;
       });

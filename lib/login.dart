@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/first_access.dart';
+import 'package:dice_keeper/models/character.dart';
+import 'package:dice_keeper/models/room.dart';
 import 'package:dice_keeper/providers/UserProvider.dart';
 import 'package:dice_keeper/register.dart';
+import 'package:dice_keeper/repository/characters_repository.dart';
+import 'package:dice_keeper/repository/room_repository.dart';
+import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,10 +37,20 @@ class _LoginState extends State<Login> {
 
       Provider.of<UserProvider>(context, listen: false).setUid(uid);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const FirstAccess()),
-      );
+      List<Room> rooms = await RoomRepository.getByMaster(uid);
+      List<Character> characters = await CharactersRepository.getByPlayer(uid);
+
+      if (rooms.isEmpty && characters.isEmpty) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const FirstAccess()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const RoomSelection()),
+        );
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Erro durante o login: $e")),
@@ -82,12 +97,25 @@ class _LoginState extends State<Login> {
         });
       }
 
-      Provider.of<UserProvider>(context, listen: false).setUid(userCredential.user!.uid);
+      Provider.of<UserProvider>(context, listen: false)
+          .setUid(userCredential.user!.uid);
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const FirstAccess()),
-      );
+      List<Room> rooms =
+          await RoomRepository.getByMaster(userCredential.user!.uid);
+      List<Character> characters =
+          await CharactersRepository.getByPlayer(userCredential.user!.uid);
+
+      if (rooms.isEmpty && characters.isEmpty) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const FirstAccess()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const RoomSelection()),
+        );
+      }
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(

@@ -31,27 +31,43 @@ class Character {
     required this.playerId,
   });
 
-  factory Character.fromMap(Map<String, dynamic> map) => Character(
-        name: map["name"],
-        history: map["history"],
-        str: map["str"],
-        abi: map["abi"],
-        mp: map["mp"],
-        hp: map["hp"],
-        pof: map["pof"],
-        res: map["res"],
-        arm: map["arm"],
-        advantages: List<Advantage>.from(
-            map["advantages"].map(Advantage.fromMap).toList() as List),
-        disadvantages: List<Disadvantage>.from(
-            map["disadvantages"].map(Disadvantage.fromMap).toList() as List),
-        inventory: List<Item>.from(
-            map["inventory"].map(Item.fromMap).toList() as List),
-        skills:
-            List<Skill>.from(map["skills"].map(Skill.fromMap).toList() as List),
-        roomId: map["roomId"],
-        playerId: map["playerId"],
-      );
+  factory Character.fromMap(Map<String, dynamic> map) {
+    final advantages = map["advantages"].isEmpty
+        ? List<Advantage>.empty()
+        : List<Advantage>.from(
+            map["advantages"].map(Advantage.fromMap).toList() as List);
+
+    final disadvantages = map["disadvantages"].isEmpty
+        ? List<Disadvantage>.empty()
+        : List<Disadvantage>.from(
+            map["disadvantages"].map(Disadvantage.fromMap).toList() as List);
+
+    final inventory = map["inventory"].isEmpty
+        ? List<Item>.empty()
+        : List<Item>.from(map["inventory"].map(Item.fromMap).toList() as List);
+
+    final skills = map["skills"].isEmpty
+        ? List<Skill>.empty()
+        : List<Skill>.from(map["skills"].map(Skill.fromMap).toList() as List);
+
+    return Character(
+      name: map["name"],
+      history: map["history"],
+      str: map["str"],
+      abi: map["abi"],
+      mp: map["mp"],
+      hp: map["hp"],
+      pof: map["pof"],
+      res: map["res"],
+      arm: map["arm"],
+      advantages: advantages,
+      disadvantages: disadvantages,
+      inventory: inventory,
+      skills: skills,
+      roomId: map["roomId"],
+      playerId: map["playerId"],
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         "name": name,
