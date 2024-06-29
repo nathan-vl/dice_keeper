@@ -158,7 +158,7 @@ class _AdvantagesState extends State<Advantages> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Inventory(),
+                                builder: (context) => const Disadvantages(),
                               ),
                             )
                           }

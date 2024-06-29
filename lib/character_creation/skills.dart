@@ -147,7 +147,7 @@ class _SkillsState extends State<Skills> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const Inventory(),
+                                                const Advantages(),
                                           ),
                                         );
                                       },
