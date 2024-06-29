@@ -76,8 +76,6 @@ class _CreateCampaignState extends State<CreateCampaign> {
 
       String token = _generateToken();
 
-      DocumentReference userReference = _firestore.collection('users').doc(userId);
-
       await _firestore.collection('locations').doc(locationsId).set({
         "items": []
       });
@@ -87,7 +85,8 @@ class _CreateCampaignState extends State<CreateCampaign> {
         "items": []
       });
       DocumentReference npcsReference = _firestore.collection('npcs').doc(npcsId);
-
+      
+      DocumentReference userReference = _firestore.collection('users').doc(userId);
       await _firestore.collection('rooms').doc(roomId).set({
         "gameMaster": userReference,
         "title": _campaignNameController.text,

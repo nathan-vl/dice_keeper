@@ -291,7 +291,12 @@ class _AdvantageModalState extends State<AdvantageModal> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(advantage.description),
+            Container(
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.43),
+              child: SingleChildScrollView(
+                child: Text(advantage.description),
+              ),
+            ),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing

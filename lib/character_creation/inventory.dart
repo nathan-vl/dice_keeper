@@ -291,7 +291,12 @@ class _InventoryModalState extends State<InventoryModal> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(item.effect),
+            Container(
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.43),
+              child: SingleChildScrollView(
+                child: Text(item.effect),
+              ),
+            ),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing
