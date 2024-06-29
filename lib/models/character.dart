@@ -4,15 +4,15 @@ import 'package:dice_keeper/models/item.dart';
 import 'package:dice_keeper/models/skill.dart';
 
 class Character {
-  final String name, history;
-  final int level;
-  final int str, abi, mp, hp, pof, res, arm;
-  final List<Advantage> advantages;
-  final List<Disadvantage> disadvantages;
-  final List<Item> inventory;
-  final List<Skill> skills;
-  final String roomId;
-  final String playerId;
+  String name, history;
+  int level;
+  int str, abi, mp, hp, pof, res, arm;
+  List<Advantage> advantages;
+  List<Disadvantage> disadvantages;
+  List<Item> inventory;
+  List<Skill> skills;
+  String roomId;
+  String playerId;
 
   Character({
     required this.name,

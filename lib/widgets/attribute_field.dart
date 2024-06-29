@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class AttributeField extends StatefulWidget {
   final TextEditingController controller;
   final String attribute;
+  final void Function(String)? onChanged;
 
   const AttributeField({
     super.key,
     required this.attribute,
     required this.controller,
+    this.onChanged,
   });
 
   @override
@@ -17,12 +19,6 @@ class AttributeField extends StatefulWidget {
 }
 
 class _AttributeField extends State<AttributeField> {
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.text = "0";
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -37,6 +33,7 @@ class _AttributeField extends State<AttributeField> {
               border: const OutlineInputBorder(),
               labelText: widget.attribute,
             ),
+            onChanged: widget.onChanged,
           ),
         ),
         Expanded(
