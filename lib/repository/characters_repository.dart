@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/models/character.dart';
+import 'package:dice_keeper/models/skill.dart';
 
 class CharactersRepository {
   static final _db = FirebaseFirestore.instance;
@@ -15,8 +16,14 @@ class CharactersRepository {
     }
   }
 
-  static void update(String id, Character character) {
-    collection.doc(id).update(character.toMap());
+  static Future<void> update(String id, Character character) async {
+    return collection.doc(id).update(character.toMap());
+  }
+
+  static Future<void> updateSkills(String id, List<Skill> skills) async {
+    return collection.doc(id).update({
+      'skills': skills.map((skill) => skill.toMap()),
+    });
   }
 
   static Future<List<Character>> getByPlayer(String player) async {

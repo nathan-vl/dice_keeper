@@ -1,10 +1,13 @@
 import 'package:dice_keeper/models/skill.dart';
+import 'package:dice_keeper/repository/characters_repository.dart';
 import 'package:dice_keeper/repository/skill_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 class Skills extends StatefulWidget {
-  const Skills({super.key});
+  final String characterId;
+
+  const Skills({super.key, required this.characterId});
 
   @override
   State<Skills> createState() => _SkillsState();
@@ -12,15 +15,18 @@ class Skills extends StatefulWidget {
 
 class _SkillsState extends State<Skills> {
   var items = List.empty();
-  final selectedItems = <Skill>[];
   List<Skill> filteredItems = <Skill>[];
+  List<Skill> selectedItems = <Skill>[];
 
   @override
   void initState() {
     super.initState();
     SkillRepository.get().then((res) {
-      setState(() {
-        items = res;
+      CharactersRepository.get(widget.characterId).then((res2) {
+        setState(() {
+          items = res;
+          selectedItems = res2!.skills;
+        });
       });
     });
   }
@@ -29,98 +35,96 @@ class _SkillsState extends State<Skills> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 5,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SearchAnchor(
-                    builder:
-                        (BuildContext context, SearchController controller) {
-                      return SearchBar(
-                        controller: controller,
-                        padding: const WidgetStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.symmetric(horizontal: 16.0),
-                        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SearchAnchor(
+            builder: (BuildContext context, SearchController controller) {
+              return SearchBar(
+                controller: controller,
+                padding: const WidgetStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.symmetric(horizontal: 16.0),
+                ),
+                onTap: () {
+                  controller.openView();
+                },
+                onChanged: (text) {
+                  controller.openView();
+                },
+                leading: const Icon(Icons.search),
+              );
+            },
+            suggestionsBuilder: (
+              BuildContext context,
+              SearchController controller,
+            ) =>
+                items
+                    .where((i) =>
+                        controller.text.isEmpty ||
+                        i.name
+                            .toLowerCase()
+                            .contains(controller.text.toLowerCase()))
+                    .map(
+                      (skill) => ListTile(
+                        title: Text(skill.name),
                         onTap: () {
-                          controller.openView();
-                        },
-                        onChanged: (text) {
-                          controller.openView();
-                        },
-                        leading: const Icon(Icons.search),
-                      );
-                    },
-                    suggestionsBuilder: (
-                      BuildContext context,
-                      SearchController controller,
-                    ) =>
-                        items
-                            .where((i) =>
-                                controller.text.isEmpty ||
-                                i.name
-                                    .toLowerCase()
-                                    .contains(controller.text.toLowerCase()))
-                            .map(
-                              (skill) => ListTile(
-                                title: Text(skill.name),
-                                onTap: () {
-                                  setState(
-                                    () {
-                                      controller.closeView("");
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => SkillModal(
-                                          onSave: (skill) {
-                                            setState(
-                                              () {
-                                                selectedItems.add(skill);
-                                              },
-                                            );
-                                            Navigator.pop(context);
-                                          },
-                                          skill: skill,
-                                          isShowing: false,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Expanded(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: selectedItems.length,
-                      itemBuilder: (context, index) => SkillCard(
-                        skill: selectedItems[index],
-                        onSave: (skill) {
-                          setState(() {
-                            selectedItems[index] = skill;
-                          });
-                          Navigator.pop(context);
-                        },
-                        onConfirmRemove: () {
-                          setState(() {
-                            selectedItems.removeAt(index);
-                          });
-                          Navigator.pop(context);
+                          setState(
+                            () {
+                              controller.closeView("");
+                              showDialog(
+                                context: context,
+                                builder: (context) => SkillModal(
+                                  onSave: (skill) {
+                                    selectedItems.add(skill);
+                                    CharactersRepository.updateSkills(
+                                      widget.characterId,
+                                      selectedItems,
+                                    ).then(
+                                      (value) {
+                                        setState(() {});
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                  },
+                                  skill: skill,
+                                  isShowing: false,
+                                ),
+                              );
+                            },
+                          );
                         },
                       ),
                     ),
-                  ),
-                ],
+          ),
+          const SizedBox(height: 16.0),
+          Expanded(
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: selectedItems.length,
+              itemBuilder: (context, index) => SkillCard(
+                skill: selectedItems[index],
+                onSave: (skill) {
+                  setState(() {
+                    selectedItems[index] = skill;
+                  });
+                  Navigator.pop(context);
+                },
+                onConfirmRemove: () {
+                  selectedItems.removeAt(index);
+                  CharactersRepository.updateSkills(
+                    widget.characterId,
+                    selectedItems,
+                  ).then(
+                    (value) {
+                      setState(() {});
+                      Navigator.pop(context);
+                    },
+                  );
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

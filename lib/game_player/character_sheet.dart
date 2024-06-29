@@ -27,7 +27,7 @@ class CharacterSheet extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     General(characterId: characterId),
-                    const Skills(),
+                    Skills(characterId: characterId),
                     const Inventory(),
                   ],
                 ),
