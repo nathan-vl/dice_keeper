@@ -1,5 +1,5 @@
 import 'package:dice_keeper/character_creation/history.dart';
-import 'package:dice_keeper/widgets/atribbute_field.dart';
+import 'package:dice_keeper/widgets/attribute_field.dart';
 import 'package:flutter/material.dart';
 
 class Sheet extends StatefulWidget {
