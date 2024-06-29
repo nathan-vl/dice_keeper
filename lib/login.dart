@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/first_access.dart';
+import 'package:dice_keeper/providers/UserProvider.dart';
 import 'package:dice_keeper/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -26,8 +28,10 @@ class _LoginState extends State<Login> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      print(userCredential.toString());
-      // Login bem-sucedido
+      String uid = userCredential.user!.uid;
+
+      Provider.of<UserProvider>(context, listen: false).setUid(uid);
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const FirstAccess()),
@@ -77,6 +81,8 @@ class _LoginState extends State<Login> {
           'lastSignIn': Timestamp.now(),
         });
       }
+
+      Provider.of<UserProvider>(context, listen: false).setUid(userCredential.user!.uid);
 
       Navigator.pushReplacement(
         context,

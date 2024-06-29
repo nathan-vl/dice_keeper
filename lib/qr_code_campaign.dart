@@ -1,9 +1,12 @@
 import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeCampaign extends StatefulWidget {
-  const QRCodeCampaign({super.key});
+  final String token; 
+
+  const QRCodeCampaign({super.key, required this.token});
 
   @override
   State<QRCodeCampaign> createState() => _QRCodeCampaignState();
@@ -40,7 +43,7 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 32),
                 child: Text(
-                  '2b0af0p',
+                  widget.token,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
@@ -48,7 +51,7 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 32),
                 color: const Color.fromRGBO(255, 255, 255, 1),
                 child: QrImageView(
-                  data: "2B0AF0P",
+                  data: widget.token,
                   size: 250,
                   embeddedImageStyle: const QrEmbeddedImageStyle(
                     size: Size(
@@ -62,7 +65,12 @@ class _QRCodeCampaignState extends State<QRCodeCampaign> {
                 width: 230,
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: widget.token));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Código copiado para a área de transferência.")),
+                    );
+                  },
                   child: const Text(
                     'Copiar código para a área de transferência',
                     textAlign: TextAlign.center,
