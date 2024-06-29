@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CardCharacter extends StatelessWidget {
-  final String title, sub1, sub2, image;
+  final String title, sub1, sub2;
   final VoidCallback onPressedFunction;
 
   const CardCharacter({
@@ -9,7 +9,6 @@ class CardCharacter extends StatelessWidget {
     required this.title,
     required this.sub1,
     required this.sub2,
-    required this.image,
     required this.onPressedFunction,
   });
 
@@ -26,12 +25,6 @@ class CardCharacter extends StatelessWidget {
             Text(sub2),
           ],
         ),
-        trailing: LayoutBuilder(builder: (context, constraints) {
-          return SizedBox(
-            height: constraints.maxHeight,
-            child: CircleAvatar(backgroundImage: Image.asset(image).image),
-          );
-        }),
       ),
     );
   }

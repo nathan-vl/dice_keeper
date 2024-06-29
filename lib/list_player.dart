@@ -37,7 +37,6 @@ class _ListPlayerState extends State<ListPlayer> {
           title: items[index].name,
           sub1: "Nome da sala",
           sub2: "lv: 10",
-          image: "assets/splash_1152.png",
           onPressedFunction: () {
             Navigator.push(
               context,

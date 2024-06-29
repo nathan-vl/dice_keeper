@@ -25,7 +25,6 @@ class GameMasterPlayersList extends StatelessWidget {
                   title: 'Nome do Jogador',
                   sub1: 'Nome do personagem',
                   sub2: 'Lv 10',
-                  image: "assets/splash_1152.png",
                   onPressedFunction: () {
                     Navigator.push(
                       context,
@@ -40,7 +39,6 @@ class GameMasterPlayersList extends StatelessWidget {
                   title: 'Nome do Jogador',
                   sub1: 'Nome do personagem',
                   sub2: 'Lv 10',
-                  image: "assets/splash_1152.png",
                   onPressedFunction: () {
                     Navigator.push(
                       context,
