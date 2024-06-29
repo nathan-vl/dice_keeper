@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/join_campaign.dart';
 import 'package:dice_keeper/models/character.dart';
 import 'package:dice_keeper/repository/characters_repository.dart';

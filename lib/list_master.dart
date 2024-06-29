@@ -29,13 +29,10 @@ class _ListMasterState extends State<ListMaster> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: const <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: CardRoom(),
-          ),
-        ],
+      body: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: items.length,
+        itemBuilder: (context, index) => CardRoom(room: items[index]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
