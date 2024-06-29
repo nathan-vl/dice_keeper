@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dice_keeper/character_creation/sheet.dart';
+import 'package:dice_keeper/providers/UserProvider.dart';
 import 'package:dice_keeper/repository/room_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class JoinCampaign extends StatefulWidget {
   const JoinCampaign({super.key});
@@ -11,24 +15,75 @@ class JoinCampaign extends StatefulWidget {
 
 class _JoinCampaignState extends State<JoinCampaign> {
   final TextEditingController _tokenRoomController = TextEditingController();
-  Future<void> _signInRoom() async {
-    String token = _tokenRoomController.text;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    if (token.length == 7) {
-      final room = await RoomRepository.findByToken(token);
-      if (room != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Sheet(room: room),
-          ),
-        );
+  Future<bool> _hasCharacterInRoom(String userId, String token) async {
+    try {
+
+      QuerySnapshot querySnapshotRooms = await _firestore
+        .collection('rooms')
+        .where( 'token', isEqualTo: token )
+        .get();
+
+      if (querySnapshotRooms.docs.isNotEmpty) {
+        for (var docRoom in querySnapshotRooms.docs) {
+          QuerySnapshot querySnapshotCharacters = await _firestore
+            .collection('characters')
+            .where(
+              Filter.and(
+                Filter("roomId", isEqualTo: docRoom.id),
+                Filter("playerId", isEqualTo: userId)
+              )
+            )
+            .get();
+
+          if ( querySnapshotCharacters.docs.isNotEmpty ) {
+            return true;
+          }
+        }
       }
+
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Falha ao tentar acessar dados do usuario.")),
+      );
+    }
+    return false;
+  }
+
+  Future<void> _signInRoom(String userId) async {
+    try {
+      String token = _tokenRoomController.text;
+      if (token.length == 7) {
+        bool hasCharacterInRoom = await _hasCharacterInRoom(userId, token);
+        if ( !hasCharacterInRoom ) {
+          final room = await RoomRepository.findByToken(token);
+          if (room != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Sheet(room: room),
+              ),
+            );
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("O usuário já possui personagem nesta campanha.")),
+          );
+        }
+      }
+  } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Falha ao tentar acessar dados do usuario.")),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final String uid = userProvider.uid;
+
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -66,7 +121,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
                 child: TextField(
                   keyboardType: TextInputType.text,
                   controller: _tokenRoomController,
-                  onChanged: (value) => _signInRoom(),
+                  onChanged: (value) => _signInRoom(uid),
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Código da Sala',
