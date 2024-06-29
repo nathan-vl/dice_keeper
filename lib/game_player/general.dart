@@ -3,17 +3,12 @@ import 'package:dice_keeper/repository/characters_repository.dart';
 import 'package:dice_keeper/widgets/attribute_field.dart';
 import 'package:flutter/material.dart';
 
-class General extends StatefulWidget {
+class General extends StatelessWidget {
   final String characterId;
   const General({super.key, required this.characterId});
 
-  @override
-  State<General> createState() => _GeneralState();
-}
-
-class _GeneralState extends State<General> {
   Future<Character> _fetchData() async {
-    return (await CharactersRepository.get(widget.characterId))!;
+    return (await CharactersRepository.get(characterId))!;
   }
 
   @override
@@ -65,7 +60,7 @@ class _GeneralState extends State<General> {
                                     onChanged: (value) {
                                       character.name = value;
                                       CharactersRepository.update(
-                                        widget.characterId,
+                                        characterId,
                                         character,
                                       );
                                     },
@@ -88,7 +83,7 @@ class _GeneralState extends State<General> {
                                         if (level != null) {
                                           character.level = level;
                                           CharactersRepository.update(
-                                            widget.characterId,
+                                            characterId,
                                             character,
                                           );
                                         }
@@ -110,7 +105,7 @@ class _GeneralState extends State<General> {
                                   if (n != null) {
                                     character.str = n;
                                     CharactersRepository.update(
-                                      widget.characterId,
+                                      characterId,
                                       character,
                                     );
                                   }
@@ -129,7 +124,7 @@ class _GeneralState extends State<General> {
                                   if (n != null) {
                                     character.abi = n;
                                     CharactersRepository.update(
-                                      widget.characterId,
+                                      characterId,
                                       character,
                                     );
                                   }
@@ -148,7 +143,7 @@ class _GeneralState extends State<General> {
                                   if (n != null) {
                                     character.res = n;
                                     CharactersRepository.update(
-                                      widget.characterId,
+                                      characterId,
                                       character,
                                     );
                                   }
@@ -167,7 +162,7 @@ class _GeneralState extends State<General> {
                                   if (n != null) {
                                     character.arm = n;
                                     CharactersRepository.update(
-                                      widget.characterId,
+                                      characterId,
                                       character,
                                     );
                                   }
@@ -186,7 +181,7 @@ class _GeneralState extends State<General> {
                                   if (n != null) {
                                     character.pof = n;
                                     CharactersRepository.update(
-                                      widget.characterId,
+                                      characterId,
                                       character,
                                     );
                                   }
@@ -213,7 +208,7 @@ class _GeneralState extends State<General> {
                                         if (n != null) {
                                           character.hp = n;
                                           CharactersRepository.update(
-                                            widget.characterId,
+                                            characterId,
                                             character,
                                           );
                                         }
@@ -238,7 +233,7 @@ class _GeneralState extends State<General> {
                                         if (n != null) {
                                           character.mp = n;
                                           CharactersRepository.update(
-                                            widget.characterId,
+                                            characterId,
                                             character,
                                           );
                                         }
@@ -266,6 +261,13 @@ class _GeneralState extends State<General> {
                                     "Digite a história do seu persongem...!",
                                 hintStyle: TextStyle(fontSize: 16),
                               ),
+                              onChanged: (value) {
+                                character.history = value;
+                                CharactersRepository.update(
+                                  characterId,
+                                  character,
+                                );
+                              },
                             ),
                           ],
                         ),
