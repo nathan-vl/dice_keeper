@@ -1,26 +1,25 @@
-import 'package:dice_keeper/character_creation/advantages.dart';
 import 'package:dice_keeper/character_creation/inventory.dart';
-import 'package:dice_keeper/models/skill.dart';
-import 'package:dice_keeper/repository/skill_repository.dart';
+import 'package:dice_keeper/models/disadvantage.dart';
+import 'package:dice_keeper/repository/disadvantages_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
-class Skills extends StatefulWidget {
-  const Skills({super.key});
+class Disadvantages extends StatefulWidget {
+  const Disadvantages({super.key});
 
   @override
-  State<Skills> createState() => _SkillsState();
+  State<Disadvantages> createState() => _DisadvantagesState();
 }
 
-class _SkillsState extends State<Skills> {
+class _DisadvantagesState extends State<Disadvantages> {
   var items = List.empty();
-  final selectedItems = <Skill>[];
-  List<Skill> filteredItems = <Skill>[];
+  final selectedItems = <Disadvantage>[];
+  List<Disadvantage> filteredItems = <Disadvantage>[];
 
   @override
   void initState() {
     super.initState();
-    SkillRepository.get().then((res) {
+    DisadvantagesRepository.get().then((res) {
       setState(() {
         items = res;
       });
@@ -37,7 +36,7 @@ class _SkillsState extends State<Skills> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "Habilidades",
+              "Desvantagens",
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16.0),
@@ -74,24 +73,24 @@ class _SkillsState extends State<Skills> {
                                     .toLowerCase()
                                     .contains(controller.text.toLowerCase()))
                             .map(
-                              (skill) => ListTile(
-                                title: Text(skill.name),
+                              (disadvantage) => ListTile(
+                                title: Text(disadvantage.name),
                                 onTap: () {
                                   setState(
                                     () {
                                       controller.closeView("");
                                       showDialog(
                                         context: context,
-                                        builder: (context) => SkillModal(
-                                          onSave: (skill) {
+                                        builder: (context) => DisadvantageModal(
+                                          onSave: (disadvantage) {
                                             setState(
                                               () {
-                                                selectedItems.add(skill);
+                                                selectedItems.add(disadvantage);
                                               },
                                             );
                                             Navigator.pop(context);
                                           },
-                                          skill: skill,
+                                          disadvantage: disadvantage,
                                           isShowing: false,
                                         ),
                                       );
@@ -105,11 +104,11 @@ class _SkillsState extends State<Skills> {
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: selectedItems.length,
-                      itemBuilder: (context, index) => SkillCard(
-                        skill: selectedItems[index],
-                        onSave: (skill) {
+                      itemBuilder: (context, index) => DisadvantageCard(
+                        disadvantage: selectedItems[index],
+                        onSave: (disadvantage) {
                           setState(() {
-                            selectedItems[index] = skill;
+                            selectedItems[index] = disadvantage;
                           });
                           Navigator.pop(context);
                         },
@@ -158,7 +157,7 @@ class _SkillsState extends State<Skills> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Advantages(),
+                                builder: (context) => const Inventory(),
                               ),
                             )
                           }
@@ -182,14 +181,14 @@ class _SkillsState extends State<Skills> {
   }
 }
 
-class SkillCard extends StatelessWidget {
-  final Skill skill;
-  final void Function(Skill) onSave;
+class DisadvantageCard extends StatelessWidget {
+  final Disadvantage disadvantage;
+  final void Function(Disadvantage) onSave;
   final void Function() onConfirmRemove;
 
-  const SkillCard({
+  const DisadvantageCard({
     super.key,
-    required this.skill,
+    required this.disadvantage,
     required this.onSave,
     required this.onConfirmRemove,
   });
@@ -200,15 +199,15 @@ class SkillCard extends StatelessWidget {
       child: ListTile(
         onTap: () => showDialog(
           context: context,
-          builder: (context) => SkillModal(
-            skill: skill,
+          builder: (context) => DisadvantageModal(
+            disadvantage: disadvantage,
             onSave: onSave,
             isShowing: true,
           ),
         ),
-        title: Text(skill.name),
+        title: Text(disadvantage.name),
         subtitle: Text(
-          skill.description,
+          disadvantage.description,
           overflow: TextOverflow.ellipsis,
         ),
         trailing: Row(
@@ -218,7 +217,7 @@ class SkillCard extends StatelessWidget {
               onPressed: () => showDialog(
                 context: context,
                 builder: (context) => ConfirmDialog(
-                  message: "Tem certeza que deseja remover essa habilidade?",
+                  message: "Tem certeza que deseja remover essa desvantagem?",
                   confirmText: "Remover",
                   onConfirm: onConfirmRemove,
                 ),
@@ -232,29 +231,29 @@ class SkillCard extends StatelessWidget {
   }
 }
 
-class SkillModal extends StatefulWidget {
+class DisadvantageModal extends StatefulWidget {
   final bool isShowing;
-  final Skill skill;
-  final void Function(Skill) onSave;
+  final Disadvantage disadvantage;
+  final void Function(Disadvantage) onSave;
 
-  const SkillModal({
+  const DisadvantageModal({
     super.key,
-    required this.skill,
+    required this.disadvantage,
     required this.onSave,
     required this.isShowing,
   });
 
   @override
-  State<SkillModal> createState() => _SkillModalState();
+  State<DisadvantageModal> createState() => _DisadvantageModalState();
 }
 
-class _SkillModalState extends State<SkillModal> {
-  Skill skill = Skill(name: '', description: '');
+class _DisadvantageModalState extends State<DisadvantageModal> {
+  Disadvantage disadvantage = Disadvantage(name: '', description: '');
 
   @override
   void initState() {
     super.initState();
-    skill = widget.skill.clone();
+    disadvantage = widget.disadvantage.clone();
   }
 
   @override
@@ -266,11 +265,11 @@ class _SkillModalState extends State<SkillModal> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              skill.name,
+              disadvantage.name,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(skill.description),
+            Text(disadvantage.description),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing
@@ -290,9 +289,9 @@ class _SkillModalState extends State<SkillModal> {
                       ),
                       FilledButton(
                         onPressed: () => widget.onSave(
-                          Skill(
-                            name: skill.name,
-                            description: skill.description,
+                          Disadvantage(
+                            name: disadvantage.name,
+                            description: disadvantage.description,
                           ),
                         ),
                         child: const Text("Adicionar"),

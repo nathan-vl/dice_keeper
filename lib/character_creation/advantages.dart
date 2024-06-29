@@ -1,26 +1,26 @@
-import 'package:dice_keeper/character_creation/advantages.dart';
+import 'package:dice_keeper/character_creation/disadvantages.dart';
 import 'package:dice_keeper/character_creation/inventory.dart';
-import 'package:dice_keeper/models/skill.dart';
-import 'package:dice_keeper/repository/skill_repository.dart';
+import 'package:dice_keeper/models/advantage.dart';
+import 'package:dice_keeper/repository/advantages_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
-class Skills extends StatefulWidget {
-  const Skills({super.key});
+class Advantages extends StatefulWidget {
+  const Advantages({super.key});
 
   @override
-  State<Skills> createState() => _SkillsState();
+  State<Advantages> createState() => _AdvantagesState();
 }
 
-class _SkillsState extends State<Skills> {
+class _AdvantagesState extends State<Advantages> {
   var items = List.empty();
-  final selectedItems = <Skill>[];
-  List<Skill> filteredItems = <Skill>[];
+  final selectedItems = <Advantage>[];
+  List<Advantage> filteredItems = <Advantage>[];
 
   @override
   void initState() {
     super.initState();
-    SkillRepository.get().then((res) {
+    AdvantagesRepository.get().then((res) {
       setState(() {
         items = res;
       });
@@ -37,7 +37,7 @@ class _SkillsState extends State<Skills> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "Habilidades",
+              "Vantagens",
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16.0),
@@ -74,24 +74,24 @@ class _SkillsState extends State<Skills> {
                                     .toLowerCase()
                                     .contains(controller.text.toLowerCase()))
                             .map(
-                              (skill) => ListTile(
-                                title: Text(skill.name),
+                              (advantage) => ListTile(
+                                title: Text(advantage.name),
                                 onTap: () {
                                   setState(
                                     () {
                                       controller.closeView("");
                                       showDialog(
                                         context: context,
-                                        builder: (context) => SkillModal(
-                                          onSave: (skill) {
+                                        builder: (context) => AdvantageModal(
+                                          onSave: (advantage) {
                                             setState(
                                               () {
-                                                selectedItems.add(skill);
+                                                selectedItems.add(advantage);
                                               },
                                             );
                                             Navigator.pop(context);
                                           },
-                                          skill: skill,
+                                          advantage: advantage,
                                           isShowing: false,
                                         ),
                                       );
@@ -105,11 +105,11 @@ class _SkillsState extends State<Skills> {
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: selectedItems.length,
-                      itemBuilder: (context, index) => SkillCard(
-                        skill: selectedItems[index],
-                        onSave: (skill) {
+                      itemBuilder: (context, index) => AdvantageCard(
+                        advantage: selectedItems[index],
+                        onSave: (advantage) {
                           setState(() {
-                            selectedItems[index] = skill;
+                            selectedItems[index] = advantage;
                           });
                           Navigator.pop(context);
                         },
@@ -147,7 +147,7 @@ class _SkillsState extends State<Skills> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const Inventory(),
+                                                const Disadvantages(),
                                           ),
                                         );
                                       },
@@ -158,7 +158,7 @@ class _SkillsState extends State<Skills> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Advantages(),
+                                builder: (context) => const Inventory(),
                               ),
                             )
                           }
@@ -182,14 +182,14 @@ class _SkillsState extends State<Skills> {
   }
 }
 
-class SkillCard extends StatelessWidget {
-  final Skill skill;
-  final void Function(Skill) onSave;
+class AdvantageCard extends StatelessWidget {
+  final Advantage advantage;
+  final void Function(Advantage) onSave;
   final void Function() onConfirmRemove;
 
-  const SkillCard({
+  const AdvantageCard({
     super.key,
-    required this.skill,
+    required this.advantage,
     required this.onSave,
     required this.onConfirmRemove,
   });
@@ -200,15 +200,15 @@ class SkillCard extends StatelessWidget {
       child: ListTile(
         onTap: () => showDialog(
           context: context,
-          builder: (context) => SkillModal(
-            skill: skill,
+          builder: (context) => AdvantageModal(
+            advantage: advantage,
             onSave: onSave,
             isShowing: true,
           ),
         ),
-        title: Text(skill.name),
+        title: Text(advantage.name),
         subtitle: Text(
-          skill.description,
+          advantage.description,
           overflow: TextOverflow.ellipsis,
         ),
         trailing: Row(
@@ -218,7 +218,7 @@ class SkillCard extends StatelessWidget {
               onPressed: () => showDialog(
                 context: context,
                 builder: (context) => ConfirmDialog(
-                  message: "Tem certeza que deseja remover essa habilidade?",
+                  message: "Tem certeza que deseja remover essa vantagem?",
                   confirmText: "Remover",
                   onConfirm: onConfirmRemove,
                 ),
@@ -232,29 +232,29 @@ class SkillCard extends StatelessWidget {
   }
 }
 
-class SkillModal extends StatefulWidget {
+class AdvantageModal extends StatefulWidget {
   final bool isShowing;
-  final Skill skill;
-  final void Function(Skill) onSave;
+  final Advantage advantage;
+  final void Function(Advantage) onSave;
 
-  const SkillModal({
+  const AdvantageModal({
     super.key,
-    required this.skill,
+    required this.advantage,
     required this.onSave,
     required this.isShowing,
   });
 
   @override
-  State<SkillModal> createState() => _SkillModalState();
+  State<AdvantageModal> createState() => _AdvantageModalState();
 }
 
-class _SkillModalState extends State<SkillModal> {
-  Skill skill = Skill(name: '', description: '');
+class _AdvantageModalState extends State<AdvantageModal> {
+  Advantage advantage = Advantage(name: '', description: '');
 
   @override
   void initState() {
     super.initState();
-    skill = widget.skill.clone();
+    advantage = widget.advantage.clone();
   }
 
   @override
@@ -266,11 +266,11 @@ class _SkillModalState extends State<SkillModal> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              skill.name,
+              advantage.name,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(skill.description),
+            Text(advantage.description),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing
@@ -290,9 +290,9 @@ class _SkillModalState extends State<SkillModal> {
                       ),
                       FilledButton(
                         onPressed: () => widget.onSave(
-                          Skill(
-                            name: skill.name,
-                            description: skill.description,
+                          Advantage(
+                            name: advantage.name,
+                            description: advantage.description,
                           ),
                         ),
                         child: const Text("Adicionar"),
