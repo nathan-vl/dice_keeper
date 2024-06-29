@@ -33,20 +33,19 @@ class _ListPlayerState extends State<ListPlayer> {
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: items.length,
-        itemBuilder: (context, index) => CardCharacter(
-          title: items[index].name,
-          sub1: "Nome da sala",
-          sub2: "lv: 10",
-          onPressedFunction: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const PlayerMain(roomName: "[Nome da Sala]"),
-              ),
-            );
-          },
-        ),
+        itemBuilder: (context, index) {
+          return CardCharacter(
+            character: items[index],
+            onPressedFunction: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PlayerMain(character: items[index]),
+                ),
+              );
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

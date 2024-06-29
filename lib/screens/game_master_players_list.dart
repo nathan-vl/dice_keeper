@@ -1,9 +1,8 @@
-import 'package:dice_keeper/widgets/card_character.dart';
-import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:flutter/material.dart';
 
 class GameMasterPlayersList extends StatelessWidget {
-  const GameMasterPlayersList({super.key});
+  final String roomId;
+  const GameMasterPlayersList({super.key, required this.roomId});
 
   @override
   Widget build(BuildContext context) {
@@ -21,34 +20,34 @@ class GameMasterPlayersList extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CardCharacter(
-                  title: 'Nome do Jogador',
-                  sub1: 'Nome do personagem',
-                  sub2: 'Lv 10',
-                  onPressedFunction: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const PlayerMain(roomName: "[Nome da Sala]"),
-                      ),
-                    );
-                  },
-                ),
-                CardCharacter(
-                  title: 'Nome do Jogador',
-                  sub1: 'Nome do personagem',
-                  sub2: 'Lv 10',
-                  onPressedFunction: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const PlayerMain(roomName: "[Nome da Sala]"),
-                      ),
-                    );
-                  },
-                ),
+                // CardCharacter(
+                //   title: 'Nome do Jogador',
+                //   sub1: 'Nome do personagem',
+                //   sub2: 'Lv 10',
+                //   onPressedFunction: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) =>
+                //             const PlayerMain(roomName: "[Nome da Sala]"),
+                //       ),
+                //     );
+                //   },
+                // ),
+                // CardCharacter(
+                //   title: 'Nome do Jogador',
+                //   sub1: 'Nome do personagem',
+                //   sub2: 'Lv 10',
+                //   onPressedFunction: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) =>
+                //             const PlayerMain(roomName: "[Nome da Sala]"),
+                //       ),
+                //     );
+                //   },
+                // ),
               ],
             ),
           ),

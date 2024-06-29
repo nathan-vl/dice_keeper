@@ -5,6 +5,7 @@ import 'package:dice_keeper/models/skill.dart';
 
 class Character {
   final String name, history;
+  final int level;
   final int str, abi, mp, hp, pof, res, arm;
   final List<Advantage> advantages;
   final List<Disadvantage> disadvantages;
@@ -15,6 +16,7 @@ class Character {
 
   Character({
     required this.name,
+    required this.level,
     required this.history,
     required this.str,
     required this.abi,
@@ -44,6 +46,7 @@ class Character {
 
     return Character(
       name: map["name"],
+      level: map["level"],
       history: map["history"],
       str: map["str"],
       abi: map["abi"],
@@ -63,6 +66,7 @@ class Character {
 
   Map<String, dynamic> toMap() => {
         "name": name,
+        "level": level,
         "history": history,
         "str": str,
         "abi": abi,

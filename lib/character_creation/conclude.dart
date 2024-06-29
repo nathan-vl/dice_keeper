@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:dice_keeper/models/character.dart';
 import 'package:dice_keeper/providers/UserProvider.dart';
@@ -50,8 +52,9 @@ class Conclude extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const PlayerMain(
-                      roomName: "[Nome da Sala]",
+                    builder: (context) => PlayerMain(
+                      // roomName: "[Nome da Sala]",
+                      character: Character.fromMap(HashMap()),
                     ),
                   ),
                 );
