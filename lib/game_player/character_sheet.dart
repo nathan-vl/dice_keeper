@@ -4,7 +4,8 @@ import 'package:dice_keeper/game_player/skills.dart';
 import 'package:flutter/material.dart';
 
 class CharacterSheet extends StatefulWidget {
-  const CharacterSheet({super.key});
+  final String characterId;
+  const CharacterSheet({super.key, required this.characterId});
 
   @override
   State<CharacterSheet> createState() => _CharacterSheetState();

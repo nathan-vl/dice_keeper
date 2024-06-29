@@ -1,15 +1,14 @@
 import 'package:dice_keeper/dice_roller.dart';
 import 'package:dice_keeper/game_player/character_sheet.dart';
-import 'package:dice_keeper/models/character.dart';
 import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 
 class PlayerMain extends StatelessWidget {
-  final Character character;
+  final String characterId;
 
   const PlayerMain({
     super.key,
-    required this.character,
+    required this.characterId,
   });
 
   @override
@@ -35,12 +34,12 @@ class PlayerMain extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back),
           ),
-          title: Text("roomName"),
+          title: const Text("roomName"),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            CharacterSheet(),
-            DiceRoller(),
+            CharacterSheet(characterId: characterId),
+            const DiceRoller(),
           ],
         ),
       ),

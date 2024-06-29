@@ -5,6 +5,16 @@ class CharactersRepository {
   static final _db = FirebaseFirestore.instance;
   static final collection = _db.collection("characters");
 
+  static Future<Character?> get(String id) async {
+    final document = await collection.doc(id).get();
+    final data = document.data();
+    if (data == null) {
+      return null;
+    } else {
+      return Character.fromMap(data);
+    }
+  }
+
   static Future<List<Character>> getByPlayer(String player) async {
     final items = await collection.where('playerId', isEqualTo: player).get();
     final characters =
@@ -12,11 +22,14 @@ class CharactersRepository {
     return List<Character>.from(characters.toList() as List);
   }
 
+  static Future<List<String>> getIdsByPlayer(String player) async {
+    final items = await collection.where('playerId', isEqualTo: player).get();
+    final characters = items.docs.map((character) => character.id).toList();
+    return characters;
+  }
+
   static Future<Character?> getByPlayerAndRoom(
       String player, String room) async {
-    print("Player: $player");
-    print("Room: $room");
-
     final query = await collection
         .where('playerId', isEqualTo: player)
         .where('roomId', isEqualTo: room)
@@ -30,7 +43,9 @@ class CharactersRepository {
     return character;
   }
 
-  static void insertCharacter(Character character) {
-    collection.add(character.toMap());
+  static Future<DocumentReference<Map<String, dynamic>>> insertCharacter(
+    Character character,
+  ) {
+    return collection.add(character.toMap());
   }
 }

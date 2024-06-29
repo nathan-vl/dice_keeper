@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider())
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
       child: MaterialApp(
         title: 'Dice Keeper',
         theme: ThemeData(
@@ -117,7 +115,7 @@ class MyApp extends StatelessWidget {
           ),
           primarySwatch: Colors.blue,
         ),
-        home: Login(),
+        home: const Login(),
       ),
     );
   }

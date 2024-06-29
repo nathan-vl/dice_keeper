@@ -1,5 +1,4 @@
 import 'package:dice_keeper/join_campaign.dart';
-import 'package:dice_keeper/models/character.dart';
 import 'package:dice_keeper/repository/characters_repository.dart';
 import 'package:dice_keeper/widgets/card_character.dart';
 import 'package:dice_keeper/game_player/player_main.dart';
@@ -14,12 +13,12 @@ class ListPlayer extends StatefulWidget {
 }
 
 class _ListPlayerState extends State<ListPlayer> {
-  List<Character> items = <Character>[];
+  List<String> items = List.empty();
 
   @override
   void initState() {
     super.initState();
-    CharactersRepository.getByPlayer(FirebaseAuth.instance.currentUser!.uid)
+    CharactersRepository.getIdsByPlayer(FirebaseAuth.instance.currentUser!.uid)
         .then((res) {
       setState(() {
         items = res;
@@ -35,12 +34,12 @@ class _ListPlayerState extends State<ListPlayer> {
         itemCount: items.length,
         itemBuilder: (context, index) {
           return CardCharacter(
-            character: items[index],
+            characterId: items[index],
             onPressedFunction: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PlayerMain(character: items[index]),
+                  builder: (context) => PlayerMain(characterId: items[index]),
                 ),
               );
             },
