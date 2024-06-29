@@ -28,26 +28,33 @@ class _LoginState extends State<Login> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   void _login() async {
-    UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
-    String uid = userCredential.user!.uid;
-
-    Provider.of<UserProvider>(context, listen: false).setUid(uid);
-
-    List<Room> rooms = await RoomRepository.getByMaster(uid);
-    List<Character> characters = await CharactersRepository.getByPlayer(uid);
-
-    if (rooms.isEmpty && characters.isEmpty) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const FirstAccess()),
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
       );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const RoomSelection()),
+      String uid = userCredential.user!.uid;
+
+      Provider.of<UserProvider>(context, listen: false).setUid(uid);
+
+      List<Room> rooms = await RoomRepository.getByMaster(uid);
+      List<Character> characters = await CharactersRepository.getByPlayer(uid);
+
+      if (rooms.isEmpty && characters.isEmpty) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const FirstAccess()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const RoomSelection()),
+        );
+      }
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Email e ou senha inválidos ou incorretos, verifique os campos e tente novamente.")),
       );
     }
   }
