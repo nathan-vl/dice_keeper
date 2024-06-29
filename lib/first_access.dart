@@ -19,7 +19,7 @@ class _FirstAccessState extends State<FirstAccess> {
     await _auth.signOut();
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return Login();
+      return const Login();
     }));
   }
 

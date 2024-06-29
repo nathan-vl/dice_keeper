@@ -2,8 +2,25 @@ import 'package:dice_keeper/character_creation/history.dart';
 import 'package:dice_keeper/widgets/atribbute_field.dart';
 import 'package:flutter/material.dart';
 
-class Sheet extends StatelessWidget {
+class Sheet extends StatefulWidget {
   const Sheet({super.key});
+
+  @override
+  State<Sheet> createState() => _SheetState();
+}
+
+class _SheetState extends State<Sheet> {
+  final name = TextEditingController();
+  final level = TextEditingController();
+
+  final stregth = TextEditingController();
+  final ability = TextEditingController();
+  final endurance = TextEditingController();
+  final armor = TextEditingController();
+  final firePower = TextEditingController();
+
+  final healthPoints = TextEditingController();
+  final manaPoints = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,36 +66,52 @@ class Sheet extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                  child: AttributeField(attribute: "Força"),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                  child: AttributeField(
+                    attribute: "Força",
+                    controller: stregth,
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                  child: AttributeField(attribute: "Habilidade"),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  child: AttributeField(
+                    attribute: "Habilidade",
+                    controller: ability,
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                  child: AttributeField(attribute: "Resistência"),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  child: AttributeField(
+                    attribute: "Resistência",
+                    controller: endurance,
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                  child: AttributeField(attribute: "Armadura"),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  child: AttributeField(
+                    attribute: "Armadura",
+                    controller: armor,
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                  child: AttributeField(attribute: "Poder de Fogo"),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  child: AttributeField(
+                    attribute: "Poder de Fogo",
+                    controller: firePower,
+                  ),
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       flex: 5,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                         child: TextField(
+                          controller: healthPoints,
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'PV',
                           ),
@@ -88,10 +121,11 @@ class Sheet extends StatelessWidget {
                     Expanded(
                       flex: 5,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
                         child: TextField(
+                          controller: manaPoints,
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'PM',
                           ),

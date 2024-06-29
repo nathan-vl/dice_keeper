@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AttributeField extends StatefulWidget {
-  const AttributeField({super.key, required this.attribute});
+  final TextEditingController controller;
   final String attribute;
+
+  const AttributeField({
+    super.key,
+    required this.attribute,
+    required this.controller,
+  });
 
   @override
   State<AttributeField> createState() {
@@ -11,13 +17,10 @@ class AttributeField extends StatefulWidget {
 }
 
 class _AttributeField extends State<AttributeField> {
-  final controller = TextEditingController();
-  late String title = '';
-
   @override
   void initState() {
     super.initState();
-    title = widget.attribute;
+    widget.controller.text = "0";
   }
 
   @override
@@ -28,11 +31,11 @@ class _AttributeField extends State<AttributeField> {
         Expanded(
           flex: 3,
           child: TextField(
-            controller: controller,
+            controller: widget.controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
-              labelText: title,
+              labelText: widget.attribute,
             ),
           ),
         ),
@@ -41,48 +44,57 @@ class _AttributeField extends State<AttributeField> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
             child: FilledButton(
-                style: ButtonStyle(
-                    padding: WidgetStateProperty.all<EdgeInsets>(
-                        const EdgeInsets.fromLTRB(15, 17, 15, 17)),
-                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ))),
-                onPressed: () {
-                  if (controller.text == "") {
-                    controller.text = '0';
-                  }
-                  int value = int.parse(controller.text);
-                  controller.text = (value += 1).toString();
-                },
-                child: const Icon(Icons.add)),
+              style: ButtonStyle(
+                padding: WidgetStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.fromLTRB(15, 17, 15, 17),
+                ),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+              onPressed: () {
+                if (widget.controller.text == "") {
+                  widget.controller.text = '0';
+                }
+                int value = int.parse(widget.controller.text);
+                widget.controller.text = (value += 1).toString();
+              },
+              child: const Icon(Icons.add),
+            ),
           ),
         ),
         Expanded(
-            flex: 1,
-            child: SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                child: FilledButton(
-                    style: ButtonStyle(
-                        padding: WidgetStateProperty.all<EdgeInsets>(
-                            const EdgeInsets.fromLTRB(15, 17, 15, 17)),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ))),
-                    onPressed: () {
-                      if (controller.text == "") {
-                        controller.text = '0';
-                      }
-                      int value = int.parse(controller.text);
-                      if (value > 0) {
-                        controller.text = (value -= 1).toString();
-                      }
-                    },
-                    child: const Icon(Icons.remove)),
+          flex: 1,
+          child: SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+              child: FilledButton(
+                style: ButtonStyle(
+                  padding: WidgetStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.fromLTRB(15, 17, 15, 17),
+                  ),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  if (widget.controller.text == "") {
+                    widget.controller.text = '0';
+                  }
+                  int value = int.parse(widget.controller.text);
+                  if (value > 0) {
+                    widget.controller.text = (value -= 1).toString();
+                  }
+                },
+                child: const Icon(Icons.remove),
               ),
-            )),
+            ),
+          ),
+        ),
       ],
     );
   }

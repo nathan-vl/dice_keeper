@@ -1,5 +1,4 @@
 import 'package:dice_keeper/character_creation/disadvantages.dart';
-import 'package:dice_keeper/character_creation/inventory.dart';
 import 'package:dice_keeper/models/advantage.dart';
 import 'package:dice_keeper/repository/advantages_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';

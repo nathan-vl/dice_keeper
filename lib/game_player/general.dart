@@ -28,10 +28,10 @@ class _GeneralState extends State<General> {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-                const Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Expanded(
                           flex: 8,
@@ -59,26 +59,37 @@ class _GeneralState extends State<General> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                      child: AttributeField(attribute: "Força"),
+                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                      child: AttributeField(
+                        attribute: "Força",
+                        controller: TextEditingController(),
+                      ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: AttributeField(attribute: "Habilidade"),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: AttributeField(
+                          attribute: "Habilidade",
+                          controller: TextEditingController()),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: AttributeField(attribute: "Resistência"),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: AttributeField(
+                          attribute: "Resistência",
+                          controller: TextEditingController()),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: AttributeField(attribute: "Armadura"),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: AttributeField(
+                          attribute: "Armadura",
+                          controller: TextEditingController()),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: AttributeField(attribute: "Poder de Fogo"),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: AttributeField(
+                          attribute: "Poder de Fogo",
+                          controller: TextEditingController()),
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(

@@ -58,10 +58,10 @@ class _LoginState extends State<Login> {
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-        DocumentSnapshot userDoc = await _firestore
-            .collection('users')
-            .doc(userCredential.user?.uid)
-            .get();
+      DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(userCredential.user?.uid)
+          .get();
 
       if (!userDoc.exists) {
         await _firestore.collection('users').doc(userCredential.user?.uid).set({
@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => FirstAccess()),
+        MaterialPageRoute(builder: (context) => const FirstAccess()),
       );
     } catch (e) {
       print(e);
@@ -156,7 +156,8 @@ class _LoginState extends State<Login> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => Register()),
+                            MaterialPageRoute(
+                                builder: (context) => const Register()),
                           );
                         },
                         label: const Text("Criar conta"),

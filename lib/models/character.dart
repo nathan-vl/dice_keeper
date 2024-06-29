@@ -1,7 +1,6 @@
 import 'package:dice_keeper/models/advantage.dart';
 import 'package:dice_keeper/models/disadvantage.dart';
 import 'package:dice_keeper/models/item.dart';
-import 'package:dice_keeper/models/room.dart';
 import 'package:dice_keeper/models/skill.dart';
 
 class Character {
@@ -43,7 +42,7 @@ class Character {
         advantages: map["advantages"].map(Advantage.fromMap),
         disadvantages: map["disadvantages"].map(Disadvantage.fromMap),
         inventory: map["inventory"].map(Item.fromMap),
-        skills: map["skills"].map(Skill.fromMap), 
+        skills: map["skills"].map(Skill.fromMap),
         roomId: map["roomId"],
       );
 
@@ -58,9 +57,10 @@ class Character {
         "res": res,
         "arm": arm,
         "advantages": advantages.map((advantage) => advantage.toMap()),
-        "disadvantages": disadvantages.map((disadvantage) => disadvantage.toMap()),
+        "disadvantages":
+            disadvantages.map((disadvantage) => disadvantage.toMap()),
         "inventory": inventory.map((item) => item.toMap()),
         "skills": skills.map((skill) => skill.toMap()),
-        "roomId": roomId, 
+        "roomId": roomId,
       };
 }
