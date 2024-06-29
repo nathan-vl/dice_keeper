@@ -12,61 +12,81 @@ class Conclude extends StatelessWidget {
 
   const Conclude({super.key, required this.currentCharacter});
 
-  @override
-  Widget build(BuildContext context) {
+  Future<Character?> createCharacter(BuildContext context) async {
     final String userId = Provider.of<UserProvider>(context).uid;
-    CharactersRepository.getByPlayerAndRoom(
+    final character = await CharactersRepository.getByPlayerAndRoom(
       userId,
       currentCharacter['roomId'],
-    ).then(
-      (res) {
-        if (res == null) {
-          Character character = Character.fromMap(currentCharacter);
-          CharactersRepository.insertCharacter(character);
-        }
-      },
     );
 
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Text(
-              "Tudo pronto para a jogatina",
-              style: TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 1),
-                fontSize: 32.0,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16.0),
-            Expanded(child: Image.asset("assets/confirm_splash.png")),
-            const SizedBox(height: 16.0),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PlayerMain(
-                      // roomName: "[Nome da Sala]",
-                      character: Character.fromMap(HashMap()),
-                    ),
+    if (character == null) {
+      final character = Character.fromMap(currentCharacter);
+      CharactersRepository.insertCharacter(character);
+      return character;
+    }
+
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: createCharacter(context),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+          case ConnectionState.active:
+            return Container();
+          case ConnectionState.done:
+            if (snapshot.requireData == null) {
+              return const Placeholder();
+            } else {
+              return Scaffold(
+                backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
+                resizeToAvoidBottomInset: false,
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 40.0, horizontal: 24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Tudo pronto para a jogatina",
+                        style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                          fontSize: 32.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16.0),
+                      Expanded(child: Image.asset("assets/confirm_splash.png")),
+                      const SizedBox(height: 16.0),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlayerMain(
+                                character: snapshot.requireData!,
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Ir para a sala",
+                          style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1)),
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-              child: const Text(
-                "Ir para a sala",
-                style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
-              ),
-            ),
-          ],
-        ),
-      ),
+                ),
+              );
+            }
+        }
+      },
     );
   }
 }
