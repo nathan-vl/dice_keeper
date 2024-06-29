@@ -70,10 +70,23 @@ class _CreateCampaignState extends State<CreateCampaign> {
 
   void _generateRoom(String userId) async {
     try {
-      var roomId = const Uuid().v4();
+      String roomId = const Uuid().v4();
+      String locationsId = const Uuid().v4();
+      String npcsId = const Uuid().v4();
+
       String token = _generateToken();
 
       DocumentReference userReference = _firestore.collection('users').doc(userId);
+
+      await _firestore.collection('locations').doc(locationsId).set({
+        "items": []
+      });
+      DocumentReference locationsReference = _firestore.collection('locations').doc(locationsId);
+
+      await _firestore.collection('npcs').doc(npcsId).set({
+        "items": []
+      });
+      DocumentReference npcsReference = _firestore.collection('npcs').doc(npcsId);
 
       await _firestore.collection('rooms').doc(roomId).set({
         "gameMaster": userReference,
@@ -81,6 +94,8 @@ class _CreateCampaignState extends State<CreateCampaign> {
         "password": !isPrivateRoom ? "" : md5.convert(utf8.encode(_passwordController.text)).toString(),
         "token": token,
         "playerQuantity": _playerQuantityController.text,
+        "locations": locationsReference,
+        "npcs": npcsReference
       });
 
       Navigator.push(

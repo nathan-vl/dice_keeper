@@ -26,7 +26,7 @@ class _RegisterState extends State<Register> {
       await _firestore.collection('users').doc(userCredential.user?.uid).set({
         'name': _nameController.text,
         'email': _emailController.text,
-        'senha': md5.convert(utf8.encode(_passwordController.text)).toString(),
+        'password': md5.convert(utf8.encode(_passwordController.text)).toString(),
         'lastSignIn': Timestamp.now(),
       });
 
