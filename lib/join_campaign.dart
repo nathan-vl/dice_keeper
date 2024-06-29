@@ -19,7 +19,6 @@ class _JoinCampaignState extends State<JoinCampaign> {
 
   Future<bool> _hasCharacterInRoom(String userId, String token) async {
     try {
-
       QuerySnapshot querySnapshotRooms = await _firestore
         .collection('rooms')
         .where( 'token', isEqualTo: token )
@@ -42,10 +41,36 @@ class _JoinCampaignState extends State<JoinCampaign> {
           }
         }
       }
-
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Falha ao tentar acessar dados do usuario.")),
+      );
+    }
+    return false;
+  }
+
+  Future<bool> _limitHasBeenReached(String token) async {
+    try {
+      QuerySnapshot querySnapshotRooms = await _firestore
+        .collection('rooms')
+        .where( 'token', isEqualTo: token )
+        .get();
+
+      if (querySnapshotRooms.docs.isNotEmpty) {
+        for (var docRoom in querySnapshotRooms.docs) {
+          QuerySnapshot querySnapshotCharacters = await _firestore
+            .collection('characters')
+            .where("roomId", isEqualTo: docRoom.id)
+            .get();
+
+          if ( !querySnapshotCharacters.docs.isNotEmpty && querySnapshotCharacters.size >= int.parse(docRoom.get('playerQuantity')) ) {
+            return true;
+          }
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Falha ao tentar acessar dados da sala.")),
       );
     }
     return false;
@@ -57,15 +82,24 @@ class _JoinCampaignState extends State<JoinCampaign> {
       if (token.length == 7) {
         bool hasCharacterInRoom = await _hasCharacterInRoom(userId, token);
         if ( !hasCharacterInRoom ) {
-          final room = await RoomRepository.findByToken(token);
-          if (room != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Sheet(room: room),
-              ),
+          bool limitHasBeenReached = await _limitHasBeenReached(token);
+
+          if (limitHasBeenReached) {
+            final room = await RoomRepository.findByToken(token);
+            if (room != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Sheet(room: room),
+                ),
+              );
+            }
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Esta campanha já atingiu o limite de jogadores.")),
             );
           }
+
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("O usuário já possui personagem nesta campanha.")),
