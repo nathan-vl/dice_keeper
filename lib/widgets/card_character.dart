@@ -46,7 +46,7 @@ class _CardCharacterState extends State<CardCharacter> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(room!.title),
-                    Text(character!.level.toString()),
+                    Text("level: ${character!.level}"),
                   ],
                 ),
               ),

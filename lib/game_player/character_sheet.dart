@@ -19,6 +19,8 @@ class CharacterSheet extends StatelessWidget {
           body: Column(
             children: [
               const TabBar(
+                isScrollable: true,
+                
                 tabs: [
                   Tab(text: "Geral"),
                   Tab(text: "Habilidades"),

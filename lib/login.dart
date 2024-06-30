@@ -106,7 +106,7 @@ class _LoginState extends State<Login> {
       List<Character> characters =
           await CharactersRepository.getByPlayer(userCredential.user!.uid);
 
-      if (rooms.isNotEmpty || characters.isNotEmpty) {
+      if (rooms.isEmpty && characters.isEmpty) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const FirstAccess()),

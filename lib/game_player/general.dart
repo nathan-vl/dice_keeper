@@ -37,7 +37,7 @@ class General extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          padding: const EdgeInsets.fromLTRB(0, 2, 0, 10),
                           child: Text(
                             character.name,
                             style: Theme.of(context).textTheme.titleMedium,
