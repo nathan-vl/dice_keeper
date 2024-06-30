@@ -49,7 +49,7 @@ class _CardRoomState extends State<CardRoom> {
                       height: constraints.maxHeight,
                       child: CircleAvatar(
                         backgroundImage:
-                            Image.asset("assets/splash_1152.png").image,
+                            Image.asset("assets/logo3D&T.png").image,
                       ),
                     );
                   },
