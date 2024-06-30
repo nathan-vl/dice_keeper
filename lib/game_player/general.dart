@@ -20,7 +20,7 @@ class General extends StatelessWidget {
           case ConnectionState.none:
           case ConnectionState.waiting:
           case ConnectionState.active:
-            return const Placeholder();
+            return Container();
           case ConnectionState.done:
             var character = snapshot.requireData;
 

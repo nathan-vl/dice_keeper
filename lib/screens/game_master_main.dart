@@ -27,7 +27,7 @@ class _GameMasterMainState extends State<GameMasterMain> {
           case ConnectionState.none:
           case ConnectionState.waiting:
           case ConnectionState.active:
-            return const Placeholder();
+            return Container();
           case ConnectionState.done:
             return DefaultTabController(
               length: 4,

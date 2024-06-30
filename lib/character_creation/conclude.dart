@@ -2,6 +2,7 @@ import 'package:dice_keeper/game_player/player_main.dart';
 import 'package:dice_keeper/models/character.dart';
 import 'package:dice_keeper/providers/UserProvider.dart';
 import 'package:dice_keeper/repository/characters_repository.dart';
+import 'package:dice_keeper/room_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,7 @@ class Conclude extends StatelessWidget {
           case ConnectionState.done:
             if (snapshot.hasData) {
               if (snapshot.requireData == null) {
-                return const Placeholder();
+                return Container();
               } else {
                 return Scaffold(
                   backgroundColor: const Color.fromRGBO(74, 84, 140, 1),
@@ -86,7 +87,7 @@ class Conclude extends StatelessWidget {
                 );
               }
             } else {
-              return const CircularProgressIndicator();
+              return const RoomSelection();
             }
         }
       },

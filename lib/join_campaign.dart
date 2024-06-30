@@ -20,30 +20,27 @@ class _JoinCampaignState extends State<JoinCampaign> {
   Future<bool> _hasCharacterInRoom(String userId, String token) async {
     try {
       QuerySnapshot querySnapshotRooms = await _firestore
-        .collection('rooms')
-        .where( 'token', isEqualTo: token )
-        .get();
+          .collection('rooms')
+          .where('token', isEqualTo: token)
+          .get();
 
       if (querySnapshotRooms.docs.isNotEmpty) {
         for (var docRoom in querySnapshotRooms.docs) {
           QuerySnapshot querySnapshotCharacters = await _firestore
-            .collection('characters')
-            .where(
-              Filter.and(
-                Filter("roomId", isEqualTo: docRoom.id),
-                Filter("playerId", isEqualTo: userId)
-              )
-            )
-            .get();
+              .collection('characters')
+              .where(Filter.and(Filter("roomId", isEqualTo: docRoom.id),
+                  Filter("playerId", isEqualTo: userId)))
+              .get();
 
-          if ( querySnapshotCharacters.docs.isNotEmpty ) {
+          if (querySnapshotCharacters.docs.isNotEmpty) {
             return true;
           }
         }
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Falha ao tentar acessar dados do usuario.")),
+        const SnackBar(
+            content: Text("Falha ao tentar acessar dados do usuario.")),
       );
     }
     return false;
@@ -52,18 +49,20 @@ class _JoinCampaignState extends State<JoinCampaign> {
   Future<bool> _limitHasBeenReached(String token) async {
     try {
       QuerySnapshot querySnapshotRooms = await _firestore
-        .collection('rooms')
-        .where( 'token', isEqualTo: token )
-        .get();
+          .collection('rooms')
+          .where('token', isEqualTo: token)
+          .get();
 
       if (querySnapshotRooms.docs.isNotEmpty) {
         for (var docRoom in querySnapshotRooms.docs) {
           QuerySnapshot querySnapshotCharacters = await _firestore
-            .collection('characters')
-            .where("roomId", isEqualTo: docRoom.id)
-            .get();
+              .collection('characters')
+              .where("roomId", isEqualTo: docRoom.id)
+              .get();
 
-          if ( !querySnapshotCharacters.docs.isNotEmpty && querySnapshotCharacters.size >= int.parse(docRoom.get('playerQuantity')) ) {
+          if (!querySnapshotCharacters.docs.isNotEmpty &&
+              querySnapshotCharacters.size >=
+                  int.parse(docRoom.get('playerQuantity'))) {
             return true;
           }
         }
@@ -81,7 +80,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
       String token = _tokenRoomController.text;
       if (token.length == 7) {
         bool hasCharacterInRoom = await _hasCharacterInRoom(userId, token);
-        if ( !hasCharacterInRoom ) {
+        if (!hasCharacterInRoom) {
           bool limitHasBeenReached = await _limitHasBeenReached(token);
 
           if (!limitHasBeenReached) {
@@ -96,19 +95,23 @@ class _JoinCampaignState extends State<JoinCampaign> {
             }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Esta campanha já atingiu o limite de jogadores.")),
+              const SnackBar(
+                  content:
+                      Text("Esta campanha já atingiu o limite de jogadores.")),
             );
           }
-
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("O usuário já possui personagem nesta campanha.")),
+            const SnackBar(
+                content:
+                    Text("O usuário já possui personagem nesta campanha.")),
           );
         }
       }
-  } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Falha ao tentar acessar dados do usuario.")),
+        const SnackBar(
+            content: Text("Falha ao tentar acessar dados do usuario.")),
       );
     }
   }
@@ -162,30 +165,30 @@ class _JoinCampaignState extends State<JoinCampaign> {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-                child: Text(
-                  'Ou',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(20, 0, 20, 240),
-                width: double.infinity,
-                height: 56,
-                child: FilledButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Placeholder(),
-                      ),
-                    );
-                  },
-                  child: const Text('Escanear QRCode'),
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+              //   child: Text(
+              //     'Ou',
+              //     textAlign: TextAlign.center,
+              //     style: Theme.of(context).textTheme.bodyMedium,
+              //   ),
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.fromLTRB(20, 0, 20, 240),
+              //   width: double.infinity,
+              //   height: 56,
+              //   child: FilledButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const Placeholder(),
+              //         ),
+              //       );
+              //     },
+              //     child: const Text('Escanear QRCode'),
+              //   ),
+              // ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);

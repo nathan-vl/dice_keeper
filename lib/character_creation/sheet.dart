@@ -18,11 +18,11 @@ class _SheetState extends State<Sheet> {
   final name = TextEditingController();
   final level = TextEditingController(text: "0");
 
-  final stregth = TextEditingController();
-  final ability = TextEditingController();
-  final endurance = TextEditingController();
-  final armor = TextEditingController();
-  final firePower = TextEditingController();
+  final stregth = TextEditingController(text: "0");
+  final ability = TextEditingController(text: "0");
+  final endurance = TextEditingController(text: "0");
+  final armor = TextEditingController(text: "0");
+  final firePower = TextEditingController(text: "0");
 
   final healthPoints = TextEditingController(text: "0");
   final manaPoints = TextEditingController(text: "0");
@@ -57,13 +57,14 @@ class _SheetState extends State<Sheet> {
                         ),
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                        child: TextField(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                        child: TextFormField(
+                          initialValue: "0",
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'lvl',
                           ),
