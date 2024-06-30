@@ -210,6 +210,7 @@ class _AdvantageModalState extends State<AdvantageModal> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 26),
         child: Column(
@@ -221,6 +222,7 @@ class _AdvantageModalState extends State<AdvantageModal> {
             ),
             const SizedBox(height: 20.0),
             Container(
+              height: 200.0,
               constraints: BoxConstraints(
                   maxHeight: MediaQuery.of(context).size.height * 0.43),
               child: SingleChildScrollView(

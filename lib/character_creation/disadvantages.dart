@@ -293,6 +293,7 @@ class _DisadvantageModalState extends State<DisadvantageModal> {
             ),
             const SizedBox(height: 20.0),
             Container(
+              height: 200.0,
               constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.43),
               child: SingleChildScrollView(
                 child: Text(disadvantage.description),

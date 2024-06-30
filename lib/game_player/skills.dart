@@ -221,7 +221,13 @@ class _SkillModalState extends State<SkillModal> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(skill.description),
+            Container(
+              height: 200.0,
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.43),
+              child: SingleChildScrollView(
+                child: Center(child: Text(skill.description)),
+              ),
+            ),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing

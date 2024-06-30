@@ -292,9 +292,10 @@ class _InventoryModalState extends State<InventoryModal> {
             ),
             const SizedBox(height: 20.0),
             Container(
+              height: 200.0,
               constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.43),
               child: SingleChildScrollView(
-                child: Text(item.effect),
+                child: Center(child: Text(item.effect)),
               ),
             ),
             const SizedBox(height: 20.0),
