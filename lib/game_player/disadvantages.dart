@@ -1,31 +1,32 @@
-import 'package:dice_keeper/models/item.dart';
+import 'package:dice_keeper/models/disadvantage.dart';
+import 'package:dice_keeper/repository/advantages_repository.dart';
 import 'package:dice_keeper/repository/characters_repository.dart';
-import 'package:dice_keeper/repository/item_repository.dart';
+import 'package:dice_keeper/repository/disadvantages_repository.dart';
 import 'package:dice_keeper/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
-class Inventory extends StatefulWidget {
+class Disadvantages extends StatefulWidget {
   final String characterId;
 
-  const Inventory({super.key, required this.characterId});
+  const Disadvantages({super.key, required this.characterId});
 
   @override
-  State<Inventory> createState() => _InventoryState();
+  State<Disadvantages> createState() => _DisadvantagesState();
 }
 
-class _InventoryState extends State<Inventory> {
+class _DisadvantagesState extends State<Disadvantages> {
   var items = List.empty();
-  List<Item> selectedItems = <Item>[];
-  List<Item> filteredItems = <Item>[];
+  List<Disadvantage> selectedItems = <Disadvantage>[];
+  List<Disadvantage> filteredItems = <Disadvantage>[];
 
   @override
   void initState() {
     super.initState();
-    ItemRepository.get().then((res) {
+    DisadvantagesRepository.get().then((res) {
       CharactersRepository.get(widget.characterId).then((res2) {
         setState(() {
           items = res;
-          selectedItems = res2!.inventory;
+          selectedItems = res2!.disadvantages;
         });
       });
     });
@@ -51,11 +52,12 @@ class _InventoryState extends State<Inventory> {
                       return SearchBar(
                         controller: controller,
                         padding: const WidgetStatePropertyAll<EdgeInsets>(
-                            EdgeInsets.symmetric(horizontal: 16.0)),
+                          EdgeInsets.symmetric(horizontal: 16.0),
+                        ),
                         onTap: () {
                           controller.openView();
                         },
-                        onChanged: (_) {
+                        onChanged: (text) {
                           controller.openView();
                         },
                         leading: const Icon(Icons.search),
@@ -72,24 +74,24 @@ class _InventoryState extends State<Inventory> {
                                     .toLowerCase()
                                     .contains(controller.text.toLowerCase()))
                             .map(
-                              (item) => ListTile(
-                                title: Text(item.name),
+                              (disadvantage) => ListTile(
+                                title: Text(disadvantage.name),
                                 onTap: () {
                                   setState(
                                     () {
                                       controller.closeView("");
                                       showDialog(
                                         context: context,
-                                        builder: (context) => InventoryModal(
-                                          onSave: (skill) {
+                                        builder: (context) => DisadvantageModal(
+                                          onSave: (disadvantage) {
                                             setState(
                                               () {
-                                                selectedItems.add(skill);
+                                                selectedItems.add(disadvantage);
                                               },
                                             );
                                             Navigator.pop(context);
                                           },
-                                          item: item,
+                                          disadvantage: disadvantage,
                                           isShowing: false,
                                         ),
                                       );
@@ -104,11 +106,11 @@ class _InventoryState extends State<Inventory> {
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: selectedItems.length,
-                      itemBuilder: (context, index) => InventoryCard(
-                        item: selectedItems[index],
-                        onSave: (item) {
+                      itemBuilder: (context, index) => DisadvantageCard(
+                        disadvantage: selectedItems[index],
+                        onSave: (disadvantage) {
                           setState(() {
-                            selectedItems[index] = item;
+                            selectedItems[index] = disadvantage;
                           });
                           Navigator.pop(context);
                         },
@@ -131,14 +133,14 @@ class _InventoryState extends State<Inventory> {
   }
 }
 
-class InventoryCard extends StatelessWidget {
-  final Item item;
-  final void Function(Item) onSave;
+class DisadvantageCard extends StatelessWidget {
+  final Disadvantage disadvantage;
+  final void Function(Disadvantage) onSave;
   final void Function() onConfirmRemove;
 
-  const InventoryCard({
+  const DisadvantageCard({
     super.key,
-    required this.item,
+    required this.disadvantage,
     required this.onSave,
     required this.onConfirmRemove,
   });
@@ -149,15 +151,15 @@ class InventoryCard extends StatelessWidget {
       child: ListTile(
         onTap: () => showDialog(
           context: context,
-          builder: (context) => InventoryModal(
-            item: item,
+          builder: (context) => DisadvantageModal(
+            disadvantage: disadvantage,
             onSave: onSave,
             isShowing: true,
           ),
         ),
-        title: Text(item.name),
+        title: Text(disadvantage.name),
         subtitle: Text(
-          item.effect,
+          disadvantage.description,
           overflow: TextOverflow.ellipsis,
         ),
         trailing: Row(
@@ -167,7 +169,7 @@ class InventoryCard extends StatelessWidget {
               onPressed: () => showDialog(
                 context: context,
                 builder: (context) => ConfirmDialog(
-                  message: "Tem certeza que deseja remover esse item?",
+                  message: "Tem certeza que deseja remover essa desvantagem?",
                   confirmText: "Remover",
                   onConfirm: onConfirmRemove,
                 ),
@@ -181,29 +183,29 @@ class InventoryCard extends StatelessWidget {
   }
 }
 
-class InventoryModal extends StatefulWidget {
+class DisadvantageModal extends StatefulWidget {
   final bool isShowing;
-  final Item item;
-  final void Function(Item) onSave;
+  final Disadvantage disadvantage;
+  final void Function(Disadvantage) onSave;
 
-  const InventoryModal({
+  const DisadvantageModal({
     super.key,
-    required this.item,
+    required this.disadvantage,
     required this.onSave,
     required this.isShowing,
   });
 
   @override
-  State<InventoryModal> createState() => _InventoryModalState();
+  State<DisadvantageModal> createState() => _DisadvantageModalState();
 }
 
-class _InventoryModalState extends State<InventoryModal> {
-  Item item = Item(name: '', effect: '');
+class _DisadvantageModalState extends State<DisadvantageModal> {
+  Disadvantage disadvantage = Disadvantage(name: '', description: '');
 
   @override
   void initState() {
     super.initState();
-    item = widget.item.clone();
+    disadvantage = widget.disadvantage.clone();
   }
 
   @override
@@ -215,11 +217,17 @@ class _InventoryModalState extends State<InventoryModal> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              item.name,
+              disadvantage.name,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20.0),
-            Text(item.effect),
+            Container(
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.43),
+              child: SingleChildScrollView(
+                child: Text(disadvantage.description),
+              ),
+            ),
             const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: widget.isShowing
@@ -239,9 +247,9 @@ class _InventoryModalState extends State<InventoryModal> {
                       ),
                       FilledButton(
                         onPressed: () => widget.onSave(
-                          Item(
-                            name: item.name,
-                            effect: item.effect,
+                          Disadvantage(
+                            name: disadvantage.name,
+                            description: disadvantage.description,
                           ),
                         ),
                         child: const Text("Adicionar"),

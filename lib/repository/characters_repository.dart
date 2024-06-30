@@ -39,6 +39,12 @@ class CharactersRepository {
     return characters;
   }
 
+  static Future<List<String>> getIdsByRoom(String roomId) async {
+    final items = await collection.where('roomId', isEqualTo: roomId).get();
+    final characters = items.docs.map((character) => character.id).toList();
+    return characters;
+  }
+
   static Future<Character?> getByPlayerAndRoom(
       String player, String room) async {
     final query = await collection

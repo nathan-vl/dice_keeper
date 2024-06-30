@@ -1,8 +1,32 @@
+import 'package:dice_keeper/game_player/player_main.dart';
+import 'package:dice_keeper/repository/characters_repository.dart';
+import 'package:dice_keeper/widgets/card_character.dart';
 import 'package:flutter/material.dart';
 
-class GameMasterPlayersList extends StatelessWidget {
+class GameMasterPlayersList extends StatefulWidget {
   final String roomId;
   const GameMasterPlayersList({super.key, required this.roomId});
+
+  @override
+  State<GameMasterPlayersList> createState() => _GameMasterPlayersListState();
+}
+
+class _GameMasterPlayersListState extends State<GameMasterPlayersList> {
+  List<String> items = List.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    CharactersRepository.getIdsByRoom(widget.roomId).then(
+      (res) {
+        setState(
+          () {
+            items = res;
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,38 +41,25 @@ class GameMasterPlayersList extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // CardCharacter(
-                //   title: 'Nome do Jogador',
-                //   sub1: 'Nome do personagem',
-                //   sub2: 'Lv 10',
-                //   onPressedFunction: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) =>
-                //             const PlayerMain(roomName: "[Nome da Sala]"),
-                //       ),
-                //     );
-                //   },
-                // ),
-                // CardCharacter(
-                //   title: 'Nome do Jogador',
-                //   sub1: 'Nome do personagem',
-                //   sub2: 'Lv 10',
-                //   onPressedFunction: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) =>
-                //             const PlayerMain(roomName: "[Nome da Sala]"),
-                //       ),
-                //     );
-                //   },
-                // ),
-              ],
+            child: Scaffold(
+              body: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return CardCharacter(
+                    characterId: items[index],
+                    onPressedFunction: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PlayerMain(characterId: items[index]),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

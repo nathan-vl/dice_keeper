@@ -84,7 +84,7 @@ class _JoinCampaignState extends State<JoinCampaign> {
         if ( !hasCharacterInRoom ) {
           bool limitHasBeenReached = await _limitHasBeenReached(token);
 
-          if (limitHasBeenReached) {
+          if (!limitHasBeenReached) {
             final room = await RoomRepository.findByToken(token);
             if (room != null) {
               Navigator.push(

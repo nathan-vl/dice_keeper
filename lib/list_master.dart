@@ -1,5 +1,4 @@
 import 'package:dice_keeper/create_campaign.dart';
-import 'package:dice_keeper/models/room.dart';
 import 'package:dice_keeper/repository/room_repository.dart';
 import 'package:dice_keeper/widgets/card_room.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,15 +12,16 @@ class ListMaster extends StatefulWidget {
 }
 
 class _ListMasterState extends State<ListMaster> {
-  List<Room> items = <Room>[];
+  List<String> items = <String>[];
 
   @override
   void initState() {
     super.initState();
-    RoomRepository.getByMaster(FirebaseAuth.instance.currentUser!.uid)
+    RoomRepository.getIdsByMaster(FirebaseAuth.instance.currentUser!.uid)
         .then((res) {
       setState(() {
         items = res;
+        print(res.toList().toString());
       });
     });
   }
@@ -32,7 +32,7 @@ class _ListMasterState extends State<ListMaster> {
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: items.length,
-        itemBuilder: (context, index) => CardRoom(room: items[index]),
+        itemBuilder: (context, index) => CardRoom(roomId: items[index]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -25,11 +25,18 @@ class RoomRepository {
     return room;
   }
 
-  static Future<List<Room>> getByMaster(String masterDoc) async {
+  static Future<List<Room>> getByMaster(String masterId) async {
     final document = _db.collection("characters");
     final items =
-        await document.where('gameMaster', isEqualTo: masterDoc).get();
+        await document.where('gameMaster', isEqualTo: masterId).get();
     final rooms = items.docs.map((room) => Room.fromMap(room.data(), room.id));
     return List<Room>.from(rooms.toList() as List);
+  }
+  
+  static Future<List<String>> getIdsByMaster(String masterId) async {
+    final collection = _db.collection("rooms");
+    final items = await collection.where('gameMaster', isEqualTo: masterId).get();
+    final rooms = items.docs.map((room) => room.id).toList();
+    return rooms;
   }
 }

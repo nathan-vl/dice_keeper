@@ -1,3 +1,5 @@
+import 'package:dice_keeper/game_player/advantages.dart';
+import 'package:dice_keeper/game_player/disadvantages.dart';
 import 'package:dice_keeper/game_player/general.dart';
 import 'package:dice_keeper/game_player/inventory.dart';
 import 'package:dice_keeper/game_player/skills.dart';
@@ -12,7 +14,7 @@ class CharacterSheet extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: DefaultTabController(
-        length: 3,
+        length: 5,
         child: Scaffold(
           body: Column(
             children: [
@@ -21,6 +23,8 @@ class CharacterSheet extends StatelessWidget {
                   Tab(text: "Geral"),
                   Tab(text: "Habilidades"),
                   Tab(text: "Inventário"),
+                  Tab(text: "Vantagens",),
+                  Tab(text: "Desvantagens",)
                 ],
               ),
               Expanded(
@@ -28,7 +32,9 @@ class CharacterSheet extends StatelessWidget {
                   children: [
                     General(characterId: characterId),
                     Skills(characterId: characterId),
-                    const Inventory(),
+                    Inventory(characterId: characterId,),
+                    Advantages(characterId: characterId),
+                    Disadvantages(characterId: characterId),
                   ],
                 ),
               )

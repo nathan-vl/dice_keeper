@@ -51,15 +51,15 @@ class _GameMasterMainState extends State<GameMasterMain> {
                 ),
                 body: TabBarView(
                   children: [
-                    const GameMasterPlayersList(
-                      roomId: "2",
+                    GameMasterPlayersList(
+                      roomId: widget.roomDoc,
                     ), // Jogadores
                     const DiceRoller(),
                     GameMasterNPCs(
-                      npcsDoc: snapshot.requireData.npcsRef.id,
+                      npcsDoc: snapshot.requireData.npcsRef,
                     ),
                     GameMasterLocations(
-                      locationsDoc: snapshot.requireData.locationsRef.id,
+                      locationsDoc: snapshot.requireData.locationsRef,
                     ),
                   ],
                 ),

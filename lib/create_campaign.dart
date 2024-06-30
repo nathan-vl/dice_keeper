@@ -88,13 +88,13 @@ class _CreateCampaignState extends State<CreateCampaign> {
       
       DocumentReference userReference = _firestore.collection('users').doc(userId);
       await _firestore.collection('rooms').doc(roomId).set({
-        "gameMaster": userReference,
+        "gameMaster": userReference.id,
         "title": _campaignNameController.text,
         "password": !isPrivateRoom ? "" : md5.convert(utf8.encode(_passwordController.text)).toString(),
         "token": token,
         "playerQuantity": _playerQuantityController.text,
-        "locations": locationsReference,
-        "npcs": npcsReference
+        "locations": locationsReference.id,
+        "npcs": npcsReference.id
       });
 
       Navigator.push(
